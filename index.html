@@ -1087,40 +1087,47 @@
       <div id="success-msg" class="success-msg">
         <span data-ja="お問い合わせありがとうございます。担当者より3営業日以内にご連絡いたします。" data-en="Thank you for your inquiry. We will get back to you within 3 business days.">お問い合わせありがとうございます。担当者より3営業日以内にご連絡いたします。</span>
       </div>
-      <div class="contact-form" id="contact-form">
+      <form class="contact-form" id="contact-form"
+            action="https://formspree.io/f/xlgolndg"
+            method="POST">
+        <!-- Formspree: wada@graph03.jp に転送 -->
+        <input type="hidden" name="_replyto" value="wada@graph03.jp" />
+        <input type="hidden" name="_subject" value="【Graph】お問い合わせ" />
+        <input type="hidden" name="_language" value="ja" />
+        <input type="hidden" name="_next" value="" />
         <div class="form-row">
           <div class="form-group">
-            <label data-ja="お名前 *" data-en="Name *">お名前 *</label>
-            <input type="text" id="f-name" placeholder="山田 太郎" />
+            <label>お名前 *</label>
+            <input type="text" name="name" placeholder="山田 太郎" required />
           </div>
           <div class="form-group">
-            <label data-ja="会社・組織名" data-en="Organization">会社・組織名</label>
-            <input type="text" id="f-org" placeholder="〇〇株式会社" />
+            <label>会社・組織名</label>
+            <input type="text" name="organization" placeholder="〇〇株式会社" />
           </div>
         </div>
         <div class="form-group">
-          <label data-ja="メールアドレス *" data-en="Email *">メールアドレス *</label>
-          <input type="email" id="f-email" placeholder="your@email.com" />
+          <label>メールアドレス *</label>
+          <input type="email" name="email" placeholder="your@email.com" required />
         </div>
         <div class="form-group">
-          <label data-ja="お問い合わせ種別" data-en="Inquiry Type">お問い合わせ種別</label>
-          <select id="f-type">
-            <option data-ja="リサーチ・調査依頼" data-en="Research Request">リサーチ・調査依頼</option>
-            <option data-ja="地域振興・ローカル事業相談" data-en="Local Development Consultation">地域振興・ローカル事業相談</option>
-            <option data-ja="都市DX相談" data-en="Urban DX Consultation">都市DX相談</option>
-            <option data-ja="取材・メディア対応" data-en="Media Inquiry">取材・メディア対応</option>
-            <option data-ja="その他" data-en="Other">その他</option>
+          <label>お問い合わせ種別</label>
+          <select name="inquiry_type">
+            <option>リサーチ・調査依頼</option>
+            <option>地域振興・ローカル事業相談</option>
+            <option>都市DX相談</option>
+            <option>取材・メディア対応</option>
+            <option>その他</option>
           </select>
         </div>
         <div class="form-group">
-          <label data-ja="メッセージ *" data-en="Message *">メッセージ *</label>
-          <textarea id="f-msg" placeholder="ご相談内容をご記入ください。"></textarea>
+          <label>メッセージ *</label>
+          <textarea name="message" placeholder="ご相談内容をご記入ください。" required></textarea>
         </div>
-        <p class="form-note" data-ja="※ いただいた個人情報は、お問い合わせへの対応のみに使用します。" data-en="※ Personal information provided will be used solely for responding to your inquiry.">※ いただいた個人情報は、お問い合わせへの対応のみに使用します。</p>
+        <p class="form-note">※ いただいた個人情報は、お問い合わせへの対応のみに使用します。</p>
         <div class="form-submit">
-          <button class="btn" onclick="submitForm()" data-ja="送信する →" data-en="Send Message →">送信する →</button>
+          <button type="submit" class="btn">送信する →</button>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </section>
