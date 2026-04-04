@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -828,6 +829,62 @@
       background: linear-gradient(90deg, var(--accent) 60%, var(--accent2) 100%);
       flex-shrink: 0;
     }
+
+    /* ── CIVIC VOICE BANNER ── */
+    .cv-banner {
+      border-top: 1px solid var(--border);
+      background: #0a3d62;
+      padding: 0;
+    }
+    .cv-banner-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3.5rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 3rem;
+    }
+    .cv-banner-label {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .cv-banner-title {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
+    }
+    .cv-banner-title span { color: var(--accent); }
+    .cv-banner-sub {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.8;
+    }
+    .cv-banner-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 0.9rem 1.8rem;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .cv-banner-btn:hover { opacity: 0.85; }
   </style>
 </head>
 <body>
@@ -1026,18 +1083,10 @@
         <iframe class="note-embed" src="https://note.com/embed/notes/nfb506c030874" style="border:0;display:block;width:100%;height:230px;" loading="lazy"></iframe>
       </div>
       <div class="blog-card note-card">
-        <iframe class="note-embed" src="https://note.com/embed/notes/n17e1699a40ab" style="border:0;display:block;width:100%;height:230px;" loading="lazy"></iframe>
+        <iframe class="note-embed" src="https://note.com/embed/notes/n79e719363500" style="border:0;display:block;width:100%;height:230px;" loading="lazy"></iframe>
       </div>
       <div class="blog-card note-card">
-        <iframe class="note-embed" src="https://note.com/embed/notes/n79e719363500" style="border:0;display:block;width:100%;height:230px;" loading="lazy"></iframe>
-      </div>      
-      <div class="blog-card note-card note-placeholder">
-        <div class="note-coming">
-          <div class="note-coming-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-          </div>
-          <p class="note-coming-text">近日公開予定</p>
-        </div>
+        <iframe class="note-embed" src="https://note.com/embed/notes/n17e1699a40ab" style="border:0;display:block;width:100%;height:230px;" loading="lazy"></iframe>
       </div>
     </div>
     <div class="blog-nav">
@@ -1082,7 +1131,7 @@
     <a class="cv-banner-btn" href="civic-voice.html">特設ページを見る →</a>
   </div>
 </div>
-  
+
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-grid">
@@ -1256,24 +1305,39 @@
   }
 
   /* ── CONTACT FORM ── */
-  function submitForm() {
-    const name = document.getElementById('f-name').value.trim();
-    const email = document.getElementById('f-email').value.trim();
-    const msg = document.getElementById('f-msg').value.trim();
-
-    if (!name || !email || !msg) {
-      alert(currentLang === 'ja' ? 'お名前、メールアドレス、メッセージは必須項目です。' : 'Name, email, and message are required.');
-      return;
-    }
-
-    // Simulate submission
-    document.getElementById('contact-form').style.display = 'none';
-    const successEl = document.getElementById('success-msg');
-    successEl.style.display = 'block';
-    const successText = currentLang === 'ja'
-      ? 'お問い合わせありがとうございます。担当者より3営業日以内にご連絡いたします。'
-      : 'Thank you for your inquiry. We will get back to you within 3 business days.';
-    successEl.textContent = successText;
+  // Formspree handles submission — show thank-you on redirect back
+  // or use AJAX below for seamless experience
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = contactForm.querySelector('button[type="submit"]');
+      btn.textContent = '送信中...';
+      btn.disabled = true;
+      try {
+        const res = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          contactForm.style.display = 'none';
+          const successEl = document.getElementById('success-msg');
+          if (successEl) {
+            successEl.style.display = 'block';
+            successEl.textContent = 'お問い合わせありがとうございます。担当者より3営業日以内にご連絡いたします。';
+          }
+        } else {
+          btn.textContent = '送信する →';
+          btn.disabled = false;
+          alert('送信に失敗しました。お手数ですが、直接メール（wada@graph03.jp）にてご連絡ください。');
+        }
+      } catch(err) {
+        btn.textContent = '送信する →';
+        btn.disabled = false;
+        alert('送信に失敗しました。お手数ですが、直接メール（wada@graph03.jp）にてご連絡ください。');
+      }
+    });
   }
 
 
