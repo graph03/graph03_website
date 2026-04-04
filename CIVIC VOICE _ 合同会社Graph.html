@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)file:///C:/Users/orang/Downloads/civic-voice_1.html -->
+<html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CIVIC VOICE | 合同会社Graph</title>
+  <link href="./CIVIC VOICE _ 合同会社Graph_files/css2" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --surface: #f8f7f4;
+      --text: #1a1a1a;
+      --muted: #666;
+      --accent: #b8922a;
+      --accent2: #cc2233;
+      --border: rgba(0,0,0,0.09);
+      --cv-blue: #0a3d62;
+      --cv-mid: #1a5a8a;
+      --cv-light: #e8f4fd;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 300;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 3rem;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .nav-right a {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+    }
+    .nav-right a:hover { color: var(--accent); }
+    .nav-badge {
+      background: var(--cv-blue);
+      color: #fff;
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      padding: 0.3rem 0.8rem;
+      text-decoration: none;
+    }
+    .nav-accent-bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--cv-blue);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--cv-blue);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 60px;
+    }
+    .hero-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-circle {
+      position: absolute;
+      right: -200px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184,146,42,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero-label {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .hero-label::before {
+      content: '';
+      display: inline-block;
+      width: 30px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .hero h1 {
+      font-family: 'Oxanium', sans-serif;
+      font-size: clamp(3.5rem, 7vw, 5.5rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .hero h1 .cv { color: var(--accent); }
+    .hero-sub {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.15em;
+      margin-bottom: 2rem;
+    }
+    .hero-tagline {
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #fff;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .hero-desc {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 2;
+      margin-bottom: 2.5rem;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 0.9rem 2rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: rgba(255,255,255,0.8);
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      padding: 0.9rem 2rem;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.3);
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.6); }
+
+    /* Hero right: flow diagram */
+    .hero-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .hero-step {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 0.9rem 1.2rem;
+      animation: stepIn 0.6s ease both;
+    }
+    .hero-step:nth-child(1) { animation-delay: 0.1s; }
+    .hero-step:nth-child(2) { animation-delay: 0.2s; }
+    .hero-step:nth-child(3) { animation-delay: 0.3s; }
+    .hero-step:nth-child(4) { animation-delay: 0.4s; }
+    .hero-step:nth-child(5) { animation-delay: 0.5s; }
+    .hero-step:nth-child(6) { animation-delay: 0.6s; }
+    @keyframes stepIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .step-num {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      min-width: 28px;
+    }
+    .step-icon { font-size: 1.2rem; min-width: 28px; text-align: center; }
+    .step-text {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.85);
+      font-weight: 400;
+    }
+    .step-text strong {
+      display: block;
+      font-size: 0.78rem;
+      color: #fff;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+    .hero-step-arrow {
+      text-align: center;
+      color: rgba(255,255,255,0.2);
+      font-size: 0.8rem;
+      line-height: 1;
+      margin: -0.2rem 0;
+    }
+
+    /* ── SHARED SECTION ── */
+    section { padding: 6rem 3rem; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.67rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+    h2 {
+      font-family: 'Oxanium', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+    .section-lead {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 2;
+      max-width: 640px;
+      margin-bottom: 3rem;
+    }
+
+    /* ── PROBLEM ── */
+    #problem { background: var(--surface); border-top: 1px solid var(--border); }
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .problem-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 1.8rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .problem-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: var(--accent2);
+    }
+    .problem-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .problem-title {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+    .problem-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+    .problem-cta {
+      background: var(--cv-blue);
+      color: #fff;
+      padding: 1.5rem 2rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      line-height: 1.8;
+    }
+    .problem-cta strong {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    /* ── WHAT IS ── */
+    #what { border-top: 1px solid var(--border); }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+    .step-card {
+      padding: 2rem 1.8rem;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .step-card:nth-child(3), .step-card:nth-child(6) { border-right: none; }
+    .step-card:nth-child(4), .step-card:nth-child(5), .step-card:nth-child(6) {
+      border-top: 1px solid var(--border);
+    }
+    .step-card-num {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: rgba(10,61,98,0.08);
+      line-height: 1;
+      margin-bottom: 0.8rem;
+    }
+    .step-card-icon { font-size: 1.5rem; margin-bottom: 0.8rem; }
+    .step-card-title {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--cv-blue);
+      margin-bottom: 0.5rem;
+    }
+    .step-card-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+    .steps-features {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      padding: 1.2rem 1.8rem;
+      background: var(--cv-light);
+      border: 1px solid rgba(10,61,98,0.12);
+    }
+    .steps-feature {
+      font-size: 0.78rem;
+      color: var(--cv-blue);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .steps-feature::before { content: '✓'; color: var(--accent); font-weight: 700; }
+
+    /* ── FEATURES ── */
+    #features { background: var(--cv-blue); border-top: 1px solid var(--border); }
+    #features h2 { color: #fff; }
+    #features .section-label { color: var(--accent); }
+    #features .section-lead { color: rgba(255,255,255,0.6); }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .feature-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 2.2rem 1.8rem;
+      transition: background 0.3s;
+    }
+    .feature-card:hover { background: rgba(255,255,255,0.09); }
+    .feature-num {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+    }
+    .feature-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .feature-title {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+    .feature-step-ref {
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+      font-family: 'Oxanium', sans-serif;
+    }
+    .feature-desc {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 2;
+    }
+    .feature-bullets {
+      list-style: none;
+      margin-top: 0.8rem;
+    }
+    .feature-bullets li {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.8;
+      padding-left: 1rem;
+      position: relative;
+    }
+    .feature-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.65rem;
+    }
+
+    /* ── AI PHILOSOPHY ── */
+    #ai { border-top: 1px solid var(--border); background: var(--bg); }
+    .ai-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .ai-col-header {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.6rem 1rem;
+      margin-bottom: 1rem;
+    }
+    .ai-col-header.pos { background: rgba(10,61,98,0.08); color: var(--cv-blue); }
+    .ai-col-header.neg { background: rgba(204,34,51,0.08); color: var(--accent2); }
+    .ai-item {
+      border: 1px solid var(--border);
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 0.8rem;
+    }
+    .ai-item-title {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+    .ai-item-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+    .ai-principle {
+      margin-top: 2.5rem;
+      background: var(--cv-blue);
+      color: #fff;
+      padding: 2rem 2.5rem;
+      border-left: 4px solid var(--accent);
+    }
+    .ai-principle p {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.8;
+    }
+    .ai-principle strong { color: var(--accent); }
+
+    /* ── ROADMAP ── */
+    #roadmap { background: var(--surface); border-top: 1px solid var(--border); }
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .roadmap-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 2rem 1.8rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .roadmap-phase {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .roadmap-num {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      color: rgba(10,61,98,0.06);
+      line-height: 1;
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+    }
+    .roadmap-title {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--cv-blue);
+      margin-bottom: 1.2rem;
+    }
+    .roadmap-items {
+      list-style: none;
+    }
+    .roadmap-items li {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.9;
+      padding-left: 1rem;
+      position: relative;
+    }
+    .roadmap-items li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 1.2rem;
+      line-height: 1.5;
+    }
+    .roadmap-cost {
+      margin-top: 2rem;
+      background: var(--cv-light);
+      border: 1px solid rgba(10,61,98,0.12);
+      padding: 1.2rem 1.5rem;
+    }
+    .roadmap-cost-title {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--cv-blue);
+      margin-bottom: 0.6rem;
+    }
+    .roadmap-cost p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    /* ── CTA ── */
+    #cta {
+      background: var(--cv-blue);
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    #cta h2 { color: #fff; margin-bottom: 1rem; }
+    #cta .section-lead { color: rgba(255,255,255,0.6); margin-left: auto; margin-right: auto; text-align: left; }
+    .cta-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+      margin: 3rem 0;
+      text-align: left;
+    }
+    .cta-step {
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 1.2rem;
+    }
+    .cta-step-num {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+    .cta-step-text {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+    }
+    .cta-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0a0a0a;
+      padding: 2.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-logo {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+    }
+    .footer-logo span { color: var(--accent); }
+    .footer-back {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .footer-back:hover { color: rgba(255,255,255,0.7); }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .problem-grid { grid-template-columns: 1fr 1fr; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .ai-grid { grid-template-columns: 1fr; }
+      .roadmap-grid { grid-template-columns: 1fr; }
+      .cta-steps { grid-template-columns: 1fr 1fr; }
+      section { padding: 4rem 1.5rem; }
+      nav { padding: 0 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="file:///C:/Users/orang/Downloads/index.html">合同会社<span>Graph</span></a>
+  <div class="nav-right">
+    <a href="file:///C:/Users/orang/Downloads/civic-voice_1.html#problem">課題</a>
+    
+    <a href="file:///C:/Users/orang/Downloads/civic-voice_1.html#features">機能</a>
+    <a href="file:///C:/Users/orang/Downloads/civic-voice_1.html#roadmap">導入</a>
+    <a class="nav-badge" href="file:///C:/Users/orang/Downloads/civic-voice_1.html#cta">お問い合わせ</a>
+  </div>
+  <div class="nav-accent-bar"></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-circle"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-label">AI-Powered Civic Engagement Platform</div>
+      <h1><span class="cv">CIVIC</span><br>VOICE</h1>
+      <div class="hero-sub">住民の声を、政策へ。</div>
+      <p class="hero-tagline">多様な市民の声を、AIの力で<br>収集・分析・可視化します。</p>
+      <p class="hero-desc">従来のワークショップやパブリックコメントでは届かなかった声を、スマホ・PCから24時間いつでも収集。AIとの対話を通じて熟度の高い意見を引き出し、政策立案の質を高めます。</p>
+      <div class="hero-btns">
+        <a href="file:///C:/Users/orang/Downloads/civic-voice_1.html#cta" class="btn-primary">デモを体験する →</a>
+        <a href="file:///C:/Users/orang/Downloads/civic-voice_1.html#what" class="btn-outline">機能を見る</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-step">
+        <span class="step-num">STEP 01</span>
+        <span class="step-icon">📝</span>
+        <div class="step-text"><strong>登録</strong>氏名・年代・立場を登録（1分で完了）</div>
+      </div>
+      <div class="hero-step-arrow">↓</div>
+      <div class="hero-step">
+        <span class="step-num">STEP 02</span>
+        <span class="step-icon">📊</span>
+        <div class="step-text"><strong>テーマ確認</strong>背景・課題をデータで提示</div>
+      </div>
+      <div class="hero-step-arrow">↓</div>
+      <div class="hero-step">
+        <span class="step-num">STEP 03</span>
+        <span class="step-icon">💬</span>
+        <div class="step-text"><strong>意見入力</strong>5段階評価 ＋ AIによる深掘り質問</div>
+      </div>
+      <div class="hero-step-arrow">↓</div>
+      <div class="hero-step">
+        <span class="step-num">STEP 04</span>
+        <span class="step-icon">🔗</span>
+        <div class="step-text"><strong>傾向可視化</strong>市民の回答をリアルタイム表示</div>
+      </div>
+      <div class="hero-step-arrow">↓</div>
+      <div class="hero-step">
+        <span class="step-num">STEP 05</span>
+        <span class="step-icon">🤖</span>
+        <div class="step-text"><strong>AIと議論</strong>最大10往復の深掘り対話</div>
+      </div>
+      <div class="hero-step-arrow">↓</div>
+      <div class="hero-step">
+        <span class="step-num">STEP 06</span>
+        <span class="step-icon">🗳</span>
+        <div class="step-text"><strong>最終投票</strong>優先政策を市民が選択</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="section-inner">
+    <div class="section-label reveal">Challenge</div>
+    <h2 class="reveal">従来の住民参加が抱える<br>4つの限界</h2>
+    <p class="section-lead reveal">ワークショップやパブリックコメントによる意見収集には、構造的な限界があります。</p>
+    <div class="problem-grid">
+      <div class="problem-card reveal">
+        <div class="problem-icon">⏰</div>
+        <div class="problem-title">参加機会の制約</div>
+        <p class="problem-desc">ワークショップは平日昼・特定会場のみで開催。参加できるのは限られた人だけ。</p>
+      </div>
+      <div class="problem-card reveal">
+        <div class="problem-icon">👥</div>
+        <div class="problem-title">意見の偏り</div>
+        <p class="problem-desc">声が大きな層・参加しやすい層の意見が中心となり、多様な市民の声を受け取りにくい。</p>
+      </div>
+      <div class="problem-card reveal">
+        <div class="problem-icon">📋</div>
+        <div class="problem-title">処理コストの大きさ</div>
+        <p class="problem-desc">市民の多くの声を手作業で分類・集計することには限界がある。</p>
+      </div>
+      <div class="problem-card reveal">
+        <div class="problem-icon">🔍</div>
+        <div class="problem-title">熟度の低い意見</div>
+        <p class="problem-desc">ワークショップの人員・時間不足により、熟度の高い意見収集が難しい。</p>
+      </div>
+    </div>
+    <div class="problem-cta reveal">
+      <strong>→ 多くの市民の本意を、いつでも・どこからでも参加できる仕組みが必要です。</strong><br>
+      CIVIC VOICEは、AIの力でこれらの課題をすべて解決します。
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-inner">
+    <div class="section-label reveal">AI Features</div>
+    <h2 class="reveal">主要機能 ─ 3つのAI活用ポイント</h2>
+    <p class="section-lead reveal">AIを「声の増幅装置」として活用。市民の思考を深め、担当者の分析コストを削減します。</p>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-num">FUNCTION 01</div>
+        <div class="feature-icon">🔗</div>
+        <div class="feature-step-ref">STEP 3 — 意見を聞かせてください</div>
+        <div class="feature-title">意見の深掘り機能</div>
+        <ul class="feature-bullets">
+          <li>提示された意見に対して重要度を5段階で評価</li>
+          <li>「特に重要」「重要」と評価した意見にAIが自動で深掘り質問</li>
+          <li>「どんな場面で？」「誰が影響を受ける？」と具体化を促進</li>
+          <li>自由意見テキストの追記も可能</li>
+        </ul>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-num">FUNCTION 02</div>
+        <div class="feature-icon">🤖</div>
+        <div class="feature-step-ref">STEP 5 — AIと議論する</div>
+        <div class="feature-title">AIとの対話機能</div>
+        <ul class="feature-bullets">
+          <li>「特に重要」と評価した意見の悪影響・副作用をAIが提示</li>
+          <li>「どう乗り越えるか」をAIと最大10往復で対話</li>
+          <li>議論ログを全参加者に公開（意見ごとにツリー表示）</li>
+          <li>感情的反応から計画的意見へと思考を深化</li>
+        </ul>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-num">FUNCTION 03</div>
+        <div class="feature-icon">📈</div>
+        <div class="feature-step-ref">STEP 4 — みんなの回答傾向</div>
+        <div class="feature-title">市民意見のリアルタイム可視化</div>
+        <ul class="feature-bullets">
+          <li>重要度と関心度の2軸マッピングで4象限に自動分類</li>
+          <li>「重要・共感の高い意見」「議論が必要な意見」などをリアルタイム表示</li>
+          <li>自身の意見と市民全体の意見の乖離を確認可能</li>
+          <li>属性別フィルタで立場ごとの傾向を把握</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="section-inner">
+    <div class="section-label reveal">Implementation</div>
+    <h2 class="reveal">導入ロードマップ</h2>
+    <p class="section-lead reveal">3つのフェーズで、スモールスタートから本格運用・広域展開まで段階的に導入できます。</p>
+    <div class="roadmap-grid">
+      <div class="roadmap-card reveal">
+        <div class="roadmap-num">1</div>
+        <div class="roadmap-phase">Phase 1</div>
+        <div class="roadmap-title">PoC実施</div>
+        <ul class="roadmap-items">
+          <li>1テーマで試験運用</li>
+          <li>Pol.isまたは本システムの導入</li>
+          <li>住民・職員へのFB収集</li>
+        </ul>
+      </div>
+      <div class="roadmap-card reveal">
+        <div class="roadmap-num">2</div>
+        <div class="roadmap-phase">Phase 2</div>
+        <div class="roadmap-title">本格導入</div>
+        <ul class="roadmap-items">
+          <li>Supabase等DBへの移行・API認証</li>
+          <li>マイナンバー/LINE認証連携</li>
+          <li>職員研修・操作マニュアル整備</li>
+        </ul>
+      </div>
+      <div class="roadmap-card reveal">
+        <div class="roadmap-num">3</div>
+        <div class="roadmap-phase">Phase 3</div>
+        <div class="roadmap-title">運用・改善</div>
+        <ul class="roadmap-items">
+          <li>複数テーマでの継続運用</li>
+          <li>データ蓄積による精度向上</li>
+          <li>他部署・近隣自治体への展開</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="section-inner">
+    <div class="section-label reveal">Next Steps</div>
+    <h2 class="reveal">まず、デモを体験してください。</h2>
+    <p class="section-lead reveal">CIVIC VOICEの導入は5つのステップで進めます。まずはお気軽にお問い合わせください。</p>
+    <div class="cta-steps">
+      <div class="cta-step reveal">
+        <div class="cta-step-num">① STEP 1</div>
+        <div class="cta-step-text">デモ環境の体験</div>
+      </div>
+      <div class="cta-step reveal">
+        <div class="cta-step-num">② STEP 2</div>
+        <div class="cta-step-text">導入機会の検討</div>
+      </div>
+      <div class="cta-step reveal">
+        <div class="cta-step-num">③ STEP 3</div>
+        <div class="cta-step-text">PoC計画の策定</div>
+      </div>
+      <div class="cta-step reveal">
+        <div class="cta-step-num">④ STEP 4</div>
+        <div class="cta-step-text">予算確保・調達手続き</div>
+      </div>
+      <div class="cta-step reveal">
+        <div class="cta-step-num">⑤ STEP 5</div>
+        <div class="cta-step-text">試験運用の開始</div>
+      </div>
+    </div>
+    <div class="cta-btns">
+      <a href="file:///C:/Users/orang/Downloads/index.html#contact" class="btn-primary">お問い合わせ・デモ依頼 →</a>
+      <a href="file:///C:/Users/orang/Downloads/index.html" class="btn-outline">← Graph トップへ戻る</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="file:///C:/Users/orang/Downloads/index.html">合同会社<span>Graph</span> | CIVIC VOICE</a>
+  <a class="footer-back" href="file:///C:/Users/orang/Downloads/index.html">← サイトトップへ</a>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+
+
+</body></html>
