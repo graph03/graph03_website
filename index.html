@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -1088,13 +1089,13 @@
       <div class="blog-card note-card">
         <iframe class="note-embed" src="https://note.com/embed/notes/n17e1699a40ab" style="border:0;display:block;width:100%;height:230px;" loading="lazy"></iframe>
       </div>
-       <div class="blog-card note-card">
+       <div class="blog-card note-card hidden">
         <iframe class="note-embed" src="https://note.com/embed/notes/n34b8aa609708" style="border:0;display:block;width:100%;height:230px;" loading="lazy"></iframe>
       </div>
-       <div class="blog-card note-card">
+       <div class="blog-card note-card hidden">
         <iframe class="note-embed" src="https://note.com/embed/notes/n1074177a83d3" style="border:0;display:block;width:100%;height:230px;" loading="lazy"></iframe>
       </div>
-        <div class="blog-card note-card">
+        <div class="blog-card note-card hidden">
         <iframe class="note-embed" src="https://note.com/embed/notes/n1de69c784a2c" style="border:0;display:block;width:100%;height:230px;" loading="lazy"></iframe>
       </div> 
     </div>
@@ -1512,7 +1513,16 @@
     else if (counter) counter.textContent = '';
   }
 
-  setTimeout(updateBlogNav, 300);
+  // Initialize: show only first 3 cards
+  (function initBlog() {
+    const track = document.getElementById('blogTrack');
+    if (!track) return;
+    const cards = track.querySelectorAll('.blog-card');
+    cards.forEach((card, i) => {
+      card.classList.toggle('hidden', i >= CARDS_PER_PAGE);
+    });
+    setTimeout(updateBlogNav, 100);
+  })();
 
 </script>
 </body>
