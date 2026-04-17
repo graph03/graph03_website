@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -59,6 +60,39 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Sans',san
 .empty-state{text-align:center;padding:3.5rem 1rem;color:#888780;font-size:14px}
 
 /* Causal */
+.st-wrap{max-width:960px;margin:0 auto;padding:2rem 1.5rem}
+.st-header{margin-bottom:1.5rem}
+.st-title{font-size:20px;font-weight:600;color:#1a1a18}
+.st-sub{font-size:13px;color:#888780;margin-top:3px}
+.st-filter-section{margin-bottom:1rem}
+.st-filter-divider{border:none;border-top:0.5px solid #e0dfd8;margin:0.85rem 0}
+.st-tag-row{display:flex;gap:6px;flex-wrap:wrap}
+.st-tag-btn{font-size:11px;padding:4px 11px;border-radius:20px;border:0.5px solid #ccc;background:#f5f4f0;color:#5F5E5A;cursor:pointer;transition:all 0.12s;white-space:nowrap;line-height:1.5;font-family:inherit}
+.st-tag-btn:hover{border-color:#b4b2a9}
+.st-tag-btn.ac-metro{background:#E6F1FB;border-color:#378ADD;color:#0C447C;font-weight:500}
+.st-tag-btn.ac-core{background:#EAF3DE;border-color:#3B6D11;color:#3B6D11;font-weight:500}
+.st-tag-btn.ac-small{background:#FAEEDA;border-color:#854F0B;color:#854F0B;font-weight:500}
+.st-tag-btn.ac-rural{background:#f7d0df;border-color:#993556;color:#993556;font-weight:500}
+.st-city-desc{font-size:13px;color:#5F5E5A;line-height:1.7;margin-bottom:1.25rem;padding:0.85rem 1.1rem;background:#fff;border:0.5px solid #e0dfd8;border-radius:12px}
+.st-section-label{font-size:11px;color:#888780;font-weight:500;margin-bottom:0.65rem;letter-spacing:0.03em}
+.st-card{background:#fff;border:0.5px solid #e0dfd8;border-radius:12px;padding:1rem 1.25rem;margin-bottom:10px}
+.st-card-title{font-size:13px;font-weight:600;color:#1a1a18;margin-bottom:8px;padding-bottom:7px;border-bottom:0.5px solid #f0efe8}
+.st-body{font-size:13px;color:#5F5E5A;line-height:1.75}
+.st-body p{margin-bottom:6px}
+.st-body strong{color:#1a1a18;font-weight:600}
+.st-body ul{padding-left:1.1em}
+.st-body li{margin-bottom:4px}
+.st-policy{border-left:2px solid #e0dfd8;padding:6px 0 6px 10px;margin-bottom:8px}
+.st-policy-name{font-size:13px;font-weight:600;color:#1a1a18;margin-bottom:3px}
+.st-policy-reason{font-size:12px;color:#5F5E5A;line-height:1.65}
+.st-resource{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}
+.st-rtag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0}
+.st-rtext{font-size:12px;color:#5F5E5A;line-height:1.55}
+.st-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px;padding-top:7px;border-top:0.5px solid #f0efe8}
+.st-chip{font-size:10px;padding:1px 7px;border-radius:10px;background:#f5f4f0;color:#888780}
+.st-two{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+@media(max-width:600px){.st-two{grid-template-columns:1fr}}
+
 .causal-wrap{max-width:1120px;margin:0 auto;padding:1.5rem}
 .causal-header{margin-bottom:1.1rem}
 .causal-title{font-size:18px;font-weight:600;color:#1a1a18}
@@ -111,6 +145,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.6}
   <div class="nav-title">都市経済成長 エビデンスDB</div>
   <div class="nav-tab active" id="tab-db" onclick="showPage('db')">論文データベース</div>
   <div class="nav-tab" id="tab-causal" onclick="showPage('causal')">因果関係図</div>
+  <div class="nav-tab" id="tab-strategy" onclick="showPage('strategy')">都市規模別成長戦略</div>
 </div>
 
 <!-- DB PAGE -->
@@ -216,6 +251,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.6}
       <div class="form-group"><label>著者</label><input type="text" id="f-author" placeholder="例：Glaeser, E.L."></div>
       <div class="form-group"><label>発行年</label><input type="text" id="f-year" placeholder="例：2023"></div>
       <div class="form-group form-full"><label>掲載誌・出版社</label><input type="text" id="f-datasource" placeholder="例：American Economic Review, 86(3)"></div>
+      <div class="form-group form-full"><label>URL（DOI・論文ページ）</label><input type="text" id="f-url" placeholder="例：https://doi.org/10.1257/aer.91.5.1369"></div>
       <div class="form-group form-full"><label>政策カテゴリ</label>
         <select id="f-policy">
           <option value="">選択してください</option>
@@ -245,7 +281,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.6}
 </div>
 
 <script>
-const STORAGE_KEY='urban-econ-db-v3';
+const STORAGE_KEY='urban-econ-db-v4';
 const POLICY_TAGS=['人的資本','集積・雇用密度','R&D・知識集約','インフラ','制度・行政能力','産業多様性','産業集積性','社会関係資本','人口活力','観光','歩きやすさ・暮らしやすさ','経済循環性'];
 const SIZE_TAGS=['大都市圏','中核市','小規模市','農村・町村'];
 const SIZE_DESC={'大都市圏':'100万人以上','中核市':'30〜100万人','小規模市':'10〜30万人','農村・町村':'10万人未満'};
@@ -346,7 +382,7 @@ function renderList(){
   if(!items.length){el.innerHTML='<div class="empty-state">該当するエビデンスが見つかりません。<br>検索条件を変えてみてください。</div>';return;}
   el.innerHTML=items.map(e=>{
     const sizes=(e.citySize||[]).map(s=>`<span class="bs">${esc(s)}</span>`).join('');
-    return `<div class="entry-card"><div class="ec-top"><div class="ec-title">${esc(e.title)}</div><div class="ec-badges">${e.year?`<span class="by">${esc(e.year)}</span>`:''}${e.policy?`<span class="bp">${esc(e.policy)}</span>`:''}</div></div><div class="ec-author">${esc(e.author)}${e.region?' · '+esc(e.region):''}</div>${e.datasource?`<div class="bj">${esc(e.datasource)}</div>`:''}${sizes?`<div class="ec-sizes">${sizes}</div>`:''}${e.summary?`<div class="ec-summary" style="margin-top:7px">${esc(e.summary)}</div>`:''}<div class="ec-actions"><button class="btn-sm" onclick="startEdit('${e.id}')">編集</button><button class="btn-sm btn-del" onclick="delEntry('${e.id}')">削除</button></div></div>`;
+    const titleEl=e.url?`<a href="${esc(e.url)}" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px">${esc(e.title)}</a>`:esc(e.title);return `<div class="entry-card"><div class="ec-top"><div class="ec-title">${titleEl}</div><div class="ec-badges">${e.year?`<span class="by">${esc(e.year)}</span>`:''}${e.policy?`<span class="bp">${esc(e.policy)}</span>`:''}</div></div><div class="ec-author">${esc(e.author)}${e.region?' · '+esc(e.region):''}</div>${e.datasource?`<div class="bj">${esc(e.datasource)}</div>`:''}${sizes?`<div class="ec-sizes">${sizes}</div>`:''}${e.summary?`<div class="ec-summary" style="margin-top:7px">${esc(e.summary)}</div>`:''}<div class="ec-actions"><button class="btn-sm" onclick="startEdit('${e.id}')">編集</button><button class="btn-sm btn-del" onclick="delEntry('${e.id}')">削除</button></div></div>`;
   }).join('');
 }
 function renderAll(){renderStats();renderFilters();renderList();}
@@ -355,11 +391,11 @@ function setPolicy(v){filterPolicy=v;renderAll();}
 function toggleSize(s){if(filterSizes.has(s))filterSizes.delete(s);else filterSizes.add(s);renderAll();}
 function clearSizes(){filterSizes.clear();renderAll();}
 function startAdd(){editId=null;document.getElementById('modal-title').textContent='新しいエビデンスを登録';clearForm();document.getElementById('modal-overlay').classList.remove('hidden');}
-function startEdit(id){const e=db.find(x=>x.id===id);if(!e)return;editId=id;document.getElementById('modal-title').textContent='エビデンスを編集';document.getElementById('f-title').value=e.title||'';document.getElementById('f-author').value=e.author||'';document.getElementById('f-year').value=e.year||'';document.getElementById('f-datasource').value=e.datasource||'';document.getElementById('f-policy').value=e.policy||'';document.getElementById('f-summary').value=e.summary||'';document.getElementById('f-city').value=e.city||'';document.getElementById('f-region').value=e.region||'';const sizes=e.citySize||[];document.querySelectorAll('#f-sizes input[type=checkbox]').forEach(cb=>{cb.checked=sizes.includes(cb.value);});document.getElementById('modal-overlay').classList.remove('hidden');}
-function clearForm(){['f-title','f-author','f-year','f-datasource','f-summary','f-city','f-region'].forEach(id=>document.getElementById(id).value='');document.getElementById('f-policy').value='';document.querySelectorAll('#f-sizes input[type=checkbox]').forEach(cb=>cb.checked=false);}
+function startEdit(id){const e=db.find(x=>x.id===id);if(!e)return;editId=id;document.getElementById('modal-title').textContent='エビデンスを編集';document.getElementById('f-title').value=e.title||'';document.getElementById('f-author').value=e.author||'';document.getElementById('f-year').value=e.year||'';document.getElementById('f-datasource').value=e.datasource||'';document.getElementById('f-url').value=e.url||'';document.getElementById('f-policy').value=e.policy||'';document.getElementById('f-summary').value=e.summary||'';document.getElementById('f-city').value=e.city||'';document.getElementById('f-region').value=e.region||'';const sizes=e.citySize||[];document.querySelectorAll('#f-sizes input[type=checkbox]').forEach(cb=>{cb.checked=sizes.includes(cb.value);});document.getElementById('modal-overlay').classList.remove('hidden');}
+function clearForm(){['f-title','f-author','f-year','f-datasource','f-url','f-summary','f-city','f-region'].forEach(id=>document.getElementById(id).value='');document.getElementById('f-policy').value='';document.querySelectorAll('#f-sizes input[type=checkbox]').forEach(cb=>cb.checked=false);}
 function closeModal(){document.getElementById('modal-overlay').classList.add('hidden');editId=null;}
 function overlayClick(e){if(e.target===document.getElementById('modal-overlay'))closeModal();}
-function saveForm(){const title=document.getElementById('f-title').value.trim();if(!title){alert('タイトルは必須です');return;}const citySize=[...document.querySelectorAll('#f-sizes input[type=checkbox]:checked')].map(cb=>cb.value);const entry={id:editId||uid(),title,author:document.getElementById('f-author').value.trim(),year:document.getElementById('f-year').value.trim(),datasource:document.getElementById('f-datasource').value.trim(),policy:document.getElementById('f-policy').value,citySize,summary:document.getElementById('f-summary').value.trim(),city:document.getElementById('f-city').value.trim(),region:document.getElementById('f-region').value.trim()};if(editId){db=db.map(e=>e.id===editId?entry:e);}else{db=[entry,...db];}saveDB();closeModal();renderAll();}
+function saveForm(){const title=document.getElementById('f-title').value.trim();if(!title){alert('タイトルは必須です');return;}const citySize=[...document.querySelectorAll('#f-sizes input[type=checkbox]:checked')].map(cb=>cb.value);const entry={id:editId||uid(),title,author:document.getElementById('f-author').value.trim(),year:document.getElementById('f-year').value.trim(),datasource:document.getElementById('f-datasource').value.trim(),url:document.getElementById('f-url').value.trim(),policy:document.getElementById('f-policy').value,citySize,summary:document.getElementById('f-summary').value.trim(),city:document.getElementById('f-city').value.trim(),region:document.getElementById('f-region').value.trim()};if(editId){db=db.map(e=>e.id===editId?entry:e);}else{db=[entry,...db];}saveDB();closeModal();renderAll();}
 function delEntry(id){if(!confirm('このエビデンスを削除しますか？'))return;db=db.filter(e=>e.id!==id);saveDB();renderAll();}
 
 /* CAUSAL DIAGRAM */
@@ -419,10 +455,232 @@ function showFactorDetail(factor){
 <div class="d-desc">${info.desc}</div>
 ${uniqueSizes.length?`<div class="d-sizes">${uniqueSizes.map(s=>`<span class="bs">${esc(s)}</span>`).join('')}</div>`:''}
 <div class="d-papers-label">関連論文（${papers.length}件）</div>
-${papers.map(p=>`<div class="d-paper"><div class="d-paper-title">${esc(p.title)}</div><div class="d-paper-meta">${esc(p.author)}${p.year?' ('+p.year+')':''}</div>${p.datasource?`<div class="d-paper-journal">${esc(p.datasource)}</div>`:''}</div>`).join('')}`;
+${papers.map(p=>{const pt=p.url?`<a href="${esc(p.url)}" target="_blank" rel="noopener" style="color:#185FA5;text-decoration:underline;text-underline-offset:2px">${esc(p.title)}</a>`:esc(p.title);return `<div class="d-paper"><div class="d-paper-title">${pt}</div><div class="d-paper-meta">${esc(p.author)}${p.year?' ('+p.year+')':''}</div>${p.datasource?`<div class="d-paper-journal">${esc(p.datasource)}</div>`:''}</div>`;}).join('')}`;
+}
+
+
+function showCity(id){
+  document.querySelectorAll('#page-strategy .st-panel').forEach(p=>{
+    p.style.display = p.id === 'st-'+id ? 'block' : 'none';
+  });
+  document.querySelectorAll('#page-strategy .st-tag-btn').forEach(t=>{
+    const active = t.dataset.city === id;
+    t.className = 'st-tag-btn' + (active ? ' ac-'+id : '');
+  });
 }
 
 loadDB();
 </script>
+
+<!-- STRATEGY PAGE -->
+<div class="page" id="page-strategy">
+<div class="st-wrap">
+  <div class="st-header">
+    <div class="st-title">都市規模別 成長戦略</div>
+    <div class="st-sub">論文エビデンスに基づき、都市規模ごとに現実的な成長戦略案を整理しています。</div>
+  </div>
+
+  <div class="st-filter-section">
+    <div class="filter-label">都市規模</div>
+    <div class="st-tag-row"><button class="st-tag-btn ac-metro" data-city="metro" onclick="showCity('metro')">大都市圏</button><button class="st-tag-btn" data-city="core" onclick="showCity('core')">中核市</button><button class="st-tag-btn" data-city="small" onclick="showCity('small')">小規模市</button><button class="st-tag-btn" data-city="rural" onclick="showCity('rural')">農村・町村</button></div>
+  </div>
+  <hr class="st-filter-divider">
+
+  
+<div class="st-panel active" id="st-metro" style="display:block">
+  <div class="st-city-desc"><strong>大都市圏</strong>　<span style="color:#888780;font-size:11px">人口100万人以上 ／ 政令指定都市・三大都市圏</span><br>集積・知識・人材が最も豊富な層。生産性フロンティアの更新と国際競争力の維持が主課題。規模の利益を活かしながら、混雑・住宅コスト上昇という集積の負の外部性をいかに制御するかが鍵。</div>
+
+  <div class="st-section-label">① 設定すべきゴール</div>
+  <div class="st-card">
+    <div class="st-body"><p><strong>「知識集約型クラスターの深化と、生産性成長の国内外への波及拠点となること」</strong><br><br>単なるGRP成長ではなく、国際水準の生産性・賃金・イノベーション創出を達成し、地方中核市への知識・人材・企業の移転拠点として機能すること。10〜15年スパンで域内の高付加価値雇用比率と一人あたりGRPを先進国主要都市水準へ引き上げる。</p>
+    <div class="st-chips"><span class="st-chip">Romer (1990) 内生的成長</span><span class="st-chip">Glaeser & Gottlieb (2009)</span><span class="st-chip">Moretti (2010) 地域乗数</span></div></div>
+  </div>
+
+  <div class="st-section-label">② 基本方針</div>
+  <div class="st-two">
+    <div class="st-card">
+      <div class="st-card-title">長期（10年以上）</div>
+      <div class="st-body"><ul><li>大学・研究機関・スタートアップの<strong>知識エコシステム</strong>を制度的に育成。産学官（トリプルヘリックス）連携を常設化し、特許・スピンオフを地域内に留める仕組みを構築</li><li>高スキル人材を惹きつける<strong>国際水準のアメニティ</strong>（多言語行政・国際学校・医療）を整備し、外国人高度人材の定着を促進</li><li>住宅供給規制の合理化により生活コスト上昇を抑制し、集積の<strong>負の外部性をコントロール</strong></li></ul></div>
+    </div>
+    <div class="st-card">
+      <div class="st-card-title">短期（3〜5年）</div>
+      <div class="st-body"><ul><li>既存産業クラスターの<strong>デジタル・グリーン転換支援</strong>に集中投資し、TFP（全要素生産性）の即効的引き上げを図る</li><li>スタートアップ誘致（補助・規制サンドボックス）と<strong>大企業のオープンイノベーション</strong>拠点の誘致を並行推進</li><li>交通・デジタルインフラの混雑解消に投資し、<strong>集積コストを引き下げる</strong></li></ul></div>
+    </div>
+  </div>
+
+  <div class="st-section-label">③ 重点化すべき政策とその理由</div>
+  <div class="st-card"><div class="st-body"><div class="st-policy" style="border-left-color:#378ADD">
+<div class="st-policy-name">R&D・知識集約への集中投資</div>
+<div class="st-policy-reason">Jaffe et al.（1993）が示すように知識スピルオーバーは地理的に局所化される。大都市は既に人材・大学・資本が揃っており、R&D投資の限界収益が最も高い。Greenstone et al.（2010）の通り大企業立地が周辺企業TFPを12%押し上げる効果も大都市ほど強く出る。</div>
+</div><div class="st-policy" style="border-left-color:#378ADD">
+<div class="st-policy-name">産業多様性の維持（関連多様性の促進）</div>
+<div class="st-policy-reason">Frenken et al.（2007）の知見より、単一産業への過度な依存は景気変動リスクを高める。大都市では関連する産業群をクロスファーティライズする政策（産業横断的なコワーキング・人材交流）が雇用成長に最も効く。</div>
+</div><div class="st-policy" style="border-left-color:#378ADD">
+<div class="st-policy-name">住宅供給の規制緩和・高密度開発</div>
+<div class="st-policy-reason">Diamond（2016）が示した通り、住宅コスト上昇は低・中スキル人材の排除につながり、都市の多様性を損なう。集積の便益を守るためには密度規制の見直しが不可欠。</div>
+</div></div></div>
+
+  <div class="st-section-label">④ 実現に必要なリソース</div>
+  <div class="st-card"><div class="st-body"><div class="st-resource">
+<span class="st-rtag" style="background:#E6F1FB;color:#0C447C">人材</span>
+<span class="st-rtext">国際的な研究者・エンジニア・起業家を誘致するためのビザ・住環境・報酬水準の整備。大学との共同採用プログラム</span>
+</div><div class="st-resource">
+<span class="st-rtag" style="background:#E6F1FB;color:#0C447C">資金</span>
+<span class="st-rtext">国・県・民間VC連携によるスタートアップ投資エコシステム。産学連携R&Dへの公的マッチングファンド</span>
+</div><div class="st-resource">
+<span class="st-rtag" style="background:#E6F1FB;color:#0C447C">制度</span>
+<span class="st-rtext">規制サンドボックス・国家戦略特区の活用。大学知財の商業化を促す技術移転機関（TLO）の強化</span>
+</div><div class="st-resource">
+<span class="st-rtag" style="background:#E6F1FB;color:#0C447C">インフラ</span>
+<span class="st-rtext">高速交通・光ファイバー・研究施設の更新投資。国際空港・港湾との連結強化</span>
+</div></div></div>
+</div>
+<div class="st-panel" id="st-core" style="display:none">
+  <div class="st-city-desc"><strong>中核市</strong>　<span style="color:#888780;font-size:11px">人口30〜100万人 ／ 地方県庁所在地・政令市に次ぐ中規模都市</span><br>大都市ほどの集積密度はないが、地域の行政・経済・医療・教育の中枢を担う。大都市との差別化が鍵で、「適度な暮らしやすさ」と「行政能力の高さ」を武器に域内の経済循環を強化することが現実的な成長経路。</div>
+
+  <div class="st-section-label">① 設定すべきゴール</div>
+  <div class="st-card">
+    <div class="st-body"><p><strong>「域内経済循環率の向上と、地域特化型産業クラスターの確立」</strong><br><br>域外への資金漏洩を抑制しながら、地域の強みある産業（農食・医療・伝統産業等）のクラスターを確立。Moretti（2010）の地域乗数効果を活用し、製造・医療・大学の雇用を核に裾野産業の雇用創出を連鎖させる。15年スパンで社会人口の転入超過と地域GRP成長率を全国平均超えに。</p>
+    <div class="st-chips"><span class="st-chip">Moretti (2010) 地域乗数</span><span class="st-chip">Frenken et al. (2007)</span><span class="st-chip">Oates (2001) 財政連邦主義</span></div></div>
+  </div>
+
+  <div class="st-section-label">② 基本方針</div>
+  <div class="st-two">
+    <div class="st-card">
+      <div class="st-card-title">長期（10年以上）</div>
+      <div class="st-body"><ul><li>地域大学を核とした<strong>産学連携クラスター</strong>の育成。地域固有の産業（農業・製造・観光）にデジタル・研究開発を接合し、域内イノベーション回路を構築</li><li>コンパクトシティ政策と<strong>歩きやすい中心市街地</strong>の再生により、人材定着と不動産価値向上を同時に実現（Cortright 2009）</li><li>近隣の中核市・農村との<strong>広域連携</strong>による機能分担型集積の形成</li></ul></div>
+    </div>
+    <div class="st-card">
+      <div class="st-card-title">短期（3〜5年）</div>
+      <div class="st-body"><ul><li>地元中小企業の<strong>デジタル化・生産性向上支援</strong>に集中（補助・伴走型支援）</li><li>子育て・医療・住宅の「<strong>暮らしやすさ</strong>」を可視化・ブランド化し、移住促進に直結させる</li><li>地域エネルギー・食の<strong>地産地消</strong>モデルを推進し、域内乗数の即効的向上を図る</li></ul></div>
+    </div>
+  </div>
+
+  <div class="st-section-label">③ 重点化すべき政策とその理由</div>
+  <div class="st-card"><div class="st-body"><div class="st-policy" style="border-left-color:#3B6D11">
+<div class="st-policy-name">経済循環性の強化（LM3アプローチ）</div>
+<div class="st-policy-reason">NEF（2002）のLM3手法が示すように、域内での購買・雇用・投資の連鎖を高めることがGRP底上げの最短経路。中核市は行政調達・公共サービスの規模があり、地元調達率の引き上げだけで乗数効果が即座に生まれる。大都市より取り組みやすく、効果が出やすい。</div>
+</div><div class="st-policy" style="border-left-color:#3B6D11">
+<div class="st-policy-name">制度・行政能力の向上（規制改革・創業支援）</div>
+<div class="st-policy-reason">Tiebout（1956）・Oates（2001）が示す通り、行政サービスの質が企業・居住者の立地選択を左右する。中核市は政策自由度があり、迅速な許認可・ワンストップ創業支援・デジタル行政化は大都市との差別化が可能な領域。</div>
+</div><div class="st-policy" style="border-left-color:#3B6D11">
+<div class="st-policy-name">歩きやすさ・暮らしやすさによる人材定着</div>
+<div class="st-policy-reason">Diamond（2016）の知見通り、大都市の住宅コスト上昇が続く中、中核市は「手頃で質の高い居住環境」という比較優位を持ちうる。Litman（2012）が示す歩きやすさの経済価値（不動産・医療・商業）を都市設計に反映させることで人材転入を促進する。</div>
+</div></div></div>
+
+  <div class="st-section-label">④ 実現に必要なリソース</div>
+  <div class="st-card"><div class="st-body"><div class="st-resource">
+<span class="st-rtag" style="background:#EAF3DE;color:#3B6D11">人材</span>
+<span class="st-rtext">地域大学との連携による人材育成プログラム。UIJターン人材のマッチング・定住支援体制の整備</span>
+</div><div class="st-resource">
+<span class="st-rtag" style="background:#EAF3DE;color:#3B6D11">資金</span>
+<span class="st-rtext">地域金融機関（地銀・信金）との協調融資スキーム。地方創生交付金・国補助の戦略的活用</span>
+</div><div class="st-resource">
+<span class="st-rtag" style="background:#EAF3DE;color:#3B6D11">制度</span>
+<span class="st-rtext">コンパクトシティ計画の法的裏付け。産学官連携協定の締結と継続的なガバナンス体制</span>
+</div><div class="st-resource">
+<span class="st-rtag" style="background:#EAF3DE;color:#3B6D11">インフラ</span>
+<span class="st-rtext">中心市街地の公共交通・歩行者空間整備。地域エネルギー網（地産地消型再エネ）の構築</span>
+</div></div></div>
+</div>
+<div class="st-panel" id="st-small" style="display:none">
+  <div class="st-city-desc"><strong>小規模市</strong>　<span style="color:#888780;font-size:11px">人口10〜30万人 ／ 地方の一般市・旧市町村合併後の市など</span><br>人口減少圧力が最も強く、集積の外部性は限定的。「成長」よりも「縮小への対応と機能維持」が現実的な優先課題。地域資源（農業・観光・地場産業）を活かした特化戦略と経済循環の深化で、持続可能な経済基盤を構築できる。</div>
+
+  <div class="st-section-label">① 設定すべきゴール</div>
+  <div class="st-card">
+    <div class="st-body"><p><strong>「人口減少下でも一人あたり所得と生活サービスを維持できる持続可能な経済構造の確立」</strong><br><br>絶対的なGRP成長よりも、人口減少に見合った産業の生産性向上と域内経済循環率の向上を優先。Tolbert et al.（1998）が示す「地域密着型中小企業の集積が厚生を高める」知見に基づき、地元企業の稼ぐ力と定着率を高める。10年スパンで域外資金漏洩率を20〜30%削減し、一人あたりGRPの相対的維持を目指す。</p>
+    <div class="st-chips"><span class="st-chip">Tolbert et al. (1998)</span><span class="st-chip">NEF LM3 (2002)</span><span class="st-chip">Balaguer & Cantavella (2002) 観光</span></div></div>
+  </div>
+
+  <div class="st-section-label">② 基本方針</div>
+  <div class="st-two">
+    <div class="st-card">
+      <div class="st-card-title">長期（10年以上）</div>
+      <div class="st-body"><ul><li>地域の一次産業・観光・地場産業の<strong>高付加価値化</strong>（6次産業化・ブランド化・輸出）により、少ない人口でも高い付加価値を生む構造へ転換</li><li>近隣市町村との<strong>広域連携による行政効率化</strong>と機能の集約。中核市へのアクセス改善で「機能的な通勤圏」として位置づけ</li><li>地域エネルギー・食料の域内自給率向上による<strong>資金漏洩の構造的削減</strong></li></ul></div>
+    </div>
+    <div class="st-card">
+      <div class="st-card-title">短期（3〜5年）</div>
+      <div class="st-body"><ul><li>移住・二地域居住の促進と<strong>リモートワーク環境整備</strong>による人口の一時的補完</li><li>地元農産物・特産品の<strong>販路開拓・ECチャネル強化</strong>で域外収入を増やす</li><li>空き家・廃校等の遊休資産を活用した<strong>サテライトオフィス・起業拠点</strong>の整備</li></ul></div>
+    </div>
+  </div>
+
+  <div class="st-section-label">③ 重点化すべき政策とその理由</div>
+  <div class="st-card"><div class="st-body"><div class="st-policy" style="border-left-color:#854F0B">
+<div class="st-policy-name">観光・交流人口による域外収入の確保</div>
+<div class="st-policy-reason">Sequeira & Nunes（2008）・Balaguer & Cantavella（2002）の知見では、観光は特に資源制約のある地域で有効な成長因子。域内産業が脆弱でも域外からの消費を取り込むことで地域乗数が機能する。ただしInchausti-Sintes（2015）が警告するオランダ病リスクを避けるため、産業多様性との組み合わせが必要。</div>
+</div><div class="st-policy" style="border-left-color:#854F0B">
+<div class="st-policy-name">経済循環性の強化（地産地消・地元調達）</div>
+<div class="st-policy-reason">枝廣ほか（2018）が実証するように、食・エネルギー・サービスの地産地消は域外資金流出を直接削減する。小規模市は大型企業誘致より地元の資金が地元で回る仕組みの方が即効性が高く、外部依存リスクも低い。</div>
+</div><div class="st-policy" style="border-left-color:#854F0B">
+<div class="st-policy-name">社会関係資本の活用（コミュニティ経済）</div>
+<div class="st-policy-reason">Putnam（1993）・出口ほか（2014）が示す通り、社会関係資本が厚い地域は起業率・経済レジリエンスが高い。小規模市では住民間の信頼・ネットワークが実質的な「インフラ」として機能し、行政コスト削減と地域課題解決を同時に実現できる。</div>
+</div></div></div>
+
+  <div class="st-section-label">④ 実現に必要なリソース</div>
+  <div class="st-card"><div class="st-body"><div class="st-resource">
+<span class="st-rtag" style="background:#FAEEDA;color:#854F0B">人材</span>
+<span class="st-rtext">地域おこし協力隊・UIJターン人材の戦略的活用。農業・観光の担い手育成と後継者支援制度</span>
+</div><div class="st-resource">
+<span class="st-rtag" style="background:#FAEEDA;color:#854F0B">資金</span>
+<span class="st-rtext">ふるさと納税・クラウドファンディング等の地域資金調達手段の多様化。6次産業化・観光への補助</span>
+</div><div class="st-resource">
+<span class="st-rtag" style="background:#FAEEDA;color:#854F0B">制度</span>
+<span class="st-rtext">近隣市町村との広域連合・事務委託による行政効率化。空き家・遊休地の活用を促す条例整備</span>
+</div><div class="st-resource">
+<span class="st-rtag" style="background:#FAEEDA;color:#854F0B">インフラ</span>
+<span class="st-rtext">高速ブロードバンドの全域整備（リモートワーク基盤）。移動手段の確保（デマンド交通・MaaS）</span>
+</div></div></div>
+</div>
+<div class="st-panel" id="st-rural" style="display:none">
+  <div class="st-city-desc"><strong>農村・町村</strong>　<span style="color:#888780;font-size:11px">人口10万人未満 ／ 山間・中山間・離島・農業地帯など</span><br>人口・財政ともに制約が最も厳しく、単独での「経済成長」は現実的でない場合も多い。住民の生活水準を守ることを第一義に置き、自然資本・食・コミュニティという固有の強みを最大限に活用する。広域連携と中核市との機能補完が生存戦略の軸。</div>
+
+  <div class="st-section-label">① 設定すべきゴール</div>
+  <div class="st-card">
+    <div class="st-body"><p><strong>「自然資本と社会関係資本を基盤に、外部収入を確保しながら域内で富が循環する持続可能なコミュニティ経済の実現」</strong><br><br>GRP成長より「集落の存続」「一人あたり所得の維持」「生活サービスへのアクセス確保」を優先目標に設定。20年スパンで人口流出に歯止めをかけ、「関係人口」を含む実質的な地域経済圏を維持する。</p>
+    <div class="st-chips"><span class="st-chip">Deller et al. (2010)</span><span class="st-chip">Putnam (1993) 社会関係資本</span><span class="st-chip">枝廣ほか (2018)</span></div></div>
+  </div>
+
+  <div class="st-section-label">② 基本方針</div>
+  <div class="st-two">
+    <div class="st-card">
+      <div class="st-card-title">長期（10年以上）</div>
+      <div class="st-body"><ul><li><strong>中核市・小規模市との機能分担型連携</strong>を制度化。農村は食料・エネルギー・自然資本を供給し、都市から医療・教育・行政サービスを受ける相互補完の経済圏を形成</li><li>農地・森林・水系という<strong>自然資本の経済化</strong>（環境サービス対価・カーボンクレジット・グリーンツーリズム）で域外収入を多様化</li><li>コミュニティが主体となった<strong>「小さな経済圏」</strong>の自治運営（協同組合・農事組合・地域商社）を法的・財政的に支援</li></ul></div>
+    </div>
+    <div class="st-card">
+      <div class="st-card-title">短期（3〜5年）</div>
+      <div class="st-body"><ul><li><strong>関係人口・二地域居住</strong>の積極誘致。農業体験・ワーケーション・サテライトオフィスで季節的な交流人口を取り込む</li><li>農産品のブランド化・<strong>直販・EC拡大</strong>で中間マージンを削減し、農家所得を向上</li><li>再生可能エネルギー（太陽光・小水力・バイオマス）の域内導入で<strong>エネルギー費の域外流出を削減</strong></li></ul></div>
+    </div>
+  </div>
+
+  <div class="st-section-label">③ 重点化すべき政策とその理由</div>
+  <div class="st-card"><div class="st-body"><div class="st-policy" style="border-left-color:#993556">
+<div class="st-policy-name">社会関係資本の維持・強化</div>
+<div class="st-policy-reason">Putnam（1993）・出口ほか（2014）・Granovetter（1973）が示す通り、農村では社会関係資本こそが最大の経済インフラ。住民間の信頼・協力ネットワークが行政コストを代替し、共助による農業・介護・子育てを支える。集落機能の維持自体が「経済」であり、政策として意識的に投資する必要がある。</div>
+</div><div class="st-policy" style="border-left-color:#993556">
+<div class="st-policy-name">域内経済循環の最大化（エネルギー・食・ケア）</div>
+<div class="st-policy-reason">枝廣ほか（2018）・NEF（2002）が示すように、農村では域外へのお金の「漏れ」が特に大きい。地産地消・小水力・農産直販は外部依存なく実行でき、乗数効果が最も高い政策。Deller et al.（2010）の持続可能農業モデルも同方向を支持する。</div>
+</div><div class="st-policy" style="border-left-color:#993556">
+<div class="st-policy-name">観光・関係人口による域外収入の確保</div>
+<div class="st-policy-reason">農村固有の景観・食文化・体験は都市にない希少財であり、グリーンツーリズム・農家民泊・ワーケーションは資本投資を最小化しながら域外収入を得られる。Brida et al.（2016）が示すように観光が経済成長と双方向の因果をもつ点は農村でも有効で、観光過剰リスクも規模的に低い。</div>
+</div></div></div>
+
+  <div class="st-section-label">④ 実現に必要なリソース</div>
+  <div class="st-card"><div class="st-body"><div class="st-resource">
+<span class="st-rtag" style="background:#f7d0df;color:#993556">人材</span>
+<span class="st-rtext">地域おこし協力隊・農業研修生の受け入れ体制。集落支援員・コミュニティナース等の専門職配置</span>
+</div><div class="st-resource">
+<span class="st-rtag" style="background:#f7d0df;color:#993556">資金</span>
+<span class="st-rtext">ふるさと納税・農水省補助・カーボンクレジット収入。小規模分散型投資（協同組合・クラファン）</span>
+</div><div class="st-resource">
+<span class="st-rtag" style="background:#f7d0df;color:#993556">制度</span>
+<span class="st-rtext">広域連合・定住自立圏の枠組みを活用した行政サービスの共同提供。農地・空き家の活用規制の緩和</span>
+</div><div class="st-resource">
+<span class="st-rtag" style="background:#f7d0df;color:#993556">インフラ</span>
+<span class="st-rtext">デジタル基盤（光回線・スマート農業）の整備。MaaS・ドローン物流等の次世代移動・物流手段の導入</span>
+</div></div></div>
+</div>
+</div>
+</div>
+
 </body>
 </html>
