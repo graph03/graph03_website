@@ -886,6 +886,78 @@
       transition: opacity 0.2s;
     }
     .cv-banner-btn:hover { opacity: 0.85; }
+
+    /* ── URBAN GROWTH BANNER ── */
+    .ug-banner {
+      border-top: 1px solid var(--border);
+      background: #0d0d0d;
+      padding: 0;
+    }
+    .ug-banner-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3.5rem 3rem;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 3rem;
+    }
+    .ug-banner-eyebrow {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .ug-banner-num {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: rgba(240,236,228,0.06);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      white-space: nowrap;
+    }
+    .ug-banner-title {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #f0ece4;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .ug-banner-title em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .ug-banner-sub {
+      font-size: 0.82rem;
+      color: rgba(240,236,228,0.45);
+      line-height: 1.8;
+    }
+    .ug-banner-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: #f0ece4;
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      padding: 0.9rem 1.8rem;
+      text-decoration: none;
+      border: 1px solid rgba(240,236,228,0.25);
+      white-space: nowrap;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .ug-banner-btn:hover {
+      background: rgba(240,236,228,0.08);
+      border-color: rgba(240,236,228,0.6);
+    }
   </style>
 </head>
 <body>
@@ -1139,6 +1211,19 @@
       <p class="cv-banner-sub">AIを活用した次世代型市民参加プラットフォーム。従来のワークショップでは届かなかった多様な声を収集・分析・可視化します。</p>
     </div>
     <a class="cv-banner-btn" href="civic-voice.html">特設ページを見る →</a>
+  </div>
+</div>
+
+<!-- URBAN GROWTH BANNER -->
+<div class="ug-banner">
+  <div class="ug-banner-inner">
+    <div class="ug-banner-num">200+</div>
+    <div>
+      <div class="ug-banner-eyebrow">Research Database</div>
+      <div class="ug-banner-title">何が<em>都市</em>を成長させるのか</div>
+      <p class="ug-banner-sub">国内外200都市・50以上の成長要因カテゴリ・1,000本以上の参照論文。都市戦略・政策立案・学術研究のための知識基盤。</p>
+    </div>
+    <a class="ug-banner-btn" href="urban-growth.html">データベースを見る →</a>
   </div>
 </div>
 
