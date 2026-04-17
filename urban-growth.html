@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>何が都市を成長させるのか | 合同会社Graph</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;600;700;800&family=Noto+Sans+JP:wght@300;400;500&family=Syncopate:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f4f1;
+      --surface: #eeecea;
+      --surface2: #e6e4e0;
+      --text: #1a1a1a;
+      --muted: #666;
+      --border: rgba(0,0,0,0.09);
+      --accent: #b8922a;
+      --accent2: #b8922a;
+      --grid: rgba(0,0,0,0.025);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 300;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      cursor: crosshair;
+    }
+
+    /* ── GRID BACKGROUND ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(245,244,241,0.95);
+      backdrop-filter: blur(16px);
+    }
+    .nav-logo {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-title {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .nav-cta {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      padding: 0.4rem 1rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--accent); color: #fff; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 3rem 5rem;
+      position: relative;
+      z-index: 1;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.1s ease forwards;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 40px; height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-h1 {
+      font-family: 'Syncopate', sans-serif;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.2s ease forwards;
+    }
+    .hero-h1 em {
+      font-style: italic;
+      color: var(--accent);
+      font-family: 'Syncopate', sans-serif;
+    }
+
+    .hero-sub {
+      font-family: 'Oxanium', sans-serif;
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.35s ease forwards;
+    }
+
+    .hero-desc {
+      max-width: 560px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 2.1;
+      margin-bottom: 3.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.45s ease forwards;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.55s ease forwards;
+    }
+    .btn-primary {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.95rem 2.2rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-outline {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      background: transparent;
+      color: var(--text);
+      padding: 0.95rem 2.2rem;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Hero stat strip */
+    .hero-stats {
+      display: flex;
+      gap: 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-top: 5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.7s ease forwards;
+    }
+    .hero-stat {
+      flex: 1;
+      padding: 1.8rem 2rem;
+      border-right: 1px solid var(--border);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-num {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .hero-stat-num span { color: var(--accent); font-size: 1.2rem; }
+    .hero-stat-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 7rem 3rem;
+      border-top: 1px solid var(--border);
+    }
+    .section-inner { max-width: 1300px; margin: 0 auto; }
+    .section-label {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    h2 {
+      font-family: 'Syncopate', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.25;
+      margin-bottom: 1.2rem;
+    }
+    h2 em { font-style: normal; color: var(--accent); }
+    .section-lead {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 2.1;
+      max-width: 600px;
+      margin-bottom: 4rem;
+    }
+
+    /* ── WHAT ── */
+    #what { background: var(--surface); border-top: 3px solid var(--accent); }
+    .what-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .what-left h2 { margin-bottom: 1.5rem; }
+    .what-left p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 2.2;
+      margin-bottom: 1rem;
+    }
+    .what-right {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .what-card {
+      background: var(--bg);
+      padding: 2rem 1.8rem;
+      transition: background 0.25s;
+      border: 1px solid var(--border);
+    }
+    .what-card:hover { background: var(--surface); }
+    .what-card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .what-card-title {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.02em;
+    }
+    .what-card-desc {
+      font-size: 0.76rem;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    /* Compact feature list */
+    .what-features {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border);
+    }
+    .what-feature-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 1.5rem;
+      align-items: baseline;
+      padding: 1rem 1.4rem;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .what-feature-row:last-child { border-bottom: none; }
+    .what-feature-row:hover { background: var(--surface2); }
+    .what-feature-title {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+    .what-feature-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── FACTORS ── */
+    #factors { background: var(--bg); }
+    .factors-intro {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      margin-bottom: 4rem;
+      align-items: start;
+    }
+    .factor-categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .factor-cat {
+      background: var(--surface);
+      padding: 2.5rem 2rem;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.2s, background 0.2s;
+      cursor: default;
+    }
+    .factor-cat:hover { border-bottom-color: var(--accent); background: var(--surface2); }
+    .factor-cat-num {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .factor-cat-title {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+    .factor-cat-items {
+      list-style: none;
+    }
+    .factor-cat-items li {
+      font-size: 0.73rem;
+      color: var(--muted);
+      line-height: 1.9;
+      padding-left: 0.8rem;
+      position: relative;
+    }
+    .factor-cat-items li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.6rem;
+      top: 0.15rem;
+    }
+
+    /* ── HOW ── */
+    #how { background: var(--surface); border-top: 3px solid var(--accent); }
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+    .how-step {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .how-step:last-child { border-right: none; }
+    .how-step-num {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: rgba(0,0,0,0.05);
+      line-height: 1;
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+    }
+    .how-step-label {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+    }
+    .how-step-title {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.8rem;
+      line-height: 1.4;
+    }
+    .how-step-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 2;
+    }
+
+    /* ── USE CASES ── */
+    #usecases { background: var(--bg); }
+    .usecase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .usecase-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2.2rem 2rem;
+      transition: border-color 0.25s, background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .usecase-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .usecase-card:hover::before { transform: scaleX(1); }
+    .usecase-card:hover { border-color: rgba(184,146,42,0.3); }
+    .usecase-tag {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .usecase-title {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.8rem;
+      line-height: 1.5;
+    }
+    .usecase-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 2;
+    }
+
+    /* ── CTA ── */
+    #cta {
+      background: var(--surface);
+      text-align: center;
+    }
+    #cta h2 { margin-bottom: 1rem; }
+    #cta .section-lead { margin: 0 auto 3rem; text-align: left; }
+    .cta-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 4rem;
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 10%; right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--accent), transparent);
+    }
+    .cta-box h3 {
+      font-family: 'Syncopate', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+    .cta-box p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 2;
+      margin-bottom: 2.5rem;
+    }
+    .cta-box-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ── DB BANNER ── */
+    .db-banner {
+      border-top: 3px solid var(--accent);
+      background: #1a1a1a;
+    }
+    .db-banner-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 4rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 3rem;
+    }
+    .db-banner-label {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .db-banner-title {
+      font-family: 'Syncopate', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      color: #f0ece4;
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
+    }
+    .db-banner-sub {
+      font-size: 0.83rem;
+      color: rgba(240,236,228,0.45);
+      line-height: 1.8;
+    }
+    .db-banner-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 1.1rem 2.2rem;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .db-banner-btn:hover { opacity: 0.85; }
+    @media (max-width: 960px) {
+      .db-banner-inner { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-logo {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .footer-logo span { color: var(--accent); }
+    .footer-back {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+    .footer-back:hover { color: var(--accent); }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      nav { padding: 0 1.5rem; }
+      .hero { padding: 6rem 1.5rem 4rem; }
+      section { padding: 5rem 1.5rem; }
+      .what-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .what-right { grid-template-columns: 1fr; }
+      .factor-categories { grid-template-columns: 1fr 1fr; }
+      .how-grid { grid-template-columns: 1fr 1fr; }
+      .how-step:nth-child(2) { border-right: none; }
+      .how-step:nth-child(3), .how-step:nth-child(4) { border-top: 1px solid var(--border); }
+      .usecase-grid { grid-template-columns: 1fr; }
+      .hero-stats { flex-direction: column; }
+      .hero-stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .factors-intro { grid-template-columns: 1fr; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">合同会社<span>Graph</span></a>
+  <div class="nav-title">Urban Growth Database</div>
+  <a class="nav-cta" href="index.html#contact">お問い合わせ</a>
+</nav>
+
+<!-- WHAT -->
+<section id="what">
+  <div class="section-inner">
+    <div class="what-grid">
+      <div class="what-left reveal">
+        <div class="section-label">What is this</div>
+        <h2>都市成長の<em>問い</em>に、<br>データで答える。</h2>
+        <p>「なぜあの都市は成長し、この都市は停滞したのか」——この問いは、都市政策・地方創生・投資判断のあらゆる場面で問われてきました。しかし、成長要因を体系的に整理したデータベースは、日本にはほとんど存在しません。</p>
+        <p>そこで、我々は、国内外の都市データ・学術論文・政策レポートをもとに、都市成長要因を多角的に分類・整理したデータベースを構築しました。</p>
+      </div>
+      <div class="what-features reveal">
+        <div class="what-feature-row">
+          <span class="what-feature-title">体系的な分類</span>
+          <span class="what-feature-desc">人口・産業・インフラ・政策など50以上のカテゴリで整理</span>
+        </div>
+        <div class="what-feature-row">
+          <span class="what-feature-title">国内外200都市</span>
+          <span class="what-feature-desc">地方都市から世界の主要都市まで横断的にカバー</span>
+        </div>
+        <div class="what-feature-row">
+          <span class="what-feature-title">先行研究との連結</span>
+          <span class="what-feature-desc">各要因に対応する学術論文・政策レポートをリンク</span>
+        </div>
+        <div class="what-feature-row">
+          <span class="what-feature-title">継続的な更新</span>
+          <span class="what-feature-desc">最新の統計・研究成果を随時追加・更新</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FACTORS -->
+<section id="factors">
+  <div class="section-inner">
+    <div class="factors-intro">
+      <div class="reveal">
+        <div class="section-label" style="color:var(--accent);">Database Structure</div>
+        <h2>11の<br><em>成長因子</em></h2>
+      </div>
+      <p class="section-lead reveal" style="margin-bottom:0;">都市の成長要因を11の因子に分類し、それぞれのサブカテゴリと指標、実証事例をデータとして整理しています。単一の要因だけでなく、因子間の相互作用も分析対象とします。</p>
+    </div>
+    <div class="factor-categories">
+      <div class="factor-cat reveal">
+        <div class="factor-cat-num">FACTOR 01</div>
+        <div class="factor-cat-title">人的資本</div>
+        <ul class="factor-cat-items">
+          <li>高学歴人材の集積度</li>
+          <li>大学・専門学校の立地</li>
+          <li>生涯学習・リスキリング</li>
+          <li>外国人高度人材の受入</li>
+        </ul>
+      </div>
+      <div class="factor-cat reveal">
+        <div class="factor-cat-num">FACTOR 02</div>
+        <div class="factor-cat-title">集積・雇用密度</div>
+        <ul class="factor-cat-items">
+          <li>人口・企業の空間密度</li>
+          <li>雇用密度・通勤圏規模</li>
+          <li>都市圏の中心性指標</li>
+          <li>集積の経済効果</li>
+        </ul>
+      </div>
+      <div class="factor-cat reveal">
+        <div class="factor-cat-num">FACTOR 03</div>
+        <div class="factor-cat-title">R&amp;D・知識集約</div>
+        <ul class="factor-cat-items">
+          <li>R&amp;D支出・特許出願数</li>
+          <li>研究機関・大学との連携</li>
+          <li>スタートアップ・ベンチャー数</li>
+          <li>クリエイティブ産業の集積</li>
+        </ul>
+      </div>
+      <div class="factor-cat reveal">
+        <div class="factor-cat-num">FACTOR 04</div>
+        <div class="factor-cat-title">インフラ</div>
+        <ul class="factor-cat-items">
+          <li>交通アクセス・新幹線・空港</li>
+          <li>デジタルインフラ整備度</li>
+          <li>エネルギー・上下水道</li>
+          <li>都市再開発・土地利用</li>
+        </ul>
+      </div>
+      <div class="factor-cat reveal">
+        <div class="factor-cat-num">FACTOR 05</div>
+        <div class="factor-cat-title">制度・行政能力</div>
+        <ul class="factor-cat-items">
+          <li>財政力・自主財源比率</li>
+          <li>首長のリーダーシップ</li>
+          <li>規制緩和・特区制度</li>
+          <li>産学官連携・広域連携</li>
+        </ul>
+      </div>
+      <div class="factor-cat reveal">
+        <div class="factor-cat-num">FACTOR 06</div>
+        <div class="factor-cat-title">産業の集積性・多様性</div>
+        <ul class="factor-cat-items">
+          <li>産業多様性・特化係数</li>
+          <li>製造業・サービス業の構成比</li>
+          <li>GRP成長率・付加価値生産性</li>
+          <li>サプライチェーンの厚み</li>
+        </ul>
+      </div>
+      <div class="factor-cat reveal">
+        <div class="factor-cat-num">FACTOR 07</div>
+        <div class="factor-cat-title">社会関係資本</div>
+        <ul class="factor-cat-items">
+          <li>市民参加・投票率</li>
+          <li>NPO・協同組合の密度</li>
+          <li>地域コミュニティの結束度</li>
+          <li>信頼指標・犯罪率</li>
+        </ul>
+      </div>
+      <div class="factor-cat reveal">
+        <div class="factor-cat-num">FACTOR 08</div>
+        <div class="factor-cat-title">人口活力</div>
+        <ul class="factor-cat-items">
+          <li>人口増減率・転入超過</li>
+          <li>合計特殊出生率</li>
+          <li>生産年齢人口比率</li>
+          <li>若年層・子育て世代の割合</li>
+        </ul>
+      </div>
+      <div class="factor-cat reveal">
+        <div class="factor-cat-num">FACTOR 09</div>
+        <div class="factor-cat-title">観光</div>
+        <ul class="factor-cat-items">
+          <li>観光入込客数・消費額</li>
+          <li>インバウンド受入数</li>
+          <li>宿泊施設・MICE機能</li>
+          <li>文化資源・自然資源の活用</li>
+        </ul>
+      </div>
+      <div class="factor-cat reveal">
+        <div class="factor-cat-num">FACTOR 10</div>
+        <div class="factor-cat-title">歩きやすさ・暮らしやすさ</div>
+        <ul class="factor-cat-items">
+          <li>ウォーカビリティ指標</li>
+          <li>公共交通の利便性</li>
+          <li>住宅コスト・生活費水準</li>
+          <li>医療・教育・子育て環境</li>
+        </ul>
+      </div>
+      <div class="factor-cat reveal">
+        <div class="factor-cat-num">FACTOR 11</div>
+        <div class="factor-cat-title">経済循環性</div>
+        <ul class="factor-cat-items">
+          <li>域内調達率・地域乗数</li>
+          <li>地域金融機関の貸出比率</li>
+          <li>ふるさと納税・関係人口</li>
+          <li>アンカー機関の購買力</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section id="how">
+  <div class="section-inner">
+    <div class="section-label reveal" style="color:var(--accent);">Methodology</div>
+    <h2 class="reveal">どのように<em>構築</em>したか</h2>
+    <p class="section-lead reveal">学術的な厳密性と実務的な使いやすさを両立させた、独自の構築プロセス。</p>
+    <div class="how-grid">
+      <div class="how-step reveal">
+        <div class="how-step-num">01</div>
+        <div class="how-step-label">Step 01</div>
+        <div class="how-step-title">先行研究の<br>体系的レビュー</div>
+        <p class="how-step-desc">都市経済学・地理学・政策科学の先行研究1,000本以上を精査。成長要因として実証的に示された変数を抽出・分類。</p>
+      </div>
+      <div class="how-step reveal">
+        <div class="how-step-num">02</div>
+        <div class="how-step-label">Step 02</div>
+        <div class="how-step-title">統計データの<br>収集・整備</div>
+        <p class="how-step-desc">国勢調査・経済センサス・国土数値情報など公的統計を中心に、国内外200都市のデータを時系列で収集・標準化。</p>
+      </div>
+      <div class="how-step reveal">
+        <div class="how-step-num">03</div>
+        <div class="how-step-label">Step 03</div>
+        <div class="how-step-title">要因分類と<br>ラベリング</div>
+        <p class="how-step-desc">6領域50以上のカテゴリに各要因を分類。定量・定性の両軸で評価し、都市ごとの成長パターンをラベリング。</p>
+      </div>
+      <div class="how-step reveal">
+        <div class="how-step-num">04</div>
+        <div class="how-step-label">Step 04</div>
+        <div class="how-step-title">継続的な<br>更新・拡充</div>
+        <p class="how-step-desc">新たな統計リリース・研究成果を随時反映。利用者のフィードバックをもとにカテゴリと都市数を継続拡充。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DB BANNER -->
+<div class="db-banner">
+  <div class="db-banner-inner">
+    <div>
+      <div class="db-banner-label">Urban Growth Database</div>
+      <div class="db-banner-title">データベースへ</div>
+      <p class="db-banner-sub">11の成長因子・国内外200都市のデータを横断的に検索・分析できます。</p>
+    </div>
+    <a class="db-banner-btn" href="#">データベースを開く →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="index.html">合同会社<span>Graph</span> | 都市成長要因データベース</a>
+  <a class="footer-back" href="index.html">← サイトトップへ戻る</a>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
