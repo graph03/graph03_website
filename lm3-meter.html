@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LM3メーター | 合同会社Graph</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;600;700;800&family=Noto+Sans+JP:wght@300;400;500&family=Syncopate:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f5f4f1;
+      --surface: #eeecea;
+      --surface2: #e6e4e0;
+      --text: #1a1a1a;
+      --muted: #666;
+      --border: rgba(0,0,0,0.09);
+      --accent: #b8922a;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans JP', sans-serif; font-weight: 300; background: var(--bg); color: var(--text); line-height: 1.7; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 56px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem;
+      background: rgba(245,244,241,0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: 'Oxanium', sans-serif; font-size: 0.8rem; font-weight: 600; color: var(--text); text-decoration: none; letter-spacing: 0.08em; }
+    .nav-logo span { color: var(--accent); }
+    .nav-title { font-family: 'Oxanium', sans-serif; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+    .nav-cta { font-family: 'Oxanium', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; color: var(--accent); text-decoration: none; border: 1px solid var(--accent); padding: 0.4rem 1rem; transition: background 0.2s, color 0.2s; }
+    .nav-cta:hover { background: var(--accent); color: #fff; }
+    .nav-accent-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--accent); }
+
+    /* HERO */
+    .hero {
+      padding: 9rem 3rem 6rem;
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+    }
+    .hero-eyebrow { font-family: 'Oxanium', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; opacity: 0; animation: fadeUp 0.7s 0.1s ease forwards; }
+    .hero-eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--accent); }
+    .hero h1 { font-family: 'Syncopate', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.1; color: var(--text); margin-bottom: 0.5rem; letter-spacing: -0.01em; opacity: 0; animation: fadeUp 0.7s 0.2s ease forwards; }
+    .hero h1 em { font-style: normal; color: var(--accent); display: block; font-size: 0.55em; letter-spacing: 0.15em; font-weight: 400; margin-bottom: 0.3rem; }
+    .hero-tagline { font-size: 1rem; color: var(--muted); line-height: 2; margin: 1.5rem 0 2rem; opacity: 0; animation: fadeUp 0.7s 0.3s ease forwards; }
+    .hero-ref { font-family: 'Oxanium', sans-serif; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.05em; border-left: 2px solid var(--accent); padding-left: 0.8rem; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.7s 0.35s ease forwards; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.7s 0.45s ease forwards; }
+    .btn-primary { font-family: 'Oxanium', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; background: var(--accent); color: #fff; padding: 0.9rem 2rem; text-decoration: none; transition: opacity 0.2s; }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-outline { font-family: 'Oxanium', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; background: transparent; color: var(--text); padding: 0.9rem 2rem; text-decoration: none; border: 1px solid var(--border); transition: border-color 0.2s; }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Hero right: LM3 formula visual */
+    .hero-formula { opacity: 0; animation: fadeUp 0.7s 0.3s ease forwards; }
+    .formula-box {
+      background: var(--bg); color: var(--text); padding: 2.5rem;
+      border-left: 4px solid var(--accent);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+    }
+    .formula-label { font-family: 'Oxanium', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 1.2rem; }
+    .formula-eq { font-family: 'Oxanium', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--text); margin-bottom: 1.5rem; line-height: 1.8; }
+    .formula-eq span { color: var(--accent); }
+    .formula-rounds { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-bottom: 1.5rem; }
+    .formula-round { background: var(--surface); padding: 1rem 0.8rem; }
+    .formula-round-num { font-family: 'Oxanium', sans-serif; font-size: 0.6rem; font-weight: 700; color: var(--accent); letter-spacing: 0.15em; margin-bottom: 0.3rem; }
+    .formula-round-title { font-size: 0.8rem; font-weight: 500; color: var(--text); margin-bottom: 0.3rem; }
+    .formula-round-desc { font-size: 0.72rem; color: var(--muted); line-height: 1.7; }
+    .formula-ref { font-size: 0.72rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 1rem; }
+    .score-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 1.5rem; }
+    .score-item { background: var(--surface); padding: 1.2rem 1.5rem; border: 1px solid var(--border); }
+    .score-val { font-family: 'Oxanium', sans-serif; font-size: 2rem; font-weight: 800; color: var(--text); line-height: 1; margin-bottom: 0.2rem; }
+    .score-val.good { color: var(--accent); }
+    .score-label { font-size: 0.73rem; color: var(--muted); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* SECTIONS */
+    section { padding: 6rem 3rem; border-top: 1px solid var(--border); }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-label { font-family: 'Oxanium', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+    h2 { font-family: 'Syncopate', sans-serif; font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 1rem; }
+    .section-lead { font-size: 0.88rem; color: var(--muted); line-height: 2.1; max-width: 640px; margin-bottom: 3rem; }
+
+    /* PROBLEM */
+    #problem { background: var(--surface2); border-top: 3px solid var(--accent); }
+    .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--border); border: 1px solid var(--border); }
+    .problem-col { background: var(--bg); padding: 2.5rem 2rem; }
+    .problem-col-head { font-family: 'Oxanium', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; padding: 0.6rem 0.8rem; margin-bottom: 1.5rem; line-height: 1.6; }
+    .problem-col-head.bad { background: rgba(204,34,51,0.08); color: #cc2233; }
+    .problem-col-head.good { background: rgba(184,146,42,0.10); color: var(--accent); }
+    .problem-item { border-left: 3px solid var(--border); padding: 0.8rem 1rem; margin-bottom: 0.8rem; }
+    .problem-item.bad { border-color: rgba(204,34,51,0.3); }
+    .problem-item.good { border-color: var(--accent); }
+    .problem-item-title { font-family: 'Oxanium', sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+    .problem-item-desc { font-size: 0.77rem; color: var(--muted); line-height: 1.8; }
+    .lm3-score-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+    .lm3-score-box { padding: 1.2rem; border: 1px solid var(--border); text-align: center; background: var(--surface); }
+    .lm3-score-box .val { font-family: 'Oxanium', sans-serif; font-size: 2rem; font-weight: 800; color: var(--muted); }
+    .lm3-score-box .val.hi { color: var(--accent); }
+    .lm3-score-box .desc { font-size: 0.72rem; color: var(--muted); margin-top: 0.3rem; line-height: 1.7; }
+
+    /* FEATURES */
+    #features { background: var(--bg); }
+    .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .feature-card { background: var(--surface); padding: 2.2rem 2rem; transition: background 0.2s; border: 1px solid var(--border); }
+    .feature-card:hover { background: var(--surface2); }
+    .feature-num { font-family: 'Oxanium', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 0.8rem; }
+    .feature-title { font-family: 'Oxanium', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 0.8rem; line-height: 1.4; }
+    .feature-desc { font-size: 0.8rem; color: var(--muted); line-height: 2; }
+
+    /* STEPS */
+    #steps { background: var(--surface2); }
+    .steps-track { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border: 1px solid var(--border); }
+    .step-card { padding: 2rem 1.5rem; border-right: 1px solid var(--border); position: relative; background: var(--bg); }
+    .step-card:last-child { border-right: none; }
+    .step-num-bg { font-family: 'Oxanium', sans-serif; font-size: 3rem; font-weight: 800; color: rgba(0,0,0,0.04); line-height: 1; position: absolute; top: 1rem; right: 1rem; }
+    .step-label { font-family: 'Oxanium', sans-serif; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 0.8rem; }
+    .step-title { font-family: 'Oxanium', sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--text); margin-bottom: 0.6rem; line-height: 1.4; }
+    .step-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.9; }
+    .step-who { font-size: 0.68rem; color: var(--accent); margin-top: 0.8rem; font-family: 'Oxanium', sans-serif; letter-spacing: 0.05em; }
+
+    /* SHEET */
+    #sheet { background: var(--surface); }
+    .sheet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .sheet-card { border: 1px solid var(--border); padding: 2rem; background: var(--surface); }
+    .sheet-card-label { font-family: 'Oxanium', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 0.8rem; }
+    .sheet-card-title { font-family: 'Oxanium', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 1rem; }
+    .sheet-rows { border: 1px solid var(--border); background: #050505; }
+    .sheet-row { display: grid; grid-template-columns: 120px 1fr 1fr; font-size: 0.72rem; border-bottom: 1px solid var(--border); }
+    .sheet-row:last-child { border-bottom: none; }
+    .sheet-row-head { background: rgba(184,146,42,0.08); }
+    .sheet-cell { padding: 0.55rem 0.8rem; border-right: 1px solid var(--border); color: var(--muted); display: flex; align-items: center; }
+    .sheet-cell:last-child { border-right: none; }
+    .sheet-cell.head { font-family: 'Oxanium', sans-serif; font-size: 0.62rem; font-weight: 700; color: var(--text); letter-spacing: 0.05em; }
+    .sheet-cell.blue { background: rgba(100,160,230,0.08); color: #2255aa; font-size: 0.7rem; }
+    .sheet-note { font-size: 0.72rem; color: var(--accent); margin-top: 0.8rem; }
+
+    /* CTA banner */
+    .cta-banner { background: var(--surface); border-top: 3px solid var(--accent); }
+    .cta-banner-inner { max-width: 1200px; margin: 0 auto; padding: 4rem 3rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 3rem; }
+    .cta-banner-label { font-family: 'Oxanium', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 0.5rem; }
+    .cta-banner-title { font-family: 'Syncopate', sans-serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; color: var(--text); margin-bottom: 0.5rem; line-height: 1.2; }
+    .cta-banner-sub { font-size: 0.82rem; color: var(--muted); line-height: 1.8; }
+    .cta-banner-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #fff; font-family: 'Oxanium', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; padding: 1rem 2rem; text-decoration: none; white-space: nowrap; transition: opacity 0.2s; }
+    .cta-banner-btn:hover { opacity: 0.85; }
+
+    /* FOOTER */
+    footer { background: #0d0d0d; border-top: 1px solid var(--border); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; }
+    .footer-logo { font-family: 'Oxanium', sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--text); text-decoration: none; }
+    .footer-logo span { color: var(--accent); }
+    .footer-back { font-size: 0.72rem; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s; }
+    .footer-back:hover { color: var(--accent); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 4rem; gap: 3rem; }
+      section { padding: 4rem 1.5rem; }
+      .problem-grid, .sheet-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .steps-track { grid-template-columns: 1fr 1fr; }
+      .step-card:nth-child(2) { border-right: none; }
+      .step-card:nth-child(3), .step-card:nth-child(5) { border-top: 1px solid var(--border); }
+      .cta-banner-inner { grid-template-columns: 1fr; }
+    }
+
+    /* ── DOWNLOAD MODAL ── */
+    .dl-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(10,10,10,0.5);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .dl-overlay.open { display: flex; animation: dlFade 0.25s ease forwards; }
+    @keyframes dlFade { from { opacity:0; } to { opacity:1; } }
+    .dl-modal {
+      background: var(--bg);
+      width: 100%;
+      max-width: 480px;
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
+      animation: dlSlide 0.3s ease forwards;
+    }
+    @keyframes dlSlide { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    .dl-modal-header {
+      padding: 1.8rem 2rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .dl-modal-title {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .dl-modal-sub {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+    .dl-modal-close {
+      width: 32px; height: 32px;
+      border: 1px solid var(--border);
+      background: transparent;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--muted);
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .dl-modal-close:hover { background: var(--surface2); }
+    .dl-modal-body { padding: 1.5rem 2rem; }
+    .dl-form-group { margin-bottom: 1.2rem; }
+    .dl-form-group label {
+      display: block;
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+    .dl-form-group label span { color: var(--accent); }
+    .dl-form-group input {
+      width: 100%;
+      padding: 0.65rem 0.9rem;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.85rem;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .dl-form-group input:focus { border-color: var(--accent); }
+    .dl-form-group input::placeholder { color: var(--muted); font-size: 0.8rem; }
+    .dl-modal-footer {
+      padding: 1rem 2rem 1.8rem;
+      display: flex;
+      gap: 0.8rem;
+    }
+    .dl-btn-submit {
+      flex: 1;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 0.85rem 1.5rem;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .dl-btn-submit:hover { opacity: 0.85; }
+    .dl-btn-cancel {
+      background: transparent;
+      color: var(--muted);
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.85rem 1.2rem;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .dl-btn-cancel:hover { border-color: var(--text); color: var(--text); }
+    .dl-note {
+      font-size: 0.7rem;
+      color: var(--muted);
+      padding: 0 2rem 1.5rem;
+      line-height: 1.8;
+    }
+
+    /* ── DOWNLOAD MODAL ── */
+    .dl-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(10,10,10,0.5);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .dl-overlay.open {
+      display: flex;
+      animation: dlFade 0.25s ease forwards;
+    }
+    @keyframes dlFade { from { opacity: 0; } to { opacity: 1; } }
+    .dl-modal {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
+      width: 100%;
+      max-width: 480px;
+      padding: 2.5rem;
+      animation: dlSlide 0.3s ease forwards;
+      position: relative;
+    }
+    @keyframes dlSlide { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .dl-modal-title {
+      font-family: 'Syncopate', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+    .dl-modal-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1.8rem;
+    }
+    .dl-form-group {
+      margin-bottom: 1.2rem;
+    }
+    .dl-form-group label {
+      display: block;
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+    .dl-form-group label span { color: var(--accent); }
+    .dl-form-group input {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .dl-form-group input:focus { border-color: var(--accent); }
+    .dl-form-group input::placeholder { color: var(--muted); font-size: 0.8rem; }
+    .dl-modal-btns {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1.8rem;
+    }
+    .dl-submit-btn {
+      flex: 1;
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 0.9rem 1.5rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+    .dl-submit-btn:hover { opacity: 0.85; }
+    .dl-cancel-btn {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.9rem 1.2rem;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .dl-cancel-btn:hover { border-color: var(--text); color: var(--text); }
+    .dl-modal-close {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      width: 28px; height: 28px;
+      border: 1px solid var(--border);
+      background: transparent;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: var(--muted);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .dl-modal-close:hover { background: var(--text); color: #fff; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">合同会社<span>Graph</span></a>
+  <div class="nav-title">LM3 Meter</div>
+  <a class="nav-cta" href="index.html#contact">お問い合わせ</a>
+  <div class="nav-accent-bar"></div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">Local Multiplier 3 — 地域経済循環測定ツール</div>
+    <h1><em>LM3メーター</em>で地域のお金の流れを可視化する</h1>
+    <p class="hero-tagline">地域の経済活動がどれだけ地域内で循環しているかを、<br>簡単に測定・分析するためのツールです。</p>
+    <div class="hero-ref">NEF（New Economics Foundation）"The Money Trail" 2002 をもとに開発</div>
+    <div class="hero-btns">
+      <a href="#" onclick="openDlModal();return false;" class="btn-primary">📥 ファイルのダウンロード</a>
+      <a href="index.html#contact" class="btn-outline">お問い合わせ</a>
+    </div>
+  </div>
+  <div class="hero-formula">
+    <div class="formula-box">
+      <div class="formula-label">LM3 算出式</div>
+      <div class="formula-eq">LM3 = ( <span>R1</span> + <span>R2</span> + <span>R3</span> ) ÷ <span>R1</span></div>
+      <div class="formula-rounds">
+        <div class="formula-round">
+          <div class="formula-round-num">ROUND 1</div>
+          <div class="formula-round-title">収入（R1）</div>
+          <div class="formula-round-desc">対象事業者の年間総収入</div>
+        </div>
+        <div class="formula-round">
+          <div class="formula-round-num">ROUND 2</div>
+          <div class="formula-round-title">地域内支出（R2）</div>
+          <div class="formula-round-desc">仕入・人件費・委託費等の地域内支出</div>
+        </div>
+        <div class="formula-round">
+          <div class="formula-round-num">ROUND 3</div>
+          <div class="formula-round-title">地域内再支出（R3）</div>
+          <div class="formula-round-desc">R2受取者による地域内での再支出</div>
+        </div>
+      </div>
+      <div class="formula-ref">参考：全国平均 1.4〜1.7 ／ 優良事例 2.0以上</div>
+    </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="section-inner">
+    <div class="section-label reveal">Problem & Solution</div>
+    <h2 class="reveal">お金の「域外漏出」から<br>「域内循環」へ</h2>
+    <p class="section-lead reveal">大型店・ネット通販などの普及により、地域の事業者が稼いだお金が域外へ流出し、地域経済の空洞化が進んでいます。LM3はこの課題を数値で捉え、改善の道筋を示します。</p>
+    <div class="problem-grid">
+      <div class="problem-col reveal">
+        <div class="problem-col-head bad">✕ LM3スコアが低い状態　1.3以下（全国平均以下の経済循環率）</div>
+        <div class="problem-item bad">
+          <div class="problem-item-title">お金の大半が地域外へ流出</div>
+          <div class="problem-item-desc">仕入・委託費・消費が域外の企業・サービスへ流れ、地域経済への波及効果が低下</div>
+        </div>
+        <div class="problem-item bad">
+          <div class="problem-item-title">地域経済の空洞化</div>
+          <div class="problem-item-desc">地域内に残るお金が少なく、雇用・税収・地元産業が縮小するスパイラルに</div>
+        </div>
+      </div>
+      <div class="problem-col reveal">
+        <div class="problem-col-head good">○ LM3スコアが高い状態　2.0+（優良事例のスコア水準）</div>
+        <div class="problem-item good">
+          <div class="problem-item-title">お金が地域内で何度も循環</div>
+          <div class="problem-item-desc">地元の仕入先・スタッフ・業者を活用することで、お金が地域内で繰り返し使われる</div>
+        </div>
+        <div class="problem-item good">
+          <div class="problem-item-title">地域経済の活性化</div>
+          <div class="problem-item-desc">域内循環が高まることで、雇用・消費・税収が連鎖的に増加し、地域全体が潤う</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-inner">
+    <div class="section-label reveal">Features</div>
+    <h2 class="reveal">LM3メーターの4つの特徴</h2>
+    <p class="section-lead reveal">専門知識不要で、収入・支出・消費率を入力するだけでLM3を自動算出。調査から分析・比較まで一貫してサポートします。</p>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-num">FEATURE 01</div>
+        <div class="feature-title">自動でLM3を算出</div>
+        <p class="feature-desc">収入・支出・消費率の数値を入力するだけで、LM3をリアルタイムで自動計算します。特に専門知識は必要ありません。</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-num">FEATURE 02</div>
+        <div class="feature-title">調査票が付属・配布も簡単</div>
+        <p class="feature-desc">LM3の測定に必要な事業者・スタッフ・仕入先等の域内支出額データの収集を簡略化。関係者ごとに調査票Excelを自動生成し、メール添付で送るだけで回答収集を完了できます。</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-num">FEATURE 03</div>
+        <div class="feature-title">結果をExcelでダウンロード</div>
+        <p class="feature-desc">アンケート結果・LM3算出過程・結果サマリーの3シートをExcelで出力可能。報告書や他資料への活用も簡単にできます。</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-num">FEATURE 04</div>
+        <div class="feature-title">データベースによる他事例との比較</div>
+        <p class="feature-desc">当社が収集した事例のLM3スコア・各関係者ごとの域内調達率のデータから、当該事業の特性を分析。経済循環率を高めるための手法の検討にも活用可能です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section id="steps">
+  <div class="section-inner">
+    <div class="section-label reveal">How to Use</div>
+    <h2 class="reveal">5つのステップで完結</h2>
+    <p class="section-lead reveal">プロジェクト設定から算出・確認まで、シンプルな流れで誰でも使えます。</p>
+    <div class="steps-track">
+      <div class="step-card reveal">
+        <div class="step-num-bg">01</div>
+        <div class="step-label">STEP 01</div>
+        <div class="step-title">プロジェクト設定</div>
+        <p class="step-desc">事業者名・地域範囲・通貨単位を入力して保存</p>
+        <div class="step-who">管理者が設定</div>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num-bg">02</div>
+        <div class="step-label">STEP 02</div>
+        <div class="step-title">対象者の設定</div>
+        <p class="step-desc">事業者・スタッフ・仕入先・委託業者を登録</p>
+        <div class="step-who">管理者が設定</div>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num-bg">03</div>
+        <div class="step-label">STEP 03</div>
+        <div class="step-title">調査票の生成・配布</div>
+        <p class="step-desc">関係者ごとにボタン1つで調査票（Excel）を生成。メールに添付して送付</p>
+        <div class="step-who">管理者が準備 → 対象者が回答</div>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num-bg">04</div>
+        <div class="step-label">STEP 04</div>
+        <div class="step-title">回答データの取込</div>
+        <p class="step-desc">返送された調査票をドロップするだけでデータを自動取り込み</p>
+        <div class="step-who">管理者が操作</div>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num-bg">05</div>
+        <div class="step-label">STEP 05</div>
+        <div class="step-title">LM3の算出・確認</div>
+        <p class="step-desc">LM3を自動で算出。スコア・グラフ・内訳を表示。Excelでも出力可能</p>
+        <div class="step-who">管理者が確認・活用</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <div class="cta-banner-inner">
+    <div>
+      <div class="cta-banner-label">Get Started</div>
+      <div class="cta-banner-title">LM3メーターを<br>導入する</div>
+      <p class="cta-banner-sub">LM3は自由にご利用いただけます。ご不明な点があれば、お問い合わせください。</p>
+    </div>
+    <a class="cta-banner-btn" href="#" onclick="openDlModal();return false;" class="cta-banner-btn">📥 ファイルのダウンロード</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="index.html">合同会社<span>Graph</span> | LM3メーター</a>
+  <a class="footer-back" href="index.html">← サイトトップへ戻る</a>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+
+  /* ── DOWNLOAD MODAL ── */
+  function openDlModal() {
+    document.getElementById('dlOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDlModal() {
+    document.getElementById('dlOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function handleDlOverlay(e) {
+    if (e.target === document.getElementById('dlOverlay')) closeDlModal();
+  }
+  function submitDlForm() {
+    const org   = document.getElementById('dl-org').value.trim();
+    const name  = document.getElementById('dl-name').value.trim();
+    const email = document.getElementById('dl-email').value.trim();
+    if (!org || !name || !email) {
+      alert('所属・お名前・メールアドレスは必須項目です。');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert('正しいメールアドレスを入力してください。');
+      return;
+    }
+    // Send to Formspree (same endpoint as contact form)
+    fetch('https://formspree.io/f/xlgolndg', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        _subject: '【LM3メーター】ダウンロード申請',
+        所属: org,
+        氏名: name,
+        メールアドレス: email
+      })
+    });
+    // Trigger download
+    const a = document.createElement('a');
+    a.href = 'lm3-meter.zip';
+    a.download = 'lm3-meter.zip';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    closeDlModal();
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDlModal(); });
+
+
+  /* ── DOWNLOAD MODAL ── */
+  function openDlModal() {
+    document.getElementById('dlOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDlModal() {
+    document.getElementById('dlOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function handleDlOverlay(e) {
+    if (e.target === document.getElementById('dlOverlay')) closeDlModal();
+  }
+  function submitDlForm() {
+    const org   = document.getElementById('dl-org').value.trim();
+    const name  = document.getElementById('dl-name').value.trim();
+    const email = document.getElementById('dl-email').value.trim();
+    if (!org || !name || !email) {
+      alert('所属・氏名・メールアドレスをすべてご記入ください。');
+      return;
+    }
+    const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailReg.test(email)) {
+      alert('正しいメールアドレスをご入力ください。');
+      return;
+    }
+    // Trigger download
+    const a = document.createElement('a');
+    a.href = 'lm3-meter.zip';
+    a.download = 'lm3-meter.zip';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    closeDlModal();
+    // Clear form
+    document.getElementById('dl-org').value = '';
+    document.getElementById('dl-name').value = '';
+    document.getElementById('dl-email').value = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDlModal(); });
+
+</script>
+
+<!-- DOWNLOAD MODAL -->
+<div class="dl-overlay" id="dlOverlay" onclick="handleDlOverlay(event)">
+  <div class="dl-modal">
+    <div class="dl-modal-header">
+      <div>
+        <div class="dl-modal-title">📥 ファイルのダウンロード</div>
+        <div class="dl-modal-sub">以下の情報をご記入のうえ、ダウンロードしてください。</div>
+      </div>
+      <button class="dl-modal-close" onclick="closeDlModal()">✕</button>
+    </div>
+    <div class="dl-modal-body">
+      <div class="dl-form-group">
+        <label>所属・組織名 <span>*</span></label>
+        <input type="text" id="dl-org" placeholder="〇〇市役所 / 〇〇株式会社" />
+      </div>
+      <div class="dl-form-group">
+        <label>お名前 <span>*</span></label>
+        <input type="text" id="dl-name" placeholder="山田 太郎" />
+      </div>
+      <div class="dl-form-group">
+        <label>メールアドレス <span>*</span></label>
+        <input type="email" id="dl-email" placeholder="your@email.com" />
+      </div>
+    </div>
+    <div class="dl-modal-footer">
+      <button class="dl-btn-submit" onclick="submitDlForm()">ダウンロードする →</button>
+      <button class="dl-btn-cancel" onclick="closeDlModal()">キャンセル</button>
+    </div>
+    <p class="dl-note">※ ご入力いただいた情報は、ツールの改善および利用状況の把握にのみ使用します。</p>
+  </div>
+</div>
+
+<!-- DOWNLOAD MODAL -->
+<div class="dl-overlay" id="dlOverlay" onclick="handleDlOverlay(event)">
+  <div class="dl-modal">
+    <button class="dl-modal-close" onclick="closeDlModal()">✕</button>
+    <div class="dl-modal-title">ファイルのダウンロード</div>
+    <p class="dl-modal-sub">ダウンロードの前に、以下の情報をご記入ください。</p>
+    <div class="dl-form-group">
+      <label>所属 <span>*</span></label>
+      <input type="text" id="dl-org" placeholder="〇〇株式会社 / 〇〇市役所" />
+    </div>
+    <div class="dl-form-group">
+      <label>氏名 <span>*</span></label>
+      <input type="text" id="dl-name" placeholder="山田 太郎" />
+    </div>
+    <div class="dl-form-group">
+      <label>メールアドレス <span>*</span></label>
+      <input type="email" id="dl-email" placeholder="your@email.com" />
+    </div>
+    <div class="dl-modal-btns">
+      <button class="dl-submit-btn" onclick="submitDlForm()">📥 ダウンロードする</button>
+      <button class="dl-cancel-btn" onclick="closeDlModal()">キャンセル</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

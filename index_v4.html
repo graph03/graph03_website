@@ -1,0 +1,2244 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>合同会社Graph</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700&family=Syne:wght@400;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --surface: #f5f5f2;
+      --accent: #b8922a;
+      --accent2: #cc2233;
+      --text: #1a1a1a;
+      --muted: #6b6b6b;
+      --border: rgba(0,0,0,0.09);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── GRAPH BG ── */
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      height: 64px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: none;
+    }
+    .nav-accent-bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: #1a1a1a;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      flex-shrink: 0;
+      font-family: 'Oxanium', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* Language toggle */
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      flex-shrink: 0;
+      margin-left: 1.5rem;
+    }
+    .lang-btn {
+      padding: 0.3rem 0.7rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      transition: background 0.2s, color 0.2s;
+      font-family: 'Syne', sans-serif;
+    }
+    .lang-btn.active {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* ── RESOURCES DROPDOWN ── */
+    .nav-resources {
+      position: relative;
+    }
+    .nav-resources > a {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      cursor: pointer;
+    }
+    .nav-resources > a::after {
+      content: '▾';
+      font-size: 0.6rem;
+      color: var(--muted);
+      transition: transform 0.2s;
+    }
+    .nav-resources:hover > a::after { transform: rotate(180deg); }
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      background: #fff;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      min-width: 240px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-6px);
+      transition: opacity 0.2s, transform 0.2s;
+      z-index: 200;
+    }
+    .nav-resources:hover .nav-dropdown {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .nav-dropdown-item {
+      display: flex;
+      flex-direction: column;
+      padding: 0.9rem 1.2rem;
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .nav-dropdown-item:last-child { border-bottom: none; }
+    .nav-dropdown-item:hover { background: var(--surface); }
+    .nav-dropdown-item-label {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.2rem;
+    }
+    .nav-dropdown-item-title {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* ── RESOURCE CAROUSEL BANNER ── */
+    .resource-carousel-section {
+      border-top: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .resource-carousel-wrap {
+      position: relative;
+    }
+    .resource-track {
+      display: flex;
+      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+    }
+    .resource-slide {
+      flex: 0 0 100%;
+      min-width: 0;
+    }
+
+    /* Slide 1: CIVIC VOICE (dark blue) */
+    .res-slide-cv { background: #0a3d62; }
+    .res-slide-cv .res-inner { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 3rem; max-width: 1200px; margin: 0 auto; padding: 3.5rem 3rem; }
+    .res-label { font-family: 'Oxanium', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .res-slide-cv .res-label { color: var(--accent); }
+    .res-slide-cv .res-title { font-family: 'Oxanium', sans-serif; font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem; letter-spacing: -0.01em; }
+    .res-slide-cv .res-title span { color: var(--accent); }
+    .res-slide-cv .res-sub { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.8; }
+    .res-slide-cv .res-btn { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--accent); color: #fff; font-family: 'Oxanium', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; padding: 0.9rem 1.8rem; text-decoration: none; white-space: nowrap; transition: opacity 0.2s; }
+    .res-slide-cv .res-btn:hover { opacity: 0.85; }
+
+    /* Slide 2: Urban Growth (dark) */
+    .res-slide-ug { background: #0d0d0d; }
+    .res-slide-ug .res-inner { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 2.5rem; max-width: 1200px; margin: 0 auto; padding: 3.5rem 3rem; }
+    .res-slide-ug .res-num { font-family: 'Oxanium', sans-serif; font-size: 3rem; font-weight: 800; color: rgba(240,236,228,0.06); line-height: 1; white-space: nowrap; }
+    .res-slide-ug .res-label { color: var(--accent); }
+    .res-slide-ug .res-title { font-family: 'Oxanium', sans-serif; font-size: 1.5rem; font-weight: 800; color: #f0ece4; margin-bottom: 0.4rem; }
+    .res-slide-ug .res-title em { font-style: normal; color: var(--accent); }
+    .res-slide-ug .res-sub { font-size: 0.82rem; color: rgba(240,236,228,0.45); line-height: 1.8; }
+    .res-slide-ug .res-btn { display: inline-flex; align-items: center; gap: 0.4rem; background: transparent; color: #f0ece4; font-family: 'Oxanium', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; padding: 0.9rem 1.8rem; text-decoration: none; border: 1px solid rgba(240,236,228,0.25); white-space: nowrap; transition: border-color 0.2s, background 0.2s; }
+    .res-slide-ug .res-btn:hover { border-color: var(--accent); background: rgba(184,146,42,0.1); }
+
+    /* Slide 3: LM3 */
+    .res-slide-lm { background: var(--surface); border-top: 3px solid var(--accent); }
+    .res-slide-lm .res-inner { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 3rem; max-width: 1200px; margin: 0 auto; padding: 3.3rem 3rem; }
+    .res-slide-lm .res-label { color: var(--accent); }
+    .res-slide-lm .res-title { font-family: 'Oxanium', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text); margin-bottom: 0.4rem; }
+    .res-slide-lm .res-sub { font-size: 0.82rem; color: var(--muted); line-height: 1.8; }
+    .res-slide-lm .res-btn { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--accent); color: #fff; font-family: 'Oxanium', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; padding: 0.9rem 1.8rem; text-decoration: none; white-space: nowrap; transition: opacity 0.2s; }
+    .res-slide-lm .res-btn:hover { opacity: 0.85; }
+
+    /* Carousel nav */
+    .resource-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.8rem;
+      background: rgba(0,0,0,0.04);
+      border-top: 1px solid var(--border);
+    }
+    .resource-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.15);
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      padding: 0;
+    }
+    .resource-dot.active { background: var(--accent); transform: scale(1.4); }
+    .resource-arrow {
+      width: 32px; height: 32px;
+      border: 1px solid var(--border);
+      background: #fff;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text);
+      font-size: 0.8rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .resource-arrow:hover { background: var(--text); color: #fff; border-color: var(--text); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 3rem;
+      overflow: hidden;
+    }
+    .hero-inner { max-width: 900px; position: relative; z-index: 2; }
+
+    /* Video background */
+    .hero-video-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .hero-video-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    /* Dark overlay to keep text readable */
+    .hero-video-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(245,244,241,0.72) 0%,
+        rgba(245,244,241,0.50) 50%,
+        rgba(245,244,241,0.30) 100%
+      );
+      z-index: 1;
+    }
+    /* hero-num stays above video */
+    .hero-num { z-index: 2; }
+
+    h1 {
+      font-family: 'Oxanium', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.4rem, 5.5vw, 4.8rem);
+      line-height: 1.12;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--text);
+      opacity: 0;
+      animation: fadeUp 0.9s 0.3s ease forwards;
+      text-shadow: 0 2px 20px rgba(245,244,241,0.8), 0 0 40px rgba(245,244,241,0.6);
+    }
+    h1 em { font-style: normal; color: var(--accent); }
+
+    .hero-sub {
+      margin-top: 1.8rem;
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: var(--text);
+      max-width: 520px;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.5s ease forwards;
+      text-shadow: 0 1px 12px rgba(245,244,241,0.9);
+      font-weight: 500;
+    }
+    .hero-cta {
+      margin-top: 2.8rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.7s ease forwards;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 2rem;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: background 0.25s, color 0.25s;
+      background: transparent;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn:hover { background: var(--accent); color: #fff; }
+
+    .hero-num {
+      position: absolute;
+      right: 3rem; bottom: 3rem;
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(7rem, 15vw, 14rem);
+      font-weight: 800;
+      color: rgba(0,0,0,0.03);
+      line-height: 1;
+      letter-spacing: -0.05em;
+      user-select: none;
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 7rem 3rem;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .section-label::before {
+      content: '';
+      width: 20px; height: 1px;
+      background: var(--accent);
+    }
+    h2 {
+      font-family: 'Oxanium', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.4rem, 2.8vw, 2rem);
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+      margin-bottom: 3rem;
+      color: var(--text);
+    }
+
+    /* ── ABOUT ── */
+    #about { border-top: 1px solid var(--border); background: var(--bg); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--muted);
+      line-height: 2;
+      font-size: 0.95rem;
+      margin-bottom: 1.2rem;
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.8rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .stat-card:hover { border-color: rgba(184,146,42,0.3); }
+    .stat-card:hover::after { transform: scaleX(1); }
+    .stat-num {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1.2;
+    }
+    .stat-label {
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+      letter-spacing: 0.03em;
+      line-height: 1.5;
+    }
+
+    /* ── NEWS ── */
+    #news { border-top: 1px solid var(--border); background: var(--surface); }
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .news-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 1.8rem;
+      transition: box-shadow 0.3s, transform 0.3s;
+      cursor: pointer;
+    }
+    .news-card:hover {
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+      transform: translateY(-3px);
+    }
+    .news-date {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.6rem;
+    }
+    .news-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.2rem 0.6rem;
+      margin-bottom: 0.8rem;
+    }
+    .news-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--text);
+      margin-bottom: 0.8rem;
+    }
+    .news-excerpt {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* ── SERVICES ── */
+    #services { border-top: 1px solid var(--border); background: var(--bg); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: var(--border);
+    }
+    .service-card {
+      background: var(--bg);
+      padding: 3rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .service-card:hover { background: var(--surface); }
+    .service-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: rgba(184,146,42,0.07);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      transition: color 0.3s;
+    }
+    .service-card:hover .service-num { color: rgba(184,146,42,0.15); }
+    .service-icon {
+      width: 44px; height: 44px;
+      border: 1px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+    }
+    .service-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    .service-desc {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+    .service-line {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .service-card:hover .service-line { transform: scaleX(1); }
+
+    /* ── CASES ── */
+    #cases { border-top: 1px solid var(--border); background: var(--surface); }
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+    .case-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 1.1rem 1.4rem;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.3s;
+    }
+    .case-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.07); }
+    .case-category {
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+    .case-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+    .case-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 0;
+    }
+    .case-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .tag {
+      font-size: 0.67rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.6rem;
+      letter-spacing: 0.05em;
+    }
+    .case-bar {
+      position: absolute;
+      left: 0; top: 0;
+      width: 3px; height: 100%;
+      background: var(--accent);
+    }
+
+    /* ── BLOG ── */
+    #blog { border-top: 1px solid var(--border); background: var(--bg); }
+
+    .blog-slider-wrap {
+      position: relative;
+    }
+    .blog-slider-track {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      /* cards beyond 3 will be hidden by overflow:hidden on wrap */
+    }
+    /* Each "page" is a set of 3 cards */
+    .blog-page {
+      display: contents;
+    }
+    .blog-card {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      overflow: hidden;
+    }
+    .blog-card:hover { opacity: 0.75; }
+    .blog-card.hidden { display: none; }
+    .blog-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      margin-bottom: 1.2rem;
+      background: var(--surface);
+    }
+    .blog-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .blog-card:hover .blog-thumb img { transform: scale(1.05); }
+
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 0.6rem;
+    }
+    .blog-cat {
+      font-size: 0.67rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .blog-date { font-size: 0.67rem; color: var(--muted); }
+    .blog-title {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 0.6rem;
+    }
+    .blog-excerpt {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+    .blog-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 2rem;
+    }
+    .blog-nav-btn {
+      width: 40px; height: 40px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      transition: background 0.2s, color 0.2s;
+    }
+    .blog-nav-btn:hover { background: var(--text); color: #fff; }
+    .blog-nav-btn[disabled] { opacity: 0.2; cursor: default; pointer-events: none; }
+    .blog-counter {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-left: 0.5rem;
+    }
+
+    /* ── CONTACT ── */
+    #contact { border-top: 1px solid var(--border); background: var(--surface); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .contact-intro p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 2;
+      margin-bottom: 1rem;
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .form-group label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 0.85rem 1rem;
+      font-size: 0.88rem;
+      color: var(--text);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 300;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+      appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+    }
+    .form-group textarea { resize: vertical; min-height: 130px; }
+    .form-submit {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 0.5rem;
+    }
+    .form-note {
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .success-msg {
+      display: none;
+      background: rgba(184,146,42,0.08);
+      border: 1px solid rgba(184,146,42,0.3);
+      padding: 1.2rem 1.5rem;
+      color: var(--accent);
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
+    /* ── COMPANY ── */
+    #company { border-top: 1px solid var(--border); background: var(--bg); }
+    .company-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .info-table { width: 100%; border-collapse: collapse; }
+    .info-table tr { border-bottom: 1px solid var(--border); }
+    .info-table th {
+      padding: 1.1rem 0;
+      font-family: 'Zen Kaku Gothic New', 'Noto Sans JP', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      text-align: left;
+      width: 38%;
+      vertical-align: top;
+      padding-top: 1.3rem;
+    }
+    .info-table td {
+      padding: 1.1rem 0;
+      font-family: 'Zen Kaku Gothic New', 'Noto Sans JP', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.9;
+    }
+    .map-placeholder-REMOVED {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      background: var(--text);
+      color: rgba(255,255,255,0.7);
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+    }
+    .footer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .footer-nav a {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+    }
+    .footer-nav a:hover { color: rgba(255,255,255,0.8); }
+    .footer-logo-center {
+      text-align: center;
+      color: #fff;
+    }
+    .footer-copy {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.3);
+      text-align: right;
+      letter-spacing: 0.04em;
+      line-height: 1.8;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1000px) {
+
+    }
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .hero { padding: 0 1.5rem; padding-top: 6rem; }
+      section { padding: 5rem 1.5rem; }
+      .about-grid, .contact-grid, .company-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .cases-grid { grid-template-columns: 1fr 1fr; }
+
+      footer { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+      .footer-nav { align-items: center; }
+      .footer-copy { text-align: center; }
+      .hero-num { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .about-stats { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ── BLOG MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(10,10,10,0.55);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .modal-overlay.open {
+      display: flex;
+      animation: modalFadeIn 0.25s ease forwards;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    .modal {
+      background: var(--bg);
+      width: 100%;
+      max-width: 760px;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      animation: modalSlideUp 0.3s ease forwards;
+    }
+    @keyframes modalSlideUp {
+      from { transform: translateY(24px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+    .modal-header {
+      padding: 2rem 2.5rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .modal-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.8rem;
+    }
+    .modal-cat {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .modal-date {
+      font-size: 0.68rem;
+      color: var(--muted);
+    }
+    .modal-title {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.4;
+      letter-spacing: 0.01em;
+    }
+    .modal-body {
+      padding: 2rem 2.5rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .modal-body p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 2.1;
+      margin-bottom: 1.4rem;
+    }
+    .modal-body h3 {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 2rem 0 0.8rem;
+      letter-spacing: 0.02em;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1.4rem;
+      right: 1.5rem;
+      width: 36px; height: 36px;
+      border: 1px solid var(--border);
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      transition: background 0.2s, color 0.2s;
+      font-size: 1.1rem;
+    }
+    .modal-close:hover {
+      background: var(--text);
+      color: #fff;
+    }
+    .modal-footer {
+      padding: 1.2rem 2.5rem;
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .modal-accent-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent) 60%, var(--accent2) 100%);
+      flex-shrink: 0;
+    }
+
+    /* ── CIVIC VOICE BANNER ── */
+    .cv-banner {
+      border-top: 1px solid var(--border);
+      background: #0a3d62;
+      padding: 0;
+    }
+    .cv-banner-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3.5rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 3rem;
+    }
+    .cv-banner-label {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .cv-banner-title {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
+    }
+    .cv-banner-title span { color: var(--accent); }
+    .cv-banner-sub {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.8;
+    }
+    .cv-banner-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 0.9rem 1.8rem;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .cv-banner-btn:hover { opacity: 0.85; }
+
+    /* ── URBAN GROWTH BANNER ── */
+    .ug-banner {
+      border-top: 1px solid var(--border);
+      background: #0d0d0d;
+      padding: 0;
+    }
+    .ug-banner-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3.5rem 3rem;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 3rem;
+    }
+    .ug-banner-eyebrow {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .ug-banner-num {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: rgba(240,236,228,0.06);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      white-space: nowrap;
+    }
+    .ug-banner-title {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #f0ece4;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .ug-banner-title em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .ug-banner-sub {
+      font-size: 0.82rem;
+      color: rgba(240,236,228,0.45);
+      line-height: 1.8;
+    }
+    .ug-banner-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: #f0ece4;
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      padding: 0.9rem 1.8rem;
+      text-decoration: none;
+      border: 1px solid rgba(240,236,228,0.25);
+      white-space: nowrap;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .ug-banner-btn:hover {
+      background: rgba(240,236,228,0.08);
+      border-color: rgba(240,236,228,0.6);
+    }
+
+    /* ── ADMIN TRIGGER ── */
+    .admin-trigger {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 500;
+      width: 40px; height: 40px;
+      border: 1px solid rgba(0,0,0,0.12);
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(8px);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      border-radius: 2px;
+    }
+    .admin-trigger:hover { background: var(--text); color: #fff; border-color: var(--text); }
+
+    /* ── ADMIN OVERLAY ── */
+    .admin-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 600;
+      background: rgba(10,10,10,0.6);
+      backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .admin-overlay.open { display: flex; animation: modalFadeIn 0.25s ease forwards; }
+    .admin-panel {
+      background: var(--bg);
+      width: 100%;
+      max-width: 680px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .admin-header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .admin-header-title {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .admin-header-title::before {
+      content: '';
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .admin-close {
+      width: 34px; height: 34px;
+      border: 1px solid var(--border);
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 1rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .admin-close:hover { background: var(--text); color: #fff; }
+    .admin-body {
+      padding: 1.5rem 2rem;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* Auth screen */
+    .admin-auth {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+    .admin-auth-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.2rem;
+    }
+    .admin-auth-input {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 0.8rem 1rem;
+      font-size: 0.9rem;
+      color: var(--text);
+      font-family: 'Noto Sans JP', sans-serif;
+      outline: none;
+      width: 100%;
+      transition: border-color 0.2s;
+    }
+    .admin-auth-input:focus { border-color: var(--accent); }
+    .admin-auth-error {
+      font-size: 0.78rem;
+      color: var(--accent2);
+      display: none;
+    }
+    .admin-auth-error.show { display: block; }
+
+    /* Post list */
+    .admin-section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .admin-section-label::before {
+      content: '';
+      width: 14px; height: 1px;
+      background: var(--accent);
+    }
+    .admin-post-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .admin-post-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.7rem 1rem;
+      transition: border-color 0.2s;
+    }
+    .admin-post-item:hover { border-color: rgba(184,146,42,0.3); }
+    .admin-post-num {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.7rem;
+      color: var(--muted);
+      width: 1.4rem;
+      flex-shrink: 0;
+    }
+    .admin-post-url {
+      flex: 1;
+      font-size: 0.78rem;
+      color: var(--muted);
+      word-break: break-all;
+      line-height: 1.5;
+    }
+    .admin-post-del {
+      width: 28px; height: 28px;
+      border: 1px solid var(--border);
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .admin-post-del:hover { background: var(--accent2); color: #fff; border-color: var(--accent2); }
+
+    /* Add form */
+    .admin-add-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .admin-add-row {
+      display: flex;
+      gap: 0.6rem;
+    }
+    .admin-add-input {
+      flex: 1;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 0.75rem 1rem;
+      font-size: 0.82rem;
+      color: var(--text);
+      font-family: 'Noto Sans JP', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .admin-add-input:focus { border-color: var(--accent); }
+    .admin-add-btn {
+      padding: 0.75rem 1.4rem;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .admin-add-btn:hover { opacity: 0.85; }
+    .admin-add-hint {
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .admin-add-error {
+      font-size: 0.75rem;
+      color: var(--accent2);
+      display: none;
+    }
+    .admin-add-error.show { display: block; }
+
+    .admin-footer {
+      padding: 1rem 2rem;
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .admin-status {
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-family: 'Oxanium', sans-serif;
+    }
+    .admin-status.saved { color: var(--accent); }
+    .admin-reset-btn {
+      font-size: 0.72rem;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: underline;
+      letter-spacing: 0.04em;
+      padding: 0;
+    }
+    .admin-reset-btn:hover { color: var(--accent2); }
+    .admin-accent-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent) 60%, var(--accent2) 100%);
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+
+<!-- NAV -->
+<nav>
+  <a href="#top" class="nav-logo">Graph</a>
+  <div class="nav-accent-bar"></div>
+  <ul class="nav-links">
+    <li><a href="#about" data-ja="About" data-en="About">About</a></li>
+    <li><a href="#services" data-ja="事業内容" data-en="Services">事業内容</a></li>
+    <li><a href="#cases" data-ja="実績" data-en="Cases">実績</a></li>
+    <li><a href="#blog" data-ja="レポート" data-en="Report">レポート</a></li>
+    <li class="nav-resources">
+      <a href="#">リソース</a>
+      <div class="nav-dropdown">
+        <a class="nav-dropdown-item" href="civic-voice.html">
+          <span class="nav-dropdown-item-label">AI Platform</span>
+          <span class="nav-dropdown-item-title">CIVIC VOICE</span>
+        </a>
+        <a class="nav-dropdown-item" href="urban-growth.html">
+          <span class="nav-dropdown-item-label">Research Database</span>
+          <span class="nav-dropdown-item-title">何が都市を成長させるのか</span>
+        </a>
+        <a class="nav-dropdown-item" href="lm3-meter.html">
+          <span class="nav-dropdown-item-label">Measurement Tool</span>
+          <span class="nav-dropdown-item-title">LM3メーター</span>
+        </a>
+      </div>
+    </li>
+    <li><a href="#contact" data-ja="お問い合わせ" data-en="Contact">お問い合わせ</a></li>
+    <li><a href="#company" data-ja="会社概要" data-en="Company">会社概要</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('ja')">JP</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <!-- City video background (2x speed) -->
+  <div class="hero-video-wrap">
+    <video id="heroVideo" autoplay muted loop playsinline preload="auto"
+      src="City-Bg.mp4">
+    </video>
+  </div>
+  <div class="hero-video-overlay"></div>
+  <div class="hero-inner">
+    <h1>
+      Mapping the<br/>
+      <em>Future</em> of<br/>
+      Communities.
+    </h1>
+    <p class="hero-sub" data-ja="リサーチとインサイトの力で、地域と都市の未来を描く。" data-en="Shaping the future of cities and communities through research and insight.">
+      リサーチとインサイトの力で、地域と都市の未来を描く。
+    </p>
+
+  </div>
+  <div class="hero-num">G</div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <div class="section-label" data-ja="About Us" data-en="About Us">About Us</div>
+      <h2 data-ja="社会の構造を<br/>読み解く。" data-en="Decoding<br/>Social Structure.">社会の構造を<br/>読み解く。</h2>
+      <p data-ja="私たちは、リサーチと分析、地域振興、そしてデジタル技術の活用を通じて、持続可能な地域社会と都市のあり方を探求します。"
+         data-en="We explore sustainable forms of local communities and cities through research, analysis, regional revitalization, and digital technology.">
+        私たちは、リサーチと分析、地域振興、そしてデジタル技術の活用を通じて、持続可能な地域社会と都市のあり方を探求します。
+      </p>
+      <p data-ja="「Graph」という名のとおり、複雑に絡み合う社会・経済・都市のネットワークを可視化し、構造的な解決策を提供することを目指します。"
+         data-en="True to our name 'Graph,' we aim to visualize the complex, intertwined networks of society, economy, and cities, and provide structural solutions.">
+        「Graph」という名のとおり、複雑に絡み合う社会・経済・都市のネットワークを可視化し、構造的な解決策を提供することを目指します。
+      </p>
+    </div>
+    <div class="about-stats reveal">
+      <div class="stat-card">
+        <div class="stat-num">Urban</div>
+        <div class="stat-label" data-ja="都市産業政策の専門性" data-en="Urban Industry Policy">都市産業政策の専門性</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">Practical</div>
+        <div class="stat-label" data-ja="観光・交流事業の実践" data-en="Tourism & Exchange">観光・交流事業の実践</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">Local</div>
+        <div class="stat-label" data-ja="地域密着アプローチ" data-en="Local-First Approach">地域密着アプローチ</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">DX</div>
+        <div class="stat-label" data-ja="デジタル変革支援" data-en="Digital Transformation">デジタル変革支援</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label reveal" data-ja="Services" data-en="Services">Services</div>
+  <h2 class="reveal" data-ja="3つの事業領域" data-en="Three Business Areas">3つの事業領域</h2>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <div class="service-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M3 12h2M19 12h2M12 3v2M12 19v2"/><path d="M5.6 5.6l1.4 1.4M16.9 16.9l1.4 1.4M5.6 18.4l1.4-1.4M16.9 7.1l1.4-1.4"/></svg>
+      </div>
+      <div class="service-title" data-ja="リサーチ・シンクタンク事業" data-en="Research & Think Tank">リサーチ・シンクタンク事業</div>
+      <p class="service-desc" data-ja="社会課題・政策・産業構造に関する独自リサーチを実施。エビデンスに基づく提言と調査レポートを通じて、政策立案や意思決定を支援します。" data-en="We conduct original research on social issues, policies, and industrial structures. Through evidence-based recommendations and reports, we support policy planning and decision-making.">社会課題・政策・産業構造に関する独自リサーチを実施。エビデンスに基づく提言と調査レポートを通じて、政策立案や意思決定を支援します。</p>
+      <div class="service-line"></div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">02</div>
+      <div class="service-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div class="service-title" data-ja="ローカル・ディベロップメント事業" data-en="Local Development">ローカル・ディベロップメント事業</div>
+      <p class="service-desc" data-ja="千葉県で観光交流事業を実践。そのノウハウをリサーチ・シンクタンク事業に還元し、実践に基づく調査研究を実施します。" data-en="We practice tourism and exchange projects in Chiba Prefecture, channeling those insights back into our research activities for practice-based studies.">千葉県で観光交流事業を実践。そのノウハウをリサーチ・シンクタンク事業に還元し、実践に基づく調査研究を実施します。</p>
+      <div class="service-line"></div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">03</div>
+      <div class="service-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <div class="service-title" data-ja="都市DX事業" data-en="Urban DX">都市DX事業</div>
+      <p class="service-desc" data-ja="デジタル技術を都市・行政・地域サービスに実装し、スマートシティの実現を支援。データ活用・システム設計からコンサルティングまで包括的に対応します。" data-en="We implement digital technology in urban administration and local services to support smart city development, covering everything from data utilization to consulting.">デジタル技術を都市・行政・地域サービスに実装し、スマートシティの実現を支援。データ活用・システム設計からコンサルティングまで包括的に対応します。</p>
+      <div class="service-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section id="cases">
+  <div class="section-label reveal" data-ja="Case Studies" data-en="Case Studies">Case Studies</div>
+  <h2 class="reveal" data-ja="当社の主な実績" data-en="Our Work">当社の主な実績</h2>
+  <div class="cases-grid">
+    <div class="case-card reveal">
+      <div class="case-bar"></div>
+      <div class="case-category">自主事業</div>
+      <div class="case-title">地域分析ツールの開発業務</div>
+      <p class="case-desc">REASAS等のデータを活用した地域経済成長の分析ツールを開発。</p>
+    </div>
+    <div class="case-card reveal">
+      <div class="case-bar"></div>
+      <div class="case-category">研究事業</div>
+      <div class="case-title">社会的インパクト評価に関する調査研究</div>
+      <p class="case-desc">知的財産を活用した学生向けビジネスコンテストの社会的インパクト評価を実施した。</p>
+    </div>
+    <div class="case-card reveal">
+      <div class="case-bar"></div>
+      <div class="case-category">中央省庁</div>
+      <div class="case-title">国土政策シミュレーションモデル検討調査</div>
+      <p class="case-desc">国土政策シミュレーションモデルを改定し、テレワークが進展した場合の人の移動や地域経済の変化について分析を行った。</p>
+    </div>
+    <div class="case-card reveal">
+      <div class="case-bar"></div>
+      <div class="case-category">三宅町</div>
+      <div class="case-title">EBPMアドバイザリー業務</div>
+      <p class="case-desc">三宅町におけるEBPM推進に向けて、アドバイザーとして研修事業等を実施した。</p>
+    </div>
+    <div class="case-card reveal">
+      <div class="case-bar"></div>
+      <div class="case-category">瀬戸内町</div>
+      <div class="case-title">瀬戸内町グランドデザイン策定業務</div>
+      <p class="case-desc">瀬戸内町の2050年の目指すべき姿を検討するグランドデザインの策定を支援した。</p>
+    </div>
+    <div class="case-card reveal">
+      <div class="case-bar"></div>
+      <div class="case-category">川崎市</div>
+      <div class="case-title">インバウンド観光客ターゲット検討業務</div>
+      <p class="case-desc">インバウンド観光客の訪問動向を調査し、今後の観光振興策の検討に向けてターゲットを設定した。</p>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="section-label reveal" data-ja="Blog &amp; Report" data-en="Blog &amp; Report">Blog &amp; Report</div>
+  <h2 class="reveal" data-ja="ブログ・レポート" data-en="Blog & Report">ブログ・レポート</h2>
+  <div class="blog-slider-wrap">
+    <div class="blog-slider-track" id="blogTrack">
+      <!-- Cards injected by JS -->
+    </div>
+    <div class="blog-nav">
+      <button class="blog-nav-btn" id="blogPrev" onclick="blogSlide(-1)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="blog-nav-btn" id="blogNext" onclick="blogSlide(1)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+      <span class="blog-counter" id="blogCounter"></span>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal">
+    <div class="modal-accent-bar"></div>
+    <div class="modal-header">
+      <div class="modal-meta">
+        <span class="modal-cat" id="modal-cat"></span>
+        <span class="modal-date" id="modal-date"></span>
+      </div>
+      <div class="modal-title" id="modal-title"></div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal()">閉じる</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN TRIGGER -->
+<button class="admin-trigger" id="adminTrigger" title="管理画面" onclick="openAdmin()">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+    <path d="M7 11V7a5 5 0 0110 0v4"/>
+  </svg>
+</button>
+
+<!-- ADMIN PANEL -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-panel">
+    <div class="admin-accent-bar"></div>
+    <div class="admin-header">
+      <div class="admin-header-title">管理画面 — ブログ・レポート</div>
+      <button class="admin-close" onclick="closeAdmin()">✕</button>
+    </div>
+
+    <!-- AUTH SCREEN -->
+    <div class="admin-body" id="adminAuthScreen">
+      <div class="admin-auth">
+        <div class="admin-auth-label">パスワードを入力してください</div>
+        <input class="admin-auth-input" type="password" id="adminPasswordInput"
+               placeholder="••••••••"
+               onkeydown="if(event.key==='Enter')checkAdminPassword()" />
+        <div class="admin-auth-error" id="adminAuthError">パスワードが正しくありません</div>
+        <button class="admin-add-btn" onclick="checkAdminPassword()">ログイン →</button>
+      </div>
+    </div>
+
+    <!-- MAIN SCREEN (hidden until auth) -->
+    <div style="display:none;flex-direction:column;flex:1;overflow:hidden;" id="adminMainScreen">
+      <div class="admin-body">
+
+        <!-- Current posts -->
+        <div>
+          <div class="admin-section-label">現在の投稿一覧</div>
+          <div class="admin-post-list" id="adminPostList">
+            <!-- injected by JS -->
+          </div>
+        </div>
+
+        <!-- Add new post -->
+        <div>
+          <div class="admin-section-label">新しい投稿を追加</div>
+          <div class="admin-add-form">
+            <div class="admin-add-row">
+              <input class="admin-add-input" type="text" id="adminNewUrl"
+                     placeholder="https://note.com/embed/notes/xxxxx"
+                     onkeydown="if(event.key==='Enter')adminAddPost()" />
+              <button class="admin-add-btn" onclick="adminAddPost()">追加 +</button>
+            </div>
+            <div class="admin-add-error" id="adminAddError">有効なnote埋め込みURLを入力してください</div>
+            <div class="admin-add-hint">
+              note記事の埋め込みURL形式：<code>https://note.com/embed/notes/xxxxx</code><br>
+              ※ noteの記事ページで「埋め込みコード」を取得し、src属性のURLを貼り付けてください。
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="admin-footer">
+        <div class="admin-status" id="adminStatus">— 変更は自動保存されます</div>
+        <button class="admin-reset-btn" onclick="adminResetDefaults()">デフォルトに戻す</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- RESOURCE CAROUSEL -->
+<div class="resource-carousel-section">
+  <div class="resource-carousel-wrap">
+    <div class="resource-track" id="resourceTrack">
+      <!-- Slide 1: CIVIC VOICE -->
+      <div class="resource-slide res-slide-cv">
+        <div class="res-inner">
+          <div>
+            <div class="res-label">AI Platform</div>
+            <div class="res-title"><span>CIVIC VOICE</span> ─ 住民の声を、政策へ。</div>
+            <p class="res-sub">AIを活用した次世代型市民参加プラットフォーム。従来のワークショップでは届かなかった多様な声を収集・分析・可視化します。</p>
+          </div>
+          <a class="res-btn" href="civic-voice.html">特設ページを見る →</a>
+        </div>
+      </div>
+      <!-- Slide 2: Urban Growth -->
+      <div class="resource-slide res-slide-ug">
+        <div class="res-inner">
+          <div class="res-num">200+</div>
+          <div>
+            <div class="res-label">Research Database</div>
+            <div class="res-title">何が<em>都市</em>を成長させるのか</div>
+            <p class="res-sub">国内外200都市・50以上の成長要因カテゴリ・1,000本以上の参照論文。都市戦略・政策立案・学術研究のための知識基盤。</p>
+          </div>
+          <a class="res-btn" href="urban-growth.html">データベースを見る →</a>
+        </div>
+      </div>
+      <!-- Slide 3: LM3 -->
+      <div class="resource-slide res-slide-lm">
+        <div class="res-inner">
+          <div>
+            <div class="res-label">Measurement Tool</div>
+            <div class="res-title">LM3メーター</div>
+            <p class="res-sub">地域の経済活動がどれだけ地域内で循環しているかを測定・分析するツール。NEF「The Money Trail」をもとに開発。</p>
+          </div>
+          <a class="res-btn" href="lm3-meter.html">特設ページを見る →</a>
+        </div>
+      </div>
+    </div>
+    <div class="resource-nav">
+      <button class="resource-arrow" onclick="resPrev()">&#8592;</button>
+      <button class="resource-dot active" onclick="resGo(0)"></button>
+      <button class="resource-dot" onclick="resGo(1)"></button>
+      <button class="resource-dot" onclick="resGo(2)"></button>
+      <button class="resource-arrow" onclick="resNext()">&#8594;</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="section-label" data-ja="Contact" data-en="Contact">Contact</div>
+      <h2 data-ja="お問い合わせ" data-en="Get in Touch">お問い合わせ</h2>
+      <p class="contact-intro" data-ja="事業に関するご相談、調査依頼、取材・メディア対応など、お気軽にご連絡ください。" data-en="Please feel free to contact us for business consultations, research requests, media inquiries, and more.">
+        事業に関するご相談、調査依頼、取材・メディア対応など、お気軽にご連絡ください。
+      </p>
+    </div>
+    <div class="reveal">
+      <div id="success-msg" class="success-msg">
+        <span data-ja="お問い合わせありがとうございます。担当者より3営業日以内にご連絡いたします。" data-en="Thank you for your inquiry. We will get back to you within 3 business days.">お問い合わせありがとうございます。担当者より3営業日以内にご連絡いたします。</span>
+      </div>
+      <form class="contact-form" id="contact-form"
+            action="https://formspree.io/f/xlgolndg"
+            method="POST">
+        <!-- Formspree: wada@graph03.jp に転送 -->
+        <input type="hidden" name="_replyto" value="wada@graph03.jp" />
+        <input type="hidden" name="_subject" value="【Graph】お問い合わせ" />
+        <input type="hidden" name="_language" value="ja" />
+        <input type="hidden" name="_next" value="" />
+        <div class="form-row">
+          <div class="form-group">
+            <label>お名前 *</label>
+            <input type="text" name="name" placeholder="山田 太郎" required />
+          </div>
+          <div class="form-group">
+            <label>会社・組織名</label>
+            <input type="text" name="organization" placeholder="〇〇株式会社" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>メールアドレス *</label>
+          <input type="email" name="email" placeholder="your@email.com" required />
+        </div>
+        <div class="form-group">
+          <label>お問い合わせ種別</label>
+          <select name="inquiry_type">
+            <option>リサーチ・調査依頼</option>
+            <option>地域振興・ローカル事業相談</option>
+            <option>都市DX相談</option>
+            <option>取材・メディア対応</option>
+            <option>その他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>メッセージ *</label>
+          <textarea name="message" placeholder="ご相談内容をご記入ください。" required></textarea>
+        </div>
+        <p class="form-note">※ いただいた個人情報は、お問い合わせへの対応のみに使用します。</p>
+        <div class="form-submit">
+          <button type="submit" class="btn">送信する →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANY -->
+<section id="company">
+  <div class="company-grid">
+    <div class="reveal">
+      <div class="section-label" data-ja="Company" data-en="Company">Company</div>
+      <h2 data-ja="会社概要" data-en="Company Info">会社概要</h2>
+      <table class="info-table">
+        <tr>
+          <th data-ja="社名" data-en="Company Name">社名</th>
+          <td data-ja="合同会社Graph" data-en="Graph LLC">合同会社Graph</td>
+        </tr>
+        <tr>
+          <th data-ja="代表者" data-en="Representative">代表者</th>
+          <td data-ja="和田 裕平" data-en="Yuhei Wada">和田 裕平</td>
+        </tr>
+        <tr>
+          <th data-ja="所在地" data-en="Address">所在地</th>
+          <td data-ja="〒170-0005<br/>東京都豊島区南大塚 3－41－10" data-en="3-41-10 Minami-Otsuka,<br/>Toshima-ku, Tokyo 170-0005">〒170-0005<br/>東京都豊島区南大塚 3－41－10</td>
+        </tr>
+        <tr>
+          <th data-ja="事業内容" data-en="Business Areas">事業内容</th>
+          <td data-ja="リサーチ・シンクタンク事業<br/>ローカル・ディベロップメント事業<br/>都市DX事業" data-en="Research & Think Tank<br/>Local Development<br/>Urban DX">リサーチ・シンクタンク事業<br/>ローカル・ディベロップメント事業<br/>都市DX事業</td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <nav class="footer-nav">
+    <a href="#about" data-ja="About" data-en="About">About</a>
+    <a href="#services" data-ja="事業内容" data-en="Services">事業内容</a>
+    <a href="#cases" data-ja="実績・事例" data-en="Cases">実績・事例</a>
+    <a href="#blog" data-ja="ブログ・レポート" data-en="Blog & Report">ブログ・レポート</a>
+    <a href="#contact" data-ja="お問い合わせ" data-en="Contact">お問い合わせ</a>
+  </nav>
+  <div class="footer-logo-center" style="font-family:'Oxanium',sans-serif;font-weight:700;font-size:1.3rem;letter-spacing:0.06em;color:#fff">
+      Graph
+    </div>
+  <div class="footer-copy">
+    &copy; 2025 合同会社Graph.<br/>All rights reserved.
+  </div>
+</footer>
+
+<script>
+  /* ── SCROLL REVEAL ── */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 70);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ── NODE ANIMATION (removed with graph-bg) ── */
+
+  /* ── LANGUAGE TOGGLE ── */
+  let currentLang = 'ja';
+
+  function setLang(lang) {
+    currentLang = lang;
+
+    // Update button states
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+    });
+
+    // Update all elements with data-ja / data-en
+    document.querySelectorAll('[data-ja]').forEach(el => {
+      const val = el.getAttribute(`data-${lang}`);
+      if (!val) return;
+      // Use innerHTML to support <br/>
+      if (val.includes('<')) el.innerHTML = val;
+      else el.textContent = val;
+    });
+
+    // Update input placeholders
+    const placeholders = {
+      'ja': { name: '山田 太郎', org: '〇〇株式会社', msg: 'ご相談内容をご記入ください。' },
+      'en': { name: 'Taro Yamada', org: 'Company Name', msg: 'Please describe your inquiry.' }
+    };
+    const p = placeholders[lang];
+    const fn = document.getElementById('f-name');
+    const fo = document.getElementById('f-org');
+    const fm = document.getElementById('f-msg');
+    if (fn) fn.placeholder = p.name;
+    if (fo) fo.placeholder = p.org;
+    if (fm) fm.placeholder = p.msg;
+
+    // Update select options
+    document.querySelectorAll('select option[data-ja]').forEach(opt => {
+      opt.textContent = opt.getAttribute(`data-${lang}`) || opt.textContent;
+    });
+
+    // Update html lang attribute
+    document.documentElement.lang = lang === 'ja' ? 'ja' : 'en';
+  }
+
+  /* ── CONTACT FORM ── */
+  // Formspree handles submission — show thank-you on redirect back
+  // or use AJAX below for seamless experience
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = contactForm.querySelector('button[type="submit"]');
+      btn.textContent = '送信中...';
+      btn.disabled = true;
+      try {
+        const res = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          contactForm.style.display = 'none';
+          const successEl = document.getElementById('success-msg');
+          if (successEl) {
+            successEl.style.display = 'block';
+            successEl.textContent = 'お問い合わせありがとうございます。担当者より3営業日以内にご連絡いたします。';
+          }
+        } else {
+          btn.textContent = '送信する →';
+          btn.disabled = false;
+          alert('送信に失敗しました。お手数ですが、直接メール（wada@graph03.jp）にてご連絡ください。');
+        }
+      } catch(err) {
+        btn.textContent = '送信する →';
+        btn.disabled = false;
+        alert('送信に失敗しました。お手数ですが、直接メール（wada@graph03.jp）にてご連絡ください。');
+      }
+    });
+  }
+
+
+  /* ── ADMIN PASSWORD ── */
+  const ADMIN_PASSWORD = 'graph2026';
+
+  /* ── DEFAULT NOTE EMBED URLS ── */
+  const DEFAULT_BLOG_URLS = [
+    'https://note.com/embed/notes/nfb506c030874',
+    'https://note.com/embed/notes/n79e719363500',
+    'https://note.com/embed/notes/n17e1699a40ab',
+    'https://note.com/embed/notes/n34b8aa609708',
+    'https://note.com/embed/notes/n1074177a83d3',
+    'https://note.com/embed/notes/n1de69c784a2c'
+  ];
+  const STORAGE_KEY = 'graph_blog_posts';
+
+  function getBlogUrls() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) return JSON.parse(saved);
+    } catch(e) {}
+    return [...DEFAULT_BLOG_URLS];
+  }
+  function saveBlogUrls(urls) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(urls)); } catch(e) {}
+  }
+
+  /* ── BLOG SLIDER ── */
+  let blogPage = 0;
+  const CARDS_PER_PAGE = 3;
+
+  function renderBlog() {
+    const track = document.getElementById('blogTrack');
+    if (!track) return;
+    const urls = getBlogUrls();
+    track.innerHTML = '';
+    urls.forEach((url, i) => {
+      const div = document.createElement('div');
+      div.className = 'blog-card note-card' + (i >= CARDS_PER_PAGE ? ' hidden' : '');
+      div.innerHTML = `<iframe class="note-embed" src="${url}" style="border:0;display:block;width:100%;height:230px;" loading="lazy"></iframe>`;
+      track.appendChild(div);
+    });
+    blogPage = 0;
+    updateBlogNav();
+  }
+
+  function blogSlide(dir) {
+    const track = document.getElementById('blogTrack');
+    const cards = track.querySelectorAll('.blog-card');
+    const total = cards.length;
+    const maxPage = Math.ceil(total / CARDS_PER_PAGE) - 1;
+    blogPage = Math.min(Math.max(blogPage + dir, 0), maxPage);
+    cards.forEach((card, i) => {
+      const start = blogPage * CARDS_PER_PAGE;
+      card.classList.toggle('hidden', i < start || i >= start + CARDS_PER_PAGE);
+    });
+    updateBlogNav();
+  }
+
+  function updateBlogNav() {
+    const track = document.getElementById('blogTrack');
+    const total = track ? track.querySelectorAll('.blog-card').length : 0;
+    const maxPage = Math.ceil(total / CARDS_PER_PAGE) - 1;
+    const prev = document.getElementById('blogPrev');
+    const next = document.getElementById('blogNext');
+    const counter = document.getElementById('blogCounter');
+    if (prev) prev.disabled = blogPage === 0;
+    if (next) next.disabled = blogPage >= maxPage;
+    if (counter && maxPage > 0) counter.textContent = (blogPage + 1) + ' / ' + (maxPage + 1);
+    else if (counter) counter.textContent = '';
+  }
+
+  renderBlog();
+
+  /* ── ADMIN PANEL ── */
+  let adminAuthed = false;
+
+  function openAdmin() {
+    document.getElementById('adminOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if (!adminAuthed) {
+      document.getElementById('adminPasswordInput').value = '';
+      setTimeout(() => document.getElementById('adminPasswordInput').focus(), 100);
+    }
+  }
+  function closeAdmin() {
+    document.getElementById('adminOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('adminOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeAdmin();
+  });
+
+  function checkAdminPassword() {
+    const val = document.getElementById('adminPasswordInput').value;
+    const err = document.getElementById('adminAuthError');
+    if (val === ADMIN_PASSWORD) {
+      adminAuthed = true;
+      document.getElementById('adminAuthScreen').style.display = 'none';
+      const main = document.getElementById('adminMainScreen');
+      main.style.display = 'flex';
+      renderAdminList();
+    } else {
+      err.classList.add('show');
+      document.getElementById('adminPasswordInput').value = '';
+      setTimeout(() => err.classList.remove('show'), 2500);
+    }
+  }
+
+  function renderAdminList() {
+    const urls = getBlogUrls();
+    const list = document.getElementById('adminPostList');
+    if (urls.length === 0) {
+      list.innerHTML = '<div style="font-size:0.8rem;color:var(--muted);padding:0.5rem 0;">投稿がありません。下のフォームから追加してください。</div>';
+      return;
+    }
+    list.innerHTML = urls.map((url, i) => `
+      <div class="admin-post-item">
+        <div class="admin-post-num">${String(i+1).padStart(2,'0')}</div>
+        <div class="admin-post-url">${escHtml(url)}</div>
+        <button class="admin-post-del" onclick="adminDeletePost(${i})" title="削除">✕</button>
+      </div>
+    `).join('');
+  }
+
+  function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function adminDeletePost(idx) {
+    if (!confirm('この投稿を削除しますか？')) return;
+    const urls = getBlogUrls();
+    urls.splice(idx, 1);
+    saveBlogUrls(urls);
+    renderAdminList();
+    renderBlog();
+    showAdminStatus('削除しました ✓');
+  }
+
+  function adminAddPost() {
+    const input = document.getElementById('adminNewUrl');
+    const err = document.getElementById('adminAddError');
+    const raw = input.value.trim();
+    let embedUrl = raw;
+    // Convert note article URL → embed URL automatically
+    const noteMatch = raw.match(/note\.com\/[^/]+\/n\/([a-zA-Z0-9]+)/);
+    if (noteMatch) embedUrl = 'https://note.com/embed/notes/' + noteMatch[1];
+    if (!embedUrl || !embedUrl.includes('note.com')) {
+      err.classList.add('show');
+      setTimeout(() => err.classList.remove('show'), 2500);
+      return;
+    }
+    const urls = getBlogUrls();
+    urls.push(embedUrl);
+    saveBlogUrls(urls);
+    input.value = '';
+    renderAdminList();
+    renderBlog();
+    showAdminStatus('追加しました ✓');
+  }
+
+  function adminResetDefaults() {
+    if (!confirm('デフォルトの投稿リストに戻しますか？現在の設定は失われます。')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    renderAdminList();
+    renderBlog();
+    showAdminStatus('デフォルトに戻しました ✓');
+  }
+
+  function showAdminStatus(msg) {
+    const el = document.getElementById('adminStatus');
+    el.textContent = msg;
+    el.classList.add('saved');
+    setTimeout(() => { el.textContent = '— 変更は自動保存されます'; el.classList.remove('saved'); }, 2500);
+  }
+
+  /* ── BLOG MODAL DATA ── */
+  const blogPosts = [
+    {
+      cat: '地域経済',
+      date: '2026.03.01',
+      title: 'Community Wealth Building の動向',
+      body: `
+        <p>Community Wealth Building（CWB）とは、地域経済システムを変革し、富を地域内に還流・蓄積することで、住民・地域社会が経済的恩恵を享受できるようにする「人を中心とした経済開発アプローチ」である。</p>
+        <p>その核心は「アンカー機関」の活用にある。地方自治体・病院・大学・住宅協会など地域に根ざした大規模機関の調達力・雇用力・資産を梃子に、地元中小企業や協同組合・社会的企業への発注を増やし、地域経済の乗数効果（地域内でお金が循環する率）を高める。CWBは①地域内調達（プロキュアメント）の強化、②公正労働・地域雇用の推進、③土地・資産の社会的活用、④協同組合・社会的企業など多元的所有の拡大、⑤地域密着型金融の整備、の5つの柱から構成される。</p>
+        <p>今日的意義は大きい。グローバル資本主義のもとで富は地域外へと流出しがちであり、生活費危機・子どもの貧困・気候変動が複合的に地域を蝕む中、CWBはこの「経済的搾取」の構造を逆転させる実践的な処方箋として注目が高まっている。スコットランドでは2025年3月に世界初のCWB立法（Community Wealth Building (Scotland) Bill）が議会に提出・可決され、地方自治体に法的義務として組み込まれた。これは政策潮流を象徴する歴史的転換点である。</p>
+        <h3>プレストン・モデル（英国ランカシャー州）</h3>
+        <p>CWBの世界的な参照モデルとなっているのが、英国プレストン市の取り組みである。2008年の金融危機後、7億ポンドの再開発計画が頓挫したプレストン市は、2013年よりCLES（地域経済戦略センター）と協働してCWBを本格導入した。</p>
+        <p>市および郡の自治体・大学・警察・病院など6つのアンカー機関の調達支出（年間10億ポンド超）を分析したところ、当初プレストン市内への支出はわずか5%、ランカシャー州内でも39%にすぎなかった。これを2016年には市内28%・州内79%超に引き上げることで、2億ポンド超の追加支出を地域内に留めることに成功した。併せて生活賃金（リビングウェイジ）の普及も推進し、2015〜2022年の間に生活賃金を受け取る労働者の割合は76%から88%に上昇。プレストンは北西イングランドで「最も住みやすい都市」に選ばれるまでに再生した。</p>
+        <h3>クリーブランド・モデル（米国オハイオ州）／スコットランド全土への展開</h3>
+        <p>プレストン・モデルの先駆けとなったのが米国クリーブランドの「エバーグリーン・コープ」である。病院・大学などのアンカー機関の調達力を活かし、低所得地域に労働者協同組合（リネンサービス・太陽光発電・都市型農業など）を設立。地域住民が株主として利益を享受する仕組みを構築した。スコットランドではノース・エアシャーを皮切りに各自治体がCWB戦略を策定し、2025年の立法化により、すべての地方自治体がCWB行動計画の策定・実施・5年ごとの進捗報告を義務付けられた。</p>
+        <h3>日本への導入可能性</h3>
+        <p>日本においてCWBの理念は、地域経済循環・地方創生・ソーシャルエコノミー振興といった既存の政策課題と高い親和性を持つ。特に人口減少が進む地方都市では、既存の大規模アンカー機関（国立大学病院・地方独立行政法人・自治体・地域金融機関）の調達改革が地域経済に与えるインパクトは大きい。</p>
+        <p>導入に向けた課題としては、①日本の公共調達制度は価格競争原理が強く社会的価値を調達基準に組み込む根拠規定が乏しい点、②地域密着型の協同組合・社会的企業エコシステムがまだ小規模である点、③首長交代等に左右されにくい長期的なガバナンス設計の必要性、が挙げられる。</p>
+        <p>一方、日本には生協・農協・地域信用金庫など協同組合の歴史的土台があり、近年は関係人口・地域おこし協力隊・ふるさと納税など地域への資源還流の機運も高まっている。地方版CWBを試行的に設計・実証する自治体が現れ、その成果が政策的に共有されることで、日本型CWBの確立に向けた一歩となりうる。グローバルな経済的不安定が続く中、地域内で富を生み・循環させる経済モデルへの転換は、日本においても喫緊の政策課題となりつつある。</p>
+        <p style="font-size:0.78rem;color:#aaa;margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);">参考：Democracy Collaborative, CLES, Scottish Parliament SPICe Briefings (2025), UCLan Research (2021)（2026年3月）</p>
+      `
+    },
+    {
+      cat: '地域振興',
+      date: '2025.07.22',
+      title: '関係人口が地域経済に与える影響：千葉県の事例から',
+      body: `
+        <p>「関係人口」とは、移住した「定住人口」でも観光に来た「交流人口」でもなく、地域と多様に関わる人々を指す概念であり、2016年頃から総務省・国土交通省を中心に政策的に注目されるようになった。具体的には、ふるさと納税の寄附者、地域おこし協力隊のOB・OG、都市部に居住しながら農山漁村に継続的に通う人々、テレワーク活用型二地域居住者などが含まれる。</p>
+        <p>政策面では、2019年の第2期「まち・ひと・しごと創生総合戦略」において関係人口の創出・拡大が明記され、2022年のデジタル田園都市国家構想基本方針でも「二地域居住・関係人口」の推進が重点施策として位置付けられた。総務省は「関係人口ポータルサイト」の整備や実証事業を通じて先進事例の横展開を図るとともに、2023年度からは「特定地域づくり事業協同組合」制度との連携強化も進めている。また、2024年に施行された改正地域再生法は、二地域居住の促進を法的に後押しし、地方公共団体による環境整備への国の財政支援枠を拡充した。</p>
+        <h3>千葉県の地域特性・具体的取組と関係人口の規模</h3>
+        <p>千葉県は首都圏に隣接しながら、内房・外房の豊かな自然海岸、北総台地の農業地帯、南房総の温暖な里山など多彩な地域資源を有する。都心から60〜90分圏内という立地はテレワーク人材の二地域居住需要を高め、移動コストの低さが関係人口の継続的な往来を促進している。</p>
+        <p>具体的な取組として、南房総市は「南房総市ふるさと回帰支援センター」を設置し、都市部在住者向けの体験プログラムや空き家バンクと連動した定期訪問者の組織化を推進している。いすみ市では有機農業を核とした「関係人口育成事業」を展開し、農業体験参加者の継続的な産品購入・ボランティア参加を促す仕組みを構築した。勝浦市はサーフィン・スキューバダイビング等のマリンスポーツ愛好者を対象に、年間パスポート型の施設利用制度を導入している。また、鴨川市・富津市では企業のサテライトオフィス誘致と併せてワーケーションプログラムを整備し、企業の週末・長期滞在者の獲得を進めている。</p>
+        <p>国土交通省「二地域居住等に関する調査（2023年）」によると、全国で二地域居住を実践・希望する人口は約840万人と推計される。千葉県は首都圏居住者（約3,700万人）のうち約2〜3%程度が同県への関与（定期訪問・ふるさと納税・農業体験等）を持つとみられ、関係人口の総数は約70〜90万人規模に達すると推計される。このうち、月1回以上の定期的な訪問・関与を持つ「深い関係人口」は約15〜20万人程度と見込まれる。</p>
+        <h3>経済効果（推計）と波及分野</h3>
+        <p>関係人口1人あたりの年間消費支出（交通費・宿泊・飲食・産品購入等）を国土交通省モデルに準拠して試算すると、定期訪問者（月1回以上）で年間約25〜35万円、不定期訪問者で年間約8〜12万円と推計される。千葉県全体の関係人口規模を踏まえた直接経済効果は年間約1,500〜2,500億円に達すると見込まれる。</p>
+        <p>波及分野としては、農林水産業（農業体験参加者による地場産品の継続購入・ふるさと納税返礼品の消費拡大）、観光・宿泊（反復訪問による消費の安定化・閑散期の需要底上げ）、不動産・建設（空き家・古民家の購入・賃借需要の創出）、IT・テレワーク関連（サテライトオフィス・コワーキングスペースの整備）、そして財政面（県内市町村のふるさと納税受入総額は2023年度約230億円、前年比約15%増）など多岐にわたる。</p>
+        <h3>今後の見通し</h3>
+        <p>デジタル技術の進展とテレワークの定着を背景に、首都圏からの関係人口は今後5年間で現状比20〜30%増加すると見込まれる。特に、2024年改正地域再生法に基づく「特定居住促進計画」の策定を機に、千葉県内の複数市町村で二地域居住者向け住宅・生活インフラの整備が本格化する見通しである。</p>
+        <p>一方、受入側のキャパシティ制約（宿泊施設の不足、交通アクセスの弱さ、空き家バンクの情報整備遅れ）が関係人口の拡大を抑制するリスクも存在する。関係人口の経済効果を地域内に最大限還流させるためには、地元産品のEC販路拡充、地域通貨・ポイント制度の導入、関係人口と地元事業者をつなぐコーディネーター人材の育成が不可欠である。</p>
+        <p>千葉県は2025年度に策定予定の「千葉県関係人口・二地域居住推進ビジョン（仮称）」の中で、市町村横断的なデジタルプラットフォームの構築と官民連携推進体制の整備を盛り込む方向で検討を進めている。関係人口の「深化」（訪問頻度の向上・消費額の増大）と「定住転換」の両方を視野に入れた戦略的な政策展開が、地域経済の持続的活性化につながると期待される。</p>
+        <p style="font-size:0.78rem;color:#aaa;margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);">※本レポートにおける推計値は、総務省・国土交通省の公表資料および先行研究を基に試算したものであり、公式統計ではありません。（2025年3月）</p>
+      `
+    },
+    {
+      cat: '地域経済',
+      date: '2026.03.01',
+      title: 'Community Wealth Building の可能性 〜アンカー機関の役割〜',
+      body: `
+        <p>Community Wealth Building（CWB）とは、地域内の富を循環させ、住民・労働者・地域社会が経済的果実を公平に享受できる仕組みを構築するアプローチである。このCWBにおいて中核的な役割を果たすのが「アンカー機関（Anchor Institution）」である。アンカー機関とは、特定地域に根ざし、移転・廃業の可能性が低く、地域経済に持続的かつ大きな影響力を持つ組織を指す。</p>
+        <p>アンカー機関として代表的なのは、大学・研究機関、病院・医療機関、自治体・公共機関、大規模文化施設などである。米国では「Eds and Meds（大学と病院）」と総称されるこれらの機関が、地域内最大の雇用主・調達者・資産保有者として機能している。地域経済における期待役割は主に三つある。第一に「雇用創出」として地域住民を優先採用する「地元雇用方針」の導入、第二に「地域調達」として食材・物品・サービスを地元企業から優先購買し地域内の資金循環を促進すること、第三に「資産活用」として機関が保有する土地・施設を地域のコミュニティ事業や住宅整備に活用することである。</p>
+        <h3>なぜアンカー機関が重要なのか：経済産業省「花火理論」の視点から</h3>
+        <p>経済産業省が提唱する「花火理論」は、地域経済の活性化を「打ち上げ花火」に例えた考え方である。外部から資金や企業を呼び込んでも、火薬（地域の内発的エネルギー）が不十分では、一時的な輝きに終わり、地域に富が定着しないとする。真に地域を輝かせるには、地域内部に根ざした強固な経済基盤——すなわち花火の「芯」——が必要であり、アンカー機関はまさにその芯としての役割を担う。アンカー機関は外部景気に左右されず地域にとどまり、安定的な需要・雇用・資金をもたらし続ける。その規模と影響力ゆえに、地域全体のサプライチェーンや人材育成に波及効果を生み出し、内発的な経済活力を高める「花火の芯」として機能するのである。</p>
+        <h3>アンカー機関が活躍する具体例</h3>
+        <p>「ラストベルト」の一角として衰退が著しかったオハイオ州クリーブランド市では、クリーブランド・クリニック、ケース・ウェスタン・リザーブ大学、クリーブランド市立病院の三機関が連携し「エバーグリーン協同組合」モデルを推進した。これら機関の購買力を地元の労働者協同組合（クリーニング・太陽光発電・温室農業）に向けることで、低所得地域に安定雇用を生み出した。外部資本に依存しない内発型の経済圏を確立した先進事例として、世界各地に影響を与えている。</p>
+        <p>英国ランカシャー州プレストン市では、市当局主導のもとランカシャー大学、プレストン・カレッジ、警察・住宅組合などのアンカー機関が協定を結び、年間約10億ポンドの調達額のうち大半を地域内企業から優先購買する方針を採用した。その結果、市内の中小企業が安定した受注先を確保し、雇用・所得・税収が循環する地域経済が形成された。日本では岩手県釜石市において、地元大学がコーディネート機能を果たしながら、地元食材の学食調達・地元企業との共同研究・学生の地元就職促進などを一体的に推進し、復興後の持続的な地域経済形成に貢献している。</p>
+        <h3>アンカー機関強化の施策例</h3>
+        <p>強化施策として有効なのは以下の三点である。第一に、地域調達率目標の設定と地域企業データベースの整備（Buy Local戦略）。英国プレストンの事例では調達担当者向けの研修が合わせて実施された。第二に、低所得者・若年者・障がい者を対象とした就労訓練プログラムと優先採用枠の設置。大学・病院と職業訓練校が連携した「地域共同訓練プログラム」の設計が有効である。第三に、複数機関による「アンカー機関協議会」の設置とKPI管理・情報公開の徹底。国レベルでは地域内再投資法（米国CRA法の日本版）や補助金制度を通じた財政的後押しも求められる。</p>
+        <h3>アンカー機関を強化することの課題</h3>
+        <p>課題も直視しなければならない。第一に、アンカー機関自身の経営力・変革意欲の問題。公立大学や地域医療機関の多くは財政制約・人員不足・硬直した組織文化を抱えており、実務レベルで方針が形骸化しやすい。第二に、地域内コネクションの固定化と参入障壁の問題。長年の取引関係が優先される「コネ優先」の構造が固定化し、新規参入者・スタートアップが機会を得にくくなるリスクがある。第三に、癒着・利益相反リスクとガバナンスの課題。独立した第三者監査の実施、利益相反申告制度の義務化、調達データのオープン化が不可欠である。第四に、特定機関への過度な集中による「アンカー機関依存」のリスク。アンカー機関はあくまで「触媒」として位置づけ、その影響力を段階的に地域の多様な担い手へ移転していく中長期的な設計思想が求められる。</p>
+        <h3>おわりに</h3>
+        <p>地域経済の自律的な発展には、外部資本頼みの「打ち上げ花火」ではなく、地域に根ざした内発的エネルギーの結集が不可欠である。アンカー機関はその「芯」として、雇用・調達・資産の三つの力を通じて地域に富を循環させる。クリーブランドやプレストンの成功例が示すように、アンカー機関が戦略的にCWBの主体として機能するとき、地域は持続的に輝く花火となり得る。一方で、経営力の不足・コネ優先・癒着・依存構造といった課題を直視し、透明なガバナンスと多様な担い手の育成を同時に進めることが、真に持続可能なCWBを実現する鍵である。日本においても、大学・病院・自治体が連携したアンカー機関モデルの構築と、その健全な運営を担保する制度設計が、今後の地方創生政策の核心的課題となるだろう。</p>
+        <p style="font-size:0.78rem;color:#aaa;margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);">参考：Democracy Collaborative, CLES, 経済産業省資料（2026年3月）</p>
+      `
+    },
+    {
+      cat: '地域経済',
+      date: '2026.03.01',
+      title: '日本におけるアンカー機関の立地動向',
+      body: `
+        <p>近年、地域経済の持続可能性が問われる中、地域の雇用と経済を下支えする「アンカー機関」の重要性が注目されている。アンカー機関とは、市場競争にさらされにくく地域に根ざした大規模雇用主であり、具体的には市区町村役所等の公務機関、病院・介護施設等の医療福祉施設、学校・大学等の教育機関、および地域経済を牽引する大規模製造業・地域金融機関等の地域中核企業を指す。本稿の目的は、これらのアンカー機関が日本全国の市区町村においてどの程度の雇用を担っているかを整理し、地域類型ごとの特徴と動向を明らかにすることにある。</p>
+        <p>本分析は、総務省・経済産業省が実施する「令和3年（2021年）経済センサス‐活動調査」の産業横断的集計（市区町村別・産業大分類別）を基礎資料として用いた。アンカー機関に相当する産業分類として、公務（大分類O）、医療・福祉（大分類P）、教育・学習支援（大分類R）、および製造業・金融保険業における大規模事業所を設定し、これらの従業者数が全産業従業者数に占める割合を「アンカー機関従業者割合」として算出した。分析対象は全国160市区町村の推計値である。</p>
+        <h3>全国全体でのアンカー機関の水準</h3>
+        <p>分析対象160市区町村の単純平均では、アンカー機関従業者割合は全従業者の約37〜38%に達している。内訳をみると、医療・福祉が最大で平均17〜18%を占め、次いで教育・学習支援が約8%、公務が約6〜7%、地域中核企業が約6%と続く。医療・福祉分野の比重が突出していることは、少子高齢化の進展に伴う医療・介護需要の恒常的な増大を反映している。アンカー機関は景気変動による解雇リスクが低く、地域内で賃金所得を循環させる機能を持つことから、地域経済の安定的な基盤として機能している。</p>
+        <h3>地域別の動向</h3>
+        <p>地域ブロック別の集計では、東北・北海道・四国・九州で40%前後と高く、関東・近畿で30〜33%と低い傾向が明確に現れた。北海道39.3%、東北39.8%、関東31.2%、中部37.4%、近畿33.0%、中国38.2%、四国39.5%、九州・沖縄39.1%。関東では民間サービス業・製造業・情報通信業が集積することでアンカー比率が相対的に低くなる一方、東北・四国では民間産業の多様性に乏しく公的セクターへの依存が高まる構造が読み取れる。公務割合は四国が8.3%と最高であり、小規模自治体が多く行政コストの負担が大きい地域特性を反映している。医療・福祉については高齢化率が高い地域ほど高く、東北・四国・九州では19〜20%前後に達している。</p>
+        <h3>アンカー機関が大きな役割を占める地域の類型化</h3>
+        <p>分析結果を踏まえ、市区町村を四類型に整理した。<strong>類型Ⅰ：過疎・公共依存型</strong>（大豊町・日野町・歌志内市等、50〜65%）は人口1万人未満の小規模町村で、公務・医療が従業者の過半を占め民間産業基盤が極めて脆弱。<strong>類型Ⅱ：地方都市・医療中核型</strong>（天草市・浜田市・鳥取市等、38〜48%）は病院・介護施設が地域最大の雇用主となる地方中小都市。<strong>類型Ⅲ：製造業中核型</strong>（刈谷市・豊田市・神栖市等、28〜38%）は大規模製造業が地域を牽引する企業城下町型で、中核企業割合が20%超に達する一方公務・医療割合は平均を下回る。<strong>類型Ⅳ：大都市・分散型</strong>（東京都特別区・大阪市・名古屋市等、26〜33%）は民間産業が多様でアンカー機関の依存度が最も低い。</p>
+        <p>類型Ⅰでは、アンカー機関の縮小（病院の統廃合や公務員の削減）が地域経済に与えるダメージが特に大きく、持続可能な地域運営のためには公的サービスの効率的な維持と同時に民間雇用を創出する産業振興策の展開が急務といえる。他方、類型Ⅲでは特定の大企業への依存という別種の脆弱性が存在し、グローバル競争や技術変化に伴う主要企業の撤退・縮小が生じた場合の地域経済へのダメージは計り知れない。アンカー機関の多様化と産業の裾野拡大が構造的課題となっている。</p>
+        <p>以上の分析を総括すると、日本の市区町村においてアンカー機関は平均で全従業者の37〜38%を占める重要な雇用基盤であり、その役割は地方・小規模自治体で特に大きい。少子高齢化と人口減少が加速する中、アンカー機関の立地動向とその地域経済への影響を継続的にモニタリングすることが、地域政策の立案において不可欠な課題となっている。</p>
+        <p style="font-size:0.78rem;color:#aaa;margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);">【出典】総務省・経済産業省「令和3年経済センサス‐活動調査」産業横断的集計（市区町村別）をもとに推計・作成。本資料の数値は代表的市区町村の推計値であり、個別市区町村の実績とは差異が生じる場合がある。（2026年3月）</p>
+      `
+    },
+    {
+      cat: '地域経済',
+      date: '2026.03.01',
+      title: 'Community Wealth Building の実現可能性 ―アンカー機関の立地動向から見た日本の地域類型―',
+      body: `
+        <p>Community Wealth Building（CWB）とは、アンカー機関の調達力・雇用力・土地資産を地域循環に組み込み、地域住民が経済的な富の恩恵を直接受け取れる構造を意図的につくる経済開発モデルである。その核心は「アンカー機関がどれほどの購買力を持ち、そのうちどれだけを域内に向けられるか」にある。</p>
+        <p>本稿では「アンカー機関の強さ（従業者割合・GRP寄与度）」と「地域経済循環の伸びしろ（域外漏出の大きさ）」の2軸を評価軸として設定し、各地域に適したCWBの戦略的アプローチを導き出す。加えて実施可能性を規定するガバナンス能力と受け皿組織の厚さを補助軸として組み合わせる。</p>
+        <h3>類型A：地方中核都市型（実現可能性：最高）</h3>
+        <p>大病院・大学・都道府県庁が集積し、アンカー機関の従業者割合が35〜48%に達する地方中核都市。病院・大学の物品調達の多くが域外へ流出しており、ローカル調達への転換という「伸びしろ」が最も大きい。市・病院・大学による三者協議体を構成しやすく、英国プレストン市の実践に最も近い構造を持つ。病院の年間調達額が100〜300億円規模に上る地域では、わずか5〜10%の域内シフトだけで数億〜数十億円の新たな域内需要が生まれる計算となる。代表例は盛岡・松江・高知・久留米・弘前など。</p>
+        <h3>類型B：地方小都市型（実現可能性：中〜高）</h3>
+        <p>地域の基幹病院と市役所がアンカー機関の中心で、従業者割合は40〜52%と高い。農協・漁協・信用金庫といった既存の協同組合インフラがあり、病院給食への地元農産物調達や建設修繕の地元業者優先発注など、比較的導入しやすい条件が揃う。天草・浜田・五島・対馬などが代表例。離島・半島という地理的制約が逆に「域内循環の必然性」を生み出しており、物流コストの観点からもローカル調達の経済合理性が高い。</p>
+        <h3>類型C：大都市近郊・ベッドタウン型（実現可能性：低〜中）</h3>
+        <p>住民の消費・就労の多くが隣接大都市に流出し、アンカー機関の従業者割合も28〜35%と低い。域内循環の起点となる規模が相対的に小さく、個別自治体単位でのCWBは効果が限定的になる。広域連携（都市圏CWB）として大都市の医療・教育機関を巻き込む戦略が現実的な選択肢である。松戸・川越・草津・宇治などが該当する。</p>
+        <h3>類型D：過疎小規模町村型（実現可能性：限定的・段階的アプローチ）</h3>
+        <p>アンカー機関の従業者割合は55〜70%と突出して高く、GRPの60〜70%以上をアンカー機関が占めるが、調達の絶対額が小さく推進体制を担う人材も乏しい。CWBの「調達改革」よりも、公共サービス提供そのものをワーカーズコープ型の協同組合へ転換する「社会的企業化」が先行条件となる。大豊町・東成瀬村・歌志内市などが該当し、複数町村の広域連携による仮想的なアンカー集積の形成が現実的な入口となる。</p>
+        <h3>まとめ</h3>
+        <p>日本においてCWBの実現可能性が最も高いのは人口10〜40万人規模の地方中核都市（類型A）である。アンカー機関のGRP寄与が40〜55%に達し、協同組合・社会的企業の受け皿が育ちうる規模感を持ち、かつ自治体の政策推進力が機能しやすいこの類型こそ、CWBの戦略的先行投資先として最も有望といえる。</p>
+        <p style="font-size:0.78rem;color:#aaa;margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);">【出典】総務省・経済産業省「令和3年経済センサス‐活動調査」、The Democracy Collaborative（2005）、CLES「Community Wealth Building through Anchor Institutions」をもとに推計・作成。（2026年3月）</p>
+      `
+    }
+  ];
+
+  function openModal(idx) {
+    const post = blogPosts[idx];
+    document.getElementById('modal-cat').textContent   = post.cat;
+    document.getElementById('modal-date').textContent  = post.date;
+    document.getElementById('modal-title').textContent = post.title;
+    document.getElementById('modal-body').innerHTML    = post.body;
+    document.getElementById('modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('modal-body').scrollTop = 0;
+  }
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('modal-overlay')) closeModal();
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeModal(); closeAdmin(); }
+  });
+
+  /* ── RESOURCE CAROUSEL ── */
+  let resIdx = 0;
+  const resTotal = 3;
+  function resGo(n) {
+    resIdx = n;
+    document.getElementById('resourceTrack').style.transform = 'translateX(-' + (100 * resIdx) + '%)';
+    document.querySelectorAll('.resource-dot').forEach((d, i) => d.classList.toggle('active', i === resIdx));
+  }
+  function resNext() { resGo((resIdx + 1) % resTotal); }
+  function resPrev() { resGo((resIdx - 1 + resTotal) % resTotal); }
+  setInterval(resNext, 6000);
+
+  /* ── HERO VIDEO 2x SPEED ── */
+  const heroVideo = document.getElementById('heroVideo');
+  if (heroVideo) {
+    heroVideo.addEventListener('loadedmetadata', () => { heroVideo.playbackRate = 2.0; });
+    heroVideo.playbackRate = 2.0;
+  }
+
+</script>
+</body>
+</html>
