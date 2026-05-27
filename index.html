@@ -31,13 +31,6 @@
     }
 
     /* ── GRAPH BG ── */
-    #graph-bg {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
 
     /* ── NAV ── */
     nav {
@@ -117,6 +110,149 @@
       color: #fff;
     }
 
+    /* ── RESOURCES DROPDOWN ── */
+    .nav-resources {
+      position: relative;
+    }
+    .nav-resources > a {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      cursor: pointer;
+    }
+    .nav-resources > a::after {
+      content: '▾';
+      font-size: 0.6rem;
+      color: var(--muted);
+      transition: transform 0.2s;
+    }
+    .nav-resources:hover > a::after { transform: rotate(180deg); }
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      background: #fff;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      min-width: 240px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-6px);
+      transition: opacity 0.2s, transform 0.2s;
+      z-index: 200;
+    }
+    .nav-resources:hover .nav-dropdown {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .nav-dropdown-item {
+      display: flex;
+      flex-direction: column;
+      padding: 0.9rem 1.2rem;
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .nav-dropdown-item:last-child { border-bottom: none; }
+    .nav-dropdown-item:hover { background: var(--surface); }
+    .nav-dropdown-item-label {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.2rem;
+    }
+    .nav-dropdown-item-title {
+      font-family: 'Oxanium', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* ── RESOURCE CAROUSEL BANNER ── */
+    .resource-carousel-section {
+      border-top: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .resource-carousel-wrap {
+      position: relative;
+    }
+    .resource-track {
+      display: flex;
+      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+    }
+    .resource-slide {
+      flex: 0 0 100%;
+      min-width: 0;
+    }
+
+    /* Slide 1: CIVIC VOICE (dark blue) */
+    .res-slide-cv { background: #0a3d62; }
+    .res-slide-cv .res-inner { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 3rem; max-width: 1200px; margin: 0 auto; padding: 3.5rem 3rem; }
+    .res-label { font-family: 'Oxanium', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .res-slide-cv .res-label { color: var(--accent); }
+    .res-slide-cv .res-title { font-family: 'Oxanium', sans-serif; font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem; letter-spacing: -0.01em; }
+    .res-slide-cv .res-title span { color: var(--accent); }
+    .res-slide-cv .res-sub { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.8; }
+    .res-slide-cv .res-btn { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--accent); color: #fff; font-family: 'Oxanium', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; padding: 0.9rem 1.8rem; text-decoration: none; white-space: nowrap; transition: opacity 0.2s; }
+    .res-slide-cv .res-btn:hover { opacity: 0.85; }
+
+    /* Slide 2: Urban Growth (dark) */
+    .res-slide-ug { background: #0d0d0d; }
+    .res-slide-ug .res-inner { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 2.5rem; max-width: 1200px; margin: 0 auto; padding: 3.5rem 3rem; }
+    .res-slide-ug .res-num { font-family: 'Oxanium', sans-serif; font-size: 3rem; font-weight: 800; color: rgba(240,236,228,0.06); line-height: 1; white-space: nowrap; }
+    .res-slide-ug .res-label { color: var(--accent); }
+    .res-slide-ug .res-title { font-family: 'Oxanium', sans-serif; font-size: 1.5rem; font-weight: 800; color: #f0ece4; margin-bottom: 0.4rem; }
+    .res-slide-ug .res-title em { font-style: normal; color: var(--accent); }
+    .res-slide-ug .res-sub { font-size: 0.82rem; color: rgba(240,236,228,0.45); line-height: 1.8; }
+    .res-slide-ug .res-btn { display: inline-flex; align-items: center; gap: 0.4rem; background: transparent; color: #f0ece4; font-family: 'Oxanium', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; padding: 0.9rem 1.8rem; text-decoration: none; border: 1px solid rgba(240,236,228,0.25); white-space: nowrap; transition: border-color 0.2s, background 0.2s; }
+    .res-slide-ug .res-btn:hover { border-color: var(--accent); background: rgba(184,146,42,0.1); }
+
+    /* Slide 3: LM3 */
+    .res-slide-lm { background: var(--surface); border-top: 3px solid var(--accent); }
+    .res-slide-lm .res-inner { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 3rem; max-width: 1200px; margin: 0 auto; padding: 3.3rem 3rem; }
+    .res-slide-lm .res-label { color: var(--accent); }
+    .res-slide-lm .res-title { font-family: 'Oxanium', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--text); margin-bottom: 0.4rem; }
+    .res-slide-lm .res-sub { font-size: 0.82rem; color: var(--muted); line-height: 1.8; }
+    .res-slide-lm .res-btn { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--accent); color: #fff; font-family: 'Oxanium', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; padding: 0.9rem 1.8rem; text-decoration: none; white-space: nowrap; transition: opacity 0.2s; }
+    .res-slide-lm .res-btn:hover { opacity: 0.85; }
+
+    /* Carousel nav */
+    .resource-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.8rem;
+      background: rgba(0,0,0,0.04);
+      border-top: 1px solid var(--border);
+    }
+    .resource-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.15);
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      padding: 0;
+    }
+    .resource-dot.active { background: var(--accent); transform: scale(1.4); }
+    .resource-arrow {
+      width: 32px; height: 32px;
+      border: 1px solid var(--border);
+      background: #fff;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text);
+      font-size: 0.8rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .resource-arrow:hover { background: var(--text); color: #fff; border-color: var(--text); }
+
     /* ── HERO ── */
     .hero {
       position: relative;
@@ -127,7 +263,35 @@
       padding: 0 3rem;
       overflow: hidden;
     }
-    .hero-inner { max-width: 900px; }
+    .hero-inner { max-width: 900px; position: relative; z-index: 2; }
+
+    /* Video background */
+    .hero-video-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .hero-video-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    /* Dark overlay to keep text readable */
+    .hero-video-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(245,244,241,0.72) 0%,
+        rgba(245,244,241,0.50) 50%,
+        rgba(245,244,241,0.30) 100%
+      );
+      z-index: 1;
+    }
+    /* hero-num stays above video */
+    .hero-num { z-index: 2; }
 
     h1 {
       font-family: 'Oxanium', sans-serif;
@@ -139,6 +303,7 @@
       color: var(--text);
       opacity: 0;
       animation: fadeUp 0.9s 0.3s ease forwards;
+      text-shadow: 0 2px 20px rgba(245,244,241,0.8), 0 0 40px rgba(245,244,241,0.6);
     }
     h1 em { font-style: normal; color: var(--accent); }
 
@@ -146,10 +311,12 @@
       margin-top: 1.8rem;
       font-size: 1.05rem;
       line-height: 1.9;
-      color: var(--muted);
+      color: var(--text);
       max-width: 520px;
       opacity: 0;
       animation: fadeUp 0.9s 0.5s ease forwards;
+      text-shadow: 0 1px 12px rgba(245,244,241,0.9);
+      font-weight: 500;
     }
     .hero-cta {
       margin-top: 2.8rem;
@@ -962,36 +1129,6 @@
 </head>
 <body>
 
-<!-- Graph background -->
-<svg id="graph-bg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-  <line x1="120" y1="80"  x2="380" y2="220" stroke="rgba(184,146,42,0.12)" stroke-width="1"/>
-  <line x1="380" y1="220" x2="700" y2="140" stroke="rgba(184,146,42,0.12)" stroke-width="1"/>
-  <line x1="700" y1="140" x2="980" y2="320" stroke="rgba(184,146,42,0.12)" stroke-width="1"/>
-  <line x1="980" y1="320" x2="1320" y2="180" stroke="rgba(184,146,42,0.12)" stroke-width="1"/>
-  <line x1="380" y1="220" x2="520" y2="480" stroke="rgba(204,34,51,0.1)" stroke-width="1"/>
-  <line x1="700" y1="140" x2="820" y2="420" stroke="rgba(204,34,51,0.1)" stroke-width="1"/>
-  <line x1="520" y1="480" x2="820" y2="420" stroke="rgba(184,146,42,0.12)" stroke-width="1"/>
-  <line x1="820" y1="420" x2="980" y2="320" stroke="rgba(184,146,42,0.12)" stroke-width="1"/>
-  <line x1="200" y1="600" x2="520" y2="480" stroke="rgba(204,34,51,0.1)" stroke-width="1"/>
-  <line x1="820" y1="420" x2="1100" y2="580" stroke="rgba(204,34,51,0.1)" stroke-width="1"/>
-  <line x1="1100" y1="580" x2="1320" y2="180" stroke="rgba(184,146,42,0.12)" stroke-width="1"/>
-  <line x1="200" y1="600" x2="400" y2="800" stroke="rgba(184,146,42,0.12)" stroke-width="1"/>
-  <line x1="520" y1="480" x2="700" y2="720" stroke="rgba(204,34,51,0.1)" stroke-width="1"/>
-  <line x1="700" y1="720" x2="1000" y2="700" stroke="rgba(184,146,42,0.12)" stroke-width="1"/>
-  <line x1="1000" y1="700" x2="1100" y2="580" stroke="rgba(204,34,51,0.1)" stroke-width="1"/>
-  <circle cx="120"  cy="80"  r="4" fill="rgba(184,146,42,0.35)"/>
-  <circle cx="380"  cy="220" r="6" fill="rgba(184,146,42,0.35)"/>
-  <circle cx="700"  cy="140" r="5" fill="rgba(184,146,42,0.35)"/>
-  <circle cx="980"  cy="320" r="7" fill="rgba(184,146,42,0.35)"/>
-  <circle cx="1320" cy="180" r="4" fill="rgba(204,34,51,0.3)"/>
-  <circle cx="520"  cy="480" r="6" fill="rgba(204,34,51,0.3)"/>
-  <circle cx="820"  cy="420" r="8" fill="rgba(184,146,42,0.35)"/>
-  <circle cx="200"  cy="600" r="4" fill="rgba(204,34,51,0.3)"/>
-  <circle cx="1100" cy="580" r="5" fill="rgba(184,146,42,0.35)"/>
-  <circle cx="400"  cy="800" r="3" fill="rgba(184,146,42,0.35)"/>
-  <circle cx="700"  cy="720" r="5" fill="rgba(204,34,51,0.3)"/>
-  <circle cx="1000" cy="700" r="4" fill="rgba(184,146,42,0.35)"/>
-</svg>
 
 <!-- NAV -->
 <nav>
@@ -999,9 +1136,26 @@
   <div class="nav-accent-bar"></div>
   <ul class="nav-links">
     <li><a href="#about" data-ja="About" data-en="About">About</a></li>
-        <li><a href="#services" data-ja="事業内容" data-en="Services">事業内容</a></li>
+    <li><a href="#services" data-ja="事業内容" data-en="Services">事業内容</a></li>
     <li><a href="#cases" data-ja="実績" data-en="Cases">実績</a></li>
     <li><a href="#blog" data-ja="レポート" data-en="Report">レポート</a></li>
+    <li class="nav-resources">
+      <a href="#">リソース</a>
+      <div class="nav-dropdown">
+        <a class="nav-dropdown-item" href="civic-voice.html">
+          <span class="nav-dropdown-item-label">AI Platform</span>
+          <span class="nav-dropdown-item-title">CIVIC VOICE</span>
+        </a>
+        <a class="nav-dropdown-item" href="urban-growth.html">
+          <span class="nav-dropdown-item-label">Research Database</span>
+          <span class="nav-dropdown-item-title">何が都市を成長させるのか</span>
+        </a>
+        <a class="nav-dropdown-item" href="lm3-meter.html">
+          <span class="nav-dropdown-item-label">Measurement Tool</span>
+          <span class="nav-dropdown-item-title">LM3メーター</span>
+        </a>
+      </div>
+    </li>
     <li><a href="#contact" data-ja="お問い合わせ" data-en="Contact">お問い合わせ</a></li>
     <li><a href="#company" data-ja="会社概要" data-en="Company">会社概要</a></li>
   </ul>
@@ -1013,6 +1167,13 @@
 
 <!-- HERO -->
 <header class="hero" id="top">
+  <!-- City video background (2x speed) -->
+  <div class="hero-video-wrap">
+    <video id="heroVideo" autoplay muted loop playsinline preload="auto"
+      src="City-Bg.mp4">
+    </video>
+  </div>
+  <div class="hero-video-overlay"></div>
   <div class="hero-inner">
     <h1>
       Mapping the<br/>
@@ -1022,9 +1183,7 @@
     <p class="hero-sub" data-ja="リサーチとインサイトの力で、地域と都市の未来を描く。" data-en="Shaping the future of cities and communities through research and insight.">
       リサーチとインサイトの力で、地域と都市の未来を描く。
     </p>
-    <div class="hero-cta">
-      <a href="#services" class="btn" data-ja="事業内容を見る →" data-en="Our Services →">事業内容を見る →</a>
-    </div>
+
   </div>
   <div class="hero-num">G</div>
 </header>
@@ -1170,12 +1329,7 @@
         <div class="blog-card note-card hidden">
         <iframe class="note-embed" src="https://note.com/embed/notes/n1de69c784a2c" style="border:0;display:block;width:100%;height:230px;" loading="lazy"></iframe>
       </div> 
-        <div class="blog-card note-card hidden">
-        <iframe class="note-embed" src="https://note.com/embed/notes/nabb245db3841" style="border:0;display:block;width:100%;height:230px;" loading="lazy"></iframe>
-      </div> 
-        <div class="blog-card note-card hidden">
-        <iframe class="note-embed" src="https://note.com/embed/notes/nf8d1dc816466" style="border:0;display:block;width:100%;height:230px;" loading="lazy"></iframe>
-      </div>     </div>
+    </div>
     <div class="blog-nav">
       <button class="blog-nav-btn" id="blogPrev" onclick="blogSlide(-1)">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
@@ -1207,28 +1361,52 @@
   </div>
 </div>
 
-<!-- CIVIC VOICE BANNER -->
-<div class="cv-banner">
-  <div class="cv-banner-inner">
-    <div>
-      <div class="cv-banner-label">New Product</div>
-      <div class="cv-banner-title"><span>CIVIC VOICE</span> ─ 住民の声を、政策へ。</div>
-      <p class="cv-banner-sub">AIを活用した次世代型市民参加プラットフォーム。従来のワークショップでは届かなかった多様な声を収集・分析・可視化します。</p>
+<!-- RESOURCE CAROUSEL -->
+<div class="resource-carousel-section">
+  <div class="resource-carousel-wrap">
+    <div class="resource-track" id="resourceTrack">
+      <!-- Slide 1: CIVIC VOICE -->
+      <div class="resource-slide res-slide-cv">
+        <div class="res-inner">
+          <div>
+            <div class="res-label">AI Platform</div>
+            <div class="res-title"><span>CIVIC VOICE</span> ─ 住民の声を、政策へ。</div>
+            <p class="res-sub">AIを活用した次世代型市民参加プラットフォーム。従来のワークショップでは届かなかった多様な声を収集・分析・可視化します。</p>
+          </div>
+          <a class="res-btn" href="civic-voice.html">特設ページを見る →</a>
+        </div>
+      </div>
+      <!-- Slide 2: Urban Growth -->
+      <div class="resource-slide res-slide-ug">
+        <div class="res-inner">
+          <div class="res-num">200+</div>
+          <div>
+            <div class="res-label">Research Database</div>
+            <div class="res-title">何が<em>都市</em>を成長させるのか</div>
+            <p class="res-sub">国内外200都市・50以上の成長要因カテゴリ・1,000本以上の参照論文。都市戦略・政策立案・学術研究のための知識基盤。</p>
+          </div>
+          <a class="res-btn" href="urban-growth.html">データベースを見る →</a>
+        </div>
+      </div>
+      <!-- Slide 3: LM3 -->
+      <div class="resource-slide res-slide-lm">
+        <div class="res-inner">
+          <div>
+            <div class="res-label">Measurement Tool</div>
+            <div class="res-title">LM3メーター</div>
+            <p class="res-sub">地域の経済活動がどれだけ地域内で循環しているかを測定・分析するツール。NEF「The Money Trail」をもとに開発。</p>
+          </div>
+          <a class="res-btn" href="lm3-meter.html">特設ページを見る →</a>
+        </div>
+      </div>
     </div>
-    <a class="cv-banner-btn" href="civic-voice.html">特設ページを見る →</a>
-  </div>
-</div>
-
-<!-- URBAN GROWTH BANNER -->
-<div class="ug-banner">
-  <div class="ug-banner-inner">
-    <div class="ug-banner-num">200+</div>
-    <div>
-      <div class="ug-banner-eyebrow">Research Database</div>
-      <div class="ug-banner-title">何が<em>都市</em>を成長させるのか</div>
-      <p class="ug-banner-sub">国内外200都市・50以上の成長要因カテゴリ・1,000本以上の参照論文。都市戦略・政策立案・学術研究のための知識基盤。</p>
+    <div class="resource-nav">
+      <button class="resource-arrow" onclick="resPrev()">&#8592;</button>
+      <button class="resource-dot active" onclick="resGo(0)"></button>
+      <button class="resource-dot" onclick="resGo(1)"></button>
+      <button class="resource-dot" onclick="resGo(2)"></button>
+      <button class="resource-arrow" onclick="resNext()">&#8594;</button>
     </div>
-    <a class="ug-banner-btn" href="urban-growth.html">データベースを見る →</a>
   </div>
 </div>
 
@@ -1348,19 +1526,7 @@
   }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  /* ── NODE ANIMATION ── */
-  document.querySelectorAll('#graph-bg circle').forEach((n, i) => {
-    const dur = 2.5 + Math.random() * 2;
-    n.style.animation = `pulse${i % 3} ${dur}s ease-in-out infinite`;
-  });
-  const s = document.createElement('style');
-  s.textContent = `
-    @keyframes pulse0 { 0%,100%{opacity:.4;transform:scale(1)} 50%{opacity:.8;transform:scale(1.5)} }
-    @keyframes pulse1 { 0%,100%{opacity:.3;transform:scale(1)} 50%{opacity:.65;transform:scale(1.4)} }
-    @keyframes pulse2 { 0%,100%{opacity:.35;transform:scale(1)} 50%{opacity:.75;transform:scale(1.6)} }
-    #graph-bg circle { transform-box:fill-box; transform-origin:center; }
-  `;
-  document.head.appendChild(s);
+  /* ── NODE ANIMATION (removed with graph-bg) ── */
 
   /* ── LANGUAGE TOGGLE ── */
   let currentLang = 'ja';
@@ -1613,6 +1779,28 @@
     });
     setTimeout(updateBlogNav, 100);
   })();
+
+
+  /* ── RESOURCE CAROUSEL ── */
+  let resIdx = 0;
+  const resTotal = 3;
+  function resGo(n) {
+    resIdx = n;
+    document.getElementById('resourceTrack').style.transform = 'translateX(-' + (100 * resIdx) + '%)';
+    document.querySelectorAll('.resource-dot').forEach((d, i) => d.classList.toggle('active', i === resIdx));
+  }
+  function resNext() { resGo((resIdx + 1) % resTotal); }
+  function resPrev() { resGo((resIdx - 1 + resTotal) % resTotal); }
+  // Auto-advance every 6s
+  setInterval(resNext, 6000);
+
+
+  /* ── HERO VIDEO 2x SPEED ── */
+  const heroVideo = document.getElementById('heroVideo');
+  if (heroVideo) {
+    heroVideo.addEventListener('loadedmetadata', () => { heroVideo.playbackRate = 2.0; });
+    heroVideo.playbackRate = 2.0;
+  }
 
 </script>
 </body>
