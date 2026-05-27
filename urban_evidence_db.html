@@ -60,47 +60,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Sans',san
 .empty-state{text-align:center;padding:3.5rem 1rem;color:#888780;font-size:14px}
 
 /* Causal */
-.st-wrap{max-width:960px;margin:0 auto;padding:2rem 1.5rem}
-.st-header{margin-bottom:1.5rem}
-.st-title{font-size:20px;font-weight:600;color:#1a1a18}
-.st-sub{font-size:13px;color:#888780;margin-top:3px}
-.st-filter-section{margin-bottom:1rem}
-.st-filter-divider{border:none;border-top:0.5px solid #e0dfd8;margin:0.85rem 0}
-.st-tag-row{display:flex;gap:6px;flex-wrap:wrap}
-.st-tag-btn{font-size:11px;padding:4px 11px;border-radius:20px;border:0.5px solid #ccc;background:#f5f4f0;color:#5F5E5A;cursor:pointer;transition:all 0.12s;white-space:nowrap;line-height:1.5;font-family:inherit}
-.st-tag-btn:hover{border-color:#b4b2a9}
-.st-tag-btn.ac-metro{background:#E6F1FB;border-color:#378ADD;color:#0C447C;font-weight:500}
-.st-tag-btn.ac-core{background:#EAF3DE;border-color:#3B6D11;color:#3B6D11;font-weight:500}
-.st-tag-btn.ac-small{background:#FAEEDA;border-color:#854F0B;color:#854F0B;font-weight:500}
-.st-tag-btn.ac-rural{background:#f7d0df;border-color:#993556;color:#993556;font-weight:500}
-.st-city-desc{font-size:13px;color:#5F5E5A;line-height:1.7;margin-bottom:1.25rem;padding:0.85rem 1.1rem;background:#fff;border:0.5px solid #e0dfd8;border-radius:12px}
-.st-section-label{font-size:11px;color:#888780;font-weight:500;margin-bottom:0.65rem;letter-spacing:0.03em}
-.st-card{background:#fff;border:0.5px solid #e0dfd8;border-radius:12px;padding:1rem 1.25rem;margin-bottom:10px}
-.st-card-title{font-size:13px;font-weight:600;color:#1a1a18;margin-bottom:8px;padding-bottom:7px;border-bottom:0.5px solid #f0efe8}
-.st-body{font-size:13px;color:#5F5E5A;line-height:1.75}
-.st-body p{margin-bottom:6px}
-.st-body strong{color:#1a1a18;font-weight:600}
-.st-body ul{padding-left:1.1em}
-.st-body li{margin-bottom:4px}
-.st-policy{border-left:2px solid #e0dfd8;padding:6px 0 6px 10px;margin-bottom:8px}
-.st-policy-name{font-size:13px;font-weight:600;color:#1a1a18;margin-bottom:3px}
-.st-policy-reason{font-size:12px;color:#5F5E5A;line-height:1.65}
-.st-resource{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}
-.st-rtag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0}
-.st-rtext{font-size:12px;color:#5F5E5A;line-height:1.55}
-.st-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px;padding-top:7px;border-top:0.5px solid #f0efe8}
-.st-chip{font-size:10px;padding:1px 7px;border-radius:10px;background:#f5f4f0;color:#888780}
-.st-two{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
-@media(max-width:600px){.st-two{grid-template-columns:1fr}}
-
-.causal-wrap{max-width:1120px;margin:0 auto;padding:1.5rem}
+.causal-wrap{max-width:100%;padding:1.5rem 2rem}
 .causal-header{margin-bottom:1.1rem}
 .causal-title{font-size:18px;font-weight:600;color:#1a1a18}
 .causal-sub{font-size:12px;color:#888780;margin-top:3px}
-.causal-body{display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start}
+.causal-body{}
 .causal-canvas{background:#fff;border:0.5px solid #e0dfd8;border-radius:14px;overflow:hidden;position:relative}
 .svg-tooltip{position:absolute;background:#1a1a18;color:#fff;font-size:11px;padding:4px 9px;border-radius:6px;pointer-events:none;white-space:nowrap;opacity:0;transition:opacity 0.1s;z-index:10}
-.detail-panel{background:#fff;border:0.5px solid #e0dfd8;border-radius:14px;padding:1.2rem;position:sticky;top:56px}
+.detail-panel{background:#fff;border:0.5px solid #e0dfd8;border-radius:12px;padding:1.25rem;margin-top:14px;display:none}
 .d-empty{color:#888780;font-size:13px;text-align:center;padding:2rem 0}
 .d-factor{font-size:15px;font-weight:600;color:#1a1a18;margin-bottom:5px}
 .d-strength{display:flex;align-items:center;gap:6px;margin-bottom:8px}
@@ -109,8 +76,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Sans',san
 .d-mech{font-size:11px;padding:3px 10px;border-radius:12px;display:inline-block;margin-bottom:8px;font-weight:500}
 .d-group{font-size:11px;color:#5F5E5A;background:#f5f4f0;padding:2px 8px;border-radius:6px;display:inline-block;margin-bottom:9px;margin-left:5px}
 .d-desc{font-size:12px;color:#5F5E5A;line-height:1.65;margin-bottom:11px}
-.d-papers-label{font-size:11px;font-weight:500;color:#888780;margin-bottom:5px}
-.d-paper{background:#f5f4f0;border-radius:8px;padding:6px 9px;margin-bottom:4px}
+.d-papers-label{font-size:11px;font-weight:500;color:#888780;margin-bottom:8px}.d-paper-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px}
+.d-paper{background:#f5f4f0;border-radius:8px;padding:8px 11px}
 .d-paper-title{font-size:12px;color:#1a1a18;font-weight:500;line-height:1.4}
 .d-paper-meta{font-size:11px;color:#888780;margin-top:2px}
 .d-paper-journal{font-size:10px;color:#854F0B;margin-top:1px}
@@ -136,7 +103,25 @@ textarea{resize:vertical;min-height:80px;line-height:1.6}
 .btn-save{font-size:13px;padding:8px 18px;background:#185FA5;color:#E6F1FB;border:none;border-radius:8px;cursor:pointer;font-weight:500}
 .btn-save:hover{background:#0C447C}
 .hidden{display:none}
-@media(max-width:760px){.causal-body{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.form-full{grid-column:1}.stats-row{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.form-grid{grid-template-columns:1fr}.form-full{grid-column:1}.stats-row{grid-template-columns:repeat(2,1fr)}}
+
+/* Admin */
+.nav-spacer{flex:1}
+.nav-admin-area{display:flex;align-items:center;gap:8px;padding-left:12px;border-left:0.5px solid #e0dfd8}
+.admin-badge{font-size:11px;background:#EAF3DE;color:#3B6D11;border:0.5px solid #C0DD97;border-radius:20px;padding:2px 10px;font-weight:500;white-space:nowrap}
+.btn-admin-login{font-size:12px;color:#b4b2a9;background:none;border:none;cursor:pointer;padding:4px 6px;border-radius:6px;line-height:1;transition:color 0.12s}
+.btn-admin-login:hover{color:#5F5E5A;background:#f5f4f0}
+.btn-admin-logout{font-size:11px;color:#A32D2D;background:none;border:0.5px solid #F09595;border-radius:6px;padding:3px 9px;cursor:pointer;transition:all 0.12s}
+.btn-admin-logout:hover{background:#FCEBEB}
+.admin-modal{background:#fff;border-radius:14px;border:0.5px solid #e0dfd8;padding:1.75rem;width:100%;max-width:340px;margin:auto}
+.admin-modal-title{font-size:15px;font-weight:600;color:#1a1a18;margin-bottom:4px}
+.admin-modal-sub{font-size:12px;color:#888780;margin-bottom:1.25rem}
+.pw-wrap{position:relative}
+.pw-wrap input{padding-right:40px}
+.pw-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#888780;font-size:14px;line-height:1;padding:2px}
+.pw-toggle:hover{color:#1a1a18}
+.admin-error{font-size:12px;color:#A32D2D;margin-top:6px;min-height:18px}
+.admin-hint{font-size:11px;color:#b4b2a9;margin-top:12px;line-height:1.6;border-top:0.5px solid #f0efea;padding-top:10px}
 </style>
 </head>
 <body>
@@ -145,7 +130,12 @@ textarea{resize:vertical;min-height:80px;line-height:1.6}
   <div class="nav-title">都市経済成長 エビデンスDB</div>
   <div class="nav-tab active" id="tab-db" onclick="showPage('db')">論文データベース</div>
   <div class="nav-tab" id="tab-causal" onclick="showPage('causal')">因果関係図</div>
-  <div class="nav-tab" id="tab-strategy" onclick="showPage('strategy')">都市規模別成長戦略</div>
+  <div class="nav-spacer"></div>
+  <div class="nav-admin-area">
+    <span class="admin-badge hidden" id="admin-badge">管理者モード</span>
+    <button class="btn-admin-logout hidden" id="btn-admin-logout" onclick="adminLogout()">ログアウト</button>
+    <button class="btn-admin-login" id="btn-admin-login" onclick="showAdminLogin()" title="管理者ログイン">🔒</button>
+  </div>
 </div>
 
 <!-- DB PAGE -->
@@ -153,7 +143,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.6}
 <div class="db-wrap">
   <div class="db-header">
     <div><div class="db-title">論文データベース</div><div class="db-sub">Urban Economic Growth Evidence Database</div></div>
-    <button class="btn-add" onclick="startAdd()">+ 新規登録</button>
+    <button class="btn-add hidden" id="btn-add" onclick="startAdd()">+ 新規登録</button>
   </div>
   <div class="stats-row">
     <div class="stat-card"><div class="stat-label">登録件数</div><div class="stat-val" id="stat-total">0</div></div>
@@ -162,7 +152,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.6}
     <div class="stat-card"><div class="stat-label">規模タグ付き</div><div class="stat-val" id="stat-sized">0</div></div>
   </div>
   <div class="search-bar"><input type="text" id="search-input" placeholder="キーワードで検索（タイトル・著者・掲載誌・概要）" oninput="onSearch()"></div>
-  <div class="filter-section"><div class="filter-label">政策カテゴリ</div><div class="tag-row" id="policy-filters"></div></div>
+  <div class="filter-section"><div class="filter-label">政策カテゴリ　<span style="font-weight:400;opacity:0.7">（複数選択可・OR条件）</span></div><div class="tag-row" id="policy-filters"></div></div>
   <hr class="filter-divider">
   <div class="filter-section"><div class="filter-label">都市規模　<span style="font-weight:400;opacity:0.7">（複数選択可・OR条件）</span></div><div class="tag-row" id="size-filters"></div></div>
   <hr class="filter-divider">
@@ -178,68 +168,91 @@ textarea{resize:vertical;min-height:80px;line-height:1.6}
     <div class="causal-title">因果関係図</div>
     <div class="causal-sub">論文エビデンスに基づく都市経済成長の因果構造　— 各因子ノードをクリックすると詳細・関連論文が表示されます</div>
   </div>
-  <div class="causal-body">
-    <div>
-      <div class="causal-canvas">
-        <svg id="causal-svg" viewBox="0 0 740 570" style="width:100%;display:block;cursor:default">
+  <div class="causal-canvas">
+        <svg id="causal-svg" viewBox="0 0 740 429" style="width:100%;display:block;cursor:default">
 <defs>
 <marker id="arr-blue" markerWidth="5" markerHeight="4" refX="4.5" refY="2" orient="auto"><path d="M0,0 L0,4 L5,2 z" fill="#185FA5"/></marker>
 <marker id="arr-green" markerWidth="5" markerHeight="4" refX="4.5" refY="2" orient="auto"><path d="M0,0 L0,4 L5,2 z" fill="#3B6D11"/></marker>
+<marker id="arr-teal" markerWidth="5" markerHeight="4" refX="4.5" refY="2" orient="auto"><path d="M0,0 L0,4 L5,2 z" fill="#0F766E"/></marker>
 <marker id="arr-brown" markerWidth="5" markerHeight="4" refX="4.5" refY="2" orient="auto"><path d="M0,0 L0,4 L5,2 z" fill="#854F0B"/></marker>
 <marker id="arr-pink" markerWidth="5" markerHeight="4" refX="4.5" refY="2" orient="auto"><path d="M0,0 L0,4 L5,2 z" fill="#993556"/></marker>
 <marker id="arr-indigo" markerWidth="5" markerHeight="4" refX="4.5" refY="2" orient="auto"><path d="M0,0 L0,4 L5,2 z" fill="#3547c8"/></marker>
 <filter id="sh"><feDropShadow dx="0" dy="1" stdDeviation="1.8" flood-opacity="0.08"/></filter>
 </defs>
-<rect x="4" y="14.0" width="438" height="126.0" rx="10" fill="#eeeffe" opacity="0.28"/>
-<rect x="4" y="146.0" width="438" height="126.0" rx="10" fill="#d6edbc" opacity="0.28"/>
-<rect x="4" y="278.0" width="438" height="85.0" rx="10" fill="#fde8c7" opacity="0.28"/>
-<rect x="4" y="369.0" width="438" height="167.0" rx="10" fill="#f7d0df" opacity="0.28"/>
-<path d="M158.0,36.0 C213.0,36.0 245.0,92.0 300.0,92.0" stroke="#185FA5" stroke-width="8.0" fill="none" opacity="0.72"/>
-<path d="M158.0,77.0 C213.0,77.0 245.0,92.0 300.0,92.0" stroke="#185FA5" stroke-width="8.0" fill="none" opacity="0.72"/>
-<path d="M158.0,118.0 C213.0,118.0 245.0,92.0 300.0,92.0" stroke="#185FA5" stroke-width="5.8" fill="none" opacity="0.72"/>
-<path d="M158.0,168.0 C213.0,168.0 245.0,224.0 300.0,224.0" stroke="#3B6D11" stroke-width="5.8" fill="none" opacity="0.72"/>
-<path d="M158.0,209.0 C213.0,209.0 245.0,224.0 300.0,224.0" stroke="#3B6D11" stroke-width="3.2" fill="none" opacity="0.72"/>
-<path d="M158.0,250.0 C213.0,250.0 245.0,224.0 300.0,224.0" stroke="#3B6D11" stroke-width="5.8" fill="none" opacity="0.72"/>
-<path d="M158.0,300.0 C213.0,300.0 245.0,335.5 300.0,335.5" stroke="#854F0B" stroke-width="8.0" fill="none" opacity="0.72"/>
-<path d="M158.0,341.0 C213.0,341.0 245.0,335.5 300.0,335.5" stroke="#854F0B" stroke-width="3.2" fill="none" opacity="0.72"/>
-<path d="M158.0,391.0 C213.0,391.0 245.0,467.5 300.0,467.5" stroke="#993556" stroke-width="5.8" fill="none" opacity="0.72"/>
-<path d="M158.0,432.0 C213.0,432.0 245.0,467.5 300.0,467.5" stroke="#993556" stroke-width="3.2" fill="none" opacity="0.72"/>
-<path d="M158.0,473.0 C213.0,473.0 245.0,467.5 300.0,467.5" stroke="#993556" stroke-width="1.2" fill="none" opacity="0.72"/>
-<path d="M158.0,514.0 C213.0,514.0 245.0,467.5 300.0,467.5" stroke="#993556" stroke-width="3.2" fill="none" opacity="0.72"/>
-<path d="M430.0,92.0 C478.0,92.0 494.0,246.4 516.0,246.4" stroke="#3547c8" stroke-width="8.0" fill="none" opacity="0.85"/>
-<path d="M430.0,224.0 C478.0,224.0 494.0,268.8 516.0,268.8" stroke="#3B6D11" stroke-width="5.8" fill="none" opacity="0.85"/>
-<path d="M430.0,335.5 C478.0,335.5 494.0,291.2 516.0,291.2" stroke="#854F0B" stroke-width="5.8" fill="none" opacity="0.85"/>
-<path d="M430.0,467.5 C478.0,467.5 494.0,313.6 516.0,313.6" stroke="#993556" stroke-width="3.2" fill="none" opacity="0.85"/>
-<g class="mech-node" data-id="m1" style="cursor:pointer"><rect x="300" y="70.0" width="130" height="44" rx="8" fill="white" stroke="#3547c8" stroke-width="1.3" filter="url(#sh)"/><text x="365.0" y="87.0" text-anchor="middle" font-size="10.5" font-weight="600" fill="#3547c8">生産性・技術向上</text><text x="365.0" y="101.0" text-anchor="middle" font-size="8.5" fill="#3547c8" opacity="0.65">中間メカニズム</text></g>
-<g class="mech-node" data-id="m2" style="cursor:pointer"><rect x="300" y="202.0" width="130" height="44" rx="8" fill="white" stroke="#3B6D11" stroke-width="1.3" filter="url(#sh)"/><text x="365.0" y="219.0" text-anchor="middle" font-size="10.5" font-weight="600" fill="#3B6D11">企業立地・産業集積</text><text x="365.0" y="233.0" text-anchor="middle" font-size="8.5" fill="#3B6D11" opacity="0.65">中間メカニズム</text></g>
-<g class="mech-node" data-id="m3" style="cursor:pointer"><rect x="300" y="313.5" width="130" height="44" rx="8" fill="white" stroke="#854F0B" stroke-width="1.3" filter="url(#sh)"/><text x="365.0" y="330.5" text-anchor="middle" font-size="10.5" font-weight="600" fill="#854F0B">制度・信頼基盤</text><text x="365.0" y="344.5" text-anchor="middle" font-size="8.5" fill="#854F0B" opacity="0.65">中間メカニズム</text></g>
-<g class="mech-node" data-id="m4" style="cursor:pointer"><rect x="300" y="445.5" width="130" height="44" rx="8" fill="white" stroke="#993556" stroke-width="1.3" filter="url(#sh)"/><text x="365.0" y="462.5" text-anchor="middle" font-size="10.5" font-weight="600" fill="#993556">需要・域内循環</text><text x="365.0" y="476.5" text-anchor="middle" font-size="8.5" fill="#993556" opacity="0.65">中間メカニズム</text></g>
-<g class="outcome-node"><rect x="516" y="224" width="144" height="112" rx="12" fill="#fff4f0" stroke="#D85A30" stroke-width="1.8" filter="url(#sh)"/><text x="588" y="264" text-anchor="middle" font-size="11.5" font-weight="700" fill="#993C1D">地域経済成長</text><text x="588" y="282" text-anchor="middle" font-size="10" fill="#993C1D">（GRP増加）</text><text x="588" y="298" text-anchor="middle" font-size="8.5" fill="#bf7a00">生産性・雇用・所得↑</text></g>
-<g class="factor-node" data-factor="人的資本" style="cursor:pointer"><rect x="10" y="21.0" width="148" height="30" rx="6" fill="#daeeff" stroke="#185FA5" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="40.0" text-anchor="middle" font-size="10" font-weight="600" fill="#185FA5">人的資本</text></g>
-<g class="factor-node" data-factor="集積・雇用密度" style="cursor:pointer"><rect x="10" y="62.0" width="148" height="30" rx="6" fill="#daeeff" stroke="#185FA5" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="81.0" text-anchor="middle" font-size="10" font-weight="600" fill="#185FA5">集積・雇用密度</text></g>
-<g class="factor-node" data-factor="R&D・知識集約" style="cursor:pointer"><rect x="10" y="103.0" width="148" height="30" rx="6" fill="#daeeff" stroke="#185FA5" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="122.0" text-anchor="middle" font-size="10" font-weight="600" fill="#185FA5">R&D・知識集約</text></g>
-<g class="factor-node" data-factor="インフラ" style="cursor:pointer"><rect x="10" y="153.0" width="148" height="30" rx="6" fill="#d6edbc" stroke="#3B6D11" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="172.0" text-anchor="middle" font-size="10" font-weight="600" fill="#3B6D11">インフラ</text></g>
-<g class="factor-node" data-factor="産業多様性" style="cursor:pointer"><rect x="10" y="194.0" width="148" height="30" rx="6" fill="#d6edbc" stroke="#3B6D11" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="213.0" text-anchor="middle" font-size="10" font-weight="600" fill="#3B6D11">産業多様性</text></g>
-<g class="factor-node" data-factor="産業集積性" style="cursor:pointer"><rect x="10" y="235.0" width="148" height="30" rx="6" fill="#d6edbc" stroke="#3B6D11" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="254.0" text-anchor="middle" font-size="10" font-weight="600" fill="#3B6D11">産業集積性</text></g>
-<g class="factor-node" data-factor="制度・行政能力" style="cursor:pointer"><rect x="10" y="285.0" width="148" height="30" rx="6" fill="#fde8c7" stroke="#854F0B" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="304.0" text-anchor="middle" font-size="10" font-weight="600" fill="#854F0B">制度・行政能力</text></g>
-<g class="factor-node" data-factor="社会関係資本" style="cursor:pointer"><rect x="10" y="326.0" width="148" height="30" rx="6" fill="#fde8c7" stroke="#854F0B" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="345.0" text-anchor="middle" font-size="10" font-weight="600" fill="#854F0B">社会関係資本</text></g>
-<g class="factor-node" data-factor="人口活力" style="cursor:pointer"><rect x="10" y="376.0" width="148" height="30" rx="6" fill="#f7d0df" stroke="#993556" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="395.0" text-anchor="middle" font-size="10" font-weight="600" fill="#993556">人口活力</text></g>
-<g class="factor-node" data-factor="観光" style="cursor:pointer"><rect x="10" y="417.0" width="148" height="30" rx="6" fill="#f7d0df" stroke="#993556" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="436.0" text-anchor="middle" font-size="10" font-weight="600" fill="#993556">観光</text></g>
-<g class="factor-node" data-factor="歩きやすさ・暮らしやすさ" style="cursor:pointer"><rect x="10" y="458.0" width="148" height="30" rx="6" fill="#f7d0df" stroke="#993556" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="477.0" text-anchor="middle" font-size="10" font-weight="600" fill="#993556">歩きやすさ・暮らしやすさ</text></g>
-<g class="factor-node" data-factor="経済循環性" style="cursor:pointer"><rect x="10" y="499.0" width="148" height="30" rx="6" fill="#f7d0df" stroke="#993556" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="518.0" text-anchor="middle" font-size="10" font-weight="600" fill="#993556">経済循環性</text></g>
-<text x="8" y="560" font-size="8.5" fill="#aaa">線の太さ＝因果の強さ：</text>
-<line x1="140" y1="557" x2="178" y2="557" stroke="#888" stroke-width="1.2" opacity="0.55"/><text x="184" y="560" font-size="8.5" fill="#aaa">弱（1〜2本）</text>
-<line x1="295" y1="557" x2="333" y2="557" stroke="#888" stroke-width="3.2" opacity="0.55"/><text x="339" y="560" font-size="8.5" fill="#aaa">中（3〜4本）</text>
-<line x1="450" y1="557" x2="488" y2="557" stroke="#888" stroke-width="8.0" opacity="0.55"/><text x="494" y="560" font-size="8.5" fill="#aaa">強（5本以上）</text>
+<rect x="4" y="7.0" width="438" height="88.6" rx="10" fill="#daeeff" opacity="0.28"/>
+<rect x="4" y="97.6" width="438" height="88.6" rx="10" fill="#d6edbc" opacity="0.28"/>
+<rect x="4" y="188.2" width="438" height="60.400000000000006" rx="10" fill="#CCFBF1" opacity="0.28"/>
+<rect x="4" y="250.6" width="438" height="60.400000000000006" rx="10" fill="#fde8c7" opacity="0.28"/>
+<rect x="4" y="313.0" width="438" height="88.60000000000002" rx="10" fill="#f7d0df" opacity="0.28"/>
+<path d="M158.0,23.1 C213.0,23.1 245.0,51.3 300.0,51.3" stroke="#3547c8" stroke-width="8.0" fill="none" opacity="0.72"/>
+<path d="M158.0,51.3 C213.0,51.3 245.0,51.3 300.0,51.3" stroke="#3547c8" stroke-width="5.8" fill="none" opacity="0.72"/>
+<path d="M158.0,79.5 C213.0,79.5 245.0,51.3 300.0,51.3" stroke="#3547c8" stroke-width="5.8" fill="none" opacity="0.72"/>
+<path d="M158.0,113.7 C213.0,113.7 245.0,141.9 300.0,141.9" stroke="#3B6D11" stroke-width="3.2" fill="none" opacity="0.72"/>
+<path d="M158.0,141.9 C213.0,141.9 245.0,141.9 300.0,141.9" stroke="#3B6D11" stroke-width="5.8" fill="none" opacity="0.72"/>
+<path d="M158.0,170.1 C213.0,170.1 245.0,141.9 300.0,141.9" stroke="#3B6D11" stroke-width="3.2" fill="none" opacity="0.72"/>
+<path d="M158.0,204.3 C213.0,204.3 245.0,218.4 300.0,218.4" stroke="#0F766E" stroke-width="5.8" fill="none" opacity="0.72"/>
+<path d="M158.0,232.5 C213.0,232.5 245.0,218.4 300.0,218.4" stroke="#0F766E" stroke-width="3.2" fill="none" opacity="0.72"/>
+<path d="M158.0,266.7 C213.0,266.7 245.0,280.8 300.0,280.8" stroke="#854F0B" stroke-width="8.0" fill="none" opacity="0.72"/>
+<path d="M158.0,294.9 C213.0,294.9 245.0,280.8 300.0,280.8" stroke="#854F0B" stroke-width="3.2" fill="none" opacity="0.72"/>
+<path d="M158.0,329.1 C213.0,329.1 245.0,357.3 300.0,357.3" stroke="#993556" stroke-width="3.2" fill="none" opacity="0.72"/>
+<path d="M158.0,357.3 C213.0,357.3 245.0,357.3 300.0,357.3" stroke="#993556" stroke-width="1.2" fill="none" opacity="0.72"/>
+<path d="M158.0,385.5 C213.0,385.5 245.0,357.3 300.0,357.3" stroke="#993556" stroke-width="5.8" fill="none" opacity="0.72"/>
+<path d="M430.0,51.3 C478.0,51.3 494.0,172.6 516.0,172.6" stroke="#3547c8" stroke-width="8.0" fill="none" opacity="0.85"/>
+<path d="M430.0,141.9 C478.0,141.9 494.0,193.3 516.0,193.3" stroke="#3B6D11" stroke-width="5.8" fill="none" opacity="0.85"/>
+<path d="M430.0,218.4 C478.0,218.4 494.0,214.0 516.0,214.0" stroke="#0F766E" stroke-width="3.2" fill="none" opacity="0.85"/>
+<path d="M430.0,280.8 C478.0,280.8 494.0,234.7 516.0,234.7" stroke="#854F0B" stroke-width="5.8" fill="none" opacity="0.85"/>
+<path d="M430.0,357.3 C478.0,357.3 494.0,255.4 516.0,255.4" stroke="#993556" stroke-width="3.2" fill="none" opacity="0.85"/>
+<g class="mech-node" data-id="m1" style="cursor:pointer"><rect x="300" y="35.0" width="130" height="32.6" rx="8" fill="white" stroke="#3547c8" stroke-width="1.3" filter="url(#sh)"/><text x="365.0" y="46.8" text-anchor="middle" font-size="9.0" font-weight="600" fill="#3547c8">生産性向上</text><text x="365.0" y="57.1" text-anchor="middle" font-size="7.3" fill="#3547c8" opacity="0.65">中間メカニズム</text></g>
+<g class="mech-node" data-id="m2" style="cursor:pointer"><rect x="300" y="125.6" width="130" height="32.6" rx="8" fill="white" stroke="#3B6D11" stroke-width="1.3" filter="url(#sh)"/><text x="365.0" y="137.4" text-anchor="middle" font-size="9.0" font-weight="600" fill="#3B6D11">産業構造</text><text x="365.0" y="147.7" text-anchor="middle" font-size="7.3" fill="#3B6D11" opacity="0.65">中間メカニズム</text></g>
+<g class="mech-node" data-id="m3" style="cursor:pointer"><rect x="300" y="202.1" width="130" height="32.6" rx="8" fill="white" stroke="#0F766E" stroke-width="1.3" filter="url(#sh)"/><text x="365.0" y="213.9" text-anchor="middle" font-size="9.0" font-weight="600" fill="#0F766E">空間配置</text><text x="365.0" y="224.2" text-anchor="middle" font-size="7.3" fill="#0F766E" opacity="0.65">中間メカニズム</text></g>
+<g class="mech-node" data-id="m4" style="cursor:pointer"><rect x="300" y="264.5" width="130" height="32.6" rx="8" fill="white" stroke="#854F0B" stroke-width="1.3" filter="url(#sh)"/><text x="365.0" y="276.3" text-anchor="middle" font-size="9.0" font-weight="600" fill="#854F0B">制度・信頼基盤</text><text x="365.0" y="286.6" text-anchor="middle" font-size="7.3" fill="#854F0B" opacity="0.65">中間メカニズム</text></g>
+<g class="mech-node" data-id="m5" style="cursor:pointer"><rect x="300" y="341.0" width="130" height="32.6" rx="8" fill="white" stroke="#993556" stroke-width="1.3" filter="url(#sh)"/><text x="365.0" y="352.8" text-anchor="middle" font-size="9.0" font-weight="600" fill="#993556">需要・域内循環</text><text x="365.0" y="363.1" text-anchor="middle" font-size="7.3" fill="#993556" opacity="0.65">中間メカニズム</text></g>
+<g class="outcome-node"><rect x="516" y="172.6" width="144" height="82.8" rx="12" fill="#fff4f0" stroke="#D85A30" stroke-width="1.8" filter="url(#sh)"/><text x="588" y="198.2" text-anchor="middle" font-size="9.9" font-weight="700" fill="#993C1D">地域経済成長</text><text x="588" y="211.5" text-anchor="middle" font-size="8.6" fill="#993C1D">（GRP増加）</text><text x="588" y="223.3" text-anchor="middle" font-size="7.3" fill="#bf7a00">生産性・雇用・所得↑</text></g>
+<g class="factor-node" data-factor="人口資本・人口活力" style="cursor:pointer"><rect x="10" y="12.0" width="148" height="22.2" rx="6" fill="#daeeff" stroke="#185FA5" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="26.3" text-anchor="middle" font-size="8.6" font-weight="600" fill="#185FA5">人口資本・人口活力</text></g>
+<g class="factor-node" data-factor="R&D・知識集約" style="cursor:pointer"><rect x="10" y="40.2" width="148" height="22.2" rx="6" fill="#daeeff" stroke="#185FA5" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="54.5" text-anchor="middle" font-size="8.6" font-weight="600" fill="#185FA5">R&D・知識集約</text></g>
+<g class="factor-node" data-factor="インフラ" style="cursor:pointer"><rect x="10" y="68.4" width="148" height="22.2" rx="6" fill="#daeeff" stroke="#185FA5" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="82.7" text-anchor="middle" font-size="8.6" font-weight="600" fill="#185FA5">インフラ</text></g>
+<g class="factor-node" data-factor="産業多様性" style="cursor:pointer"><rect x="10" y="102.6" width="148" height="22.2" rx="6" fill="#d6edbc" stroke="#3B6D11" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="116.9" text-anchor="middle" font-size="8.6" font-weight="600" fill="#3B6D11">産業多様性</text></g>
+<g class="factor-node" data-factor="産業集積性" style="cursor:pointer"><rect x="10" y="130.8" width="148" height="22.2" rx="6" fill="#d6edbc" stroke="#3B6D11" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="145.1" text-anchor="middle" font-size="8.6" font-weight="600" fill="#3B6D11">産業集積性</text></g>
+<g class="factor-node" data-factor="経済循環性" style="cursor:pointer"><rect x="10" y="159.0" width="148" height="22.2" rx="6" fill="#d6edbc" stroke="#3B6D11" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="173.3" text-anchor="middle" font-size="8.6" font-weight="600" fill="#3B6D11">経済循環性</text></g>
+<g class="factor-node" data-factor="中心性" style="cursor:pointer"><rect x="10" y="193.2" width="148" height="22.2" rx="6" fill="#CCFBF1" stroke="#0F766E" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="207.5" text-anchor="middle" font-size="8.6" font-weight="600" fill="#0F766E">中心性</text></g>
+<g class="factor-node" data-factor="都市配置" style="cursor:pointer"><rect x="10" y="221.4" width="148" height="22.2" rx="6" fill="#CCFBF1" stroke="#0F766E" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="235.7" text-anchor="middle" font-size="8.6" font-weight="600" fill="#0F766E">都市配置</text></g>
+<g class="factor-node" data-factor="制度・行政能力" style="cursor:pointer"><rect x="10" y="255.6" width="148" height="22.2" rx="6" fill="#fde8c7" stroke="#854F0B" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="269.9" text-anchor="middle" font-size="8.6" font-weight="600" fill="#854F0B">制度・行政能力</text></g>
+<g class="factor-node" data-factor="社会関係資本" style="cursor:pointer"><rect x="10" y="283.8" width="148" height="22.2" rx="6" fill="#fde8c7" stroke="#854F0B" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="298.1" text-anchor="middle" font-size="8.6" font-weight="600" fill="#854F0B">社会関係資本</text></g>
+<g class="factor-node" data-factor="観光" style="cursor:pointer"><rect x="10" y="318.0" width="148" height="22.2" rx="6" fill="#f7d0df" stroke="#993556" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="332.3" text-anchor="middle" font-size="8.6" font-weight="600" fill="#993556">観光</text></g>
+<g class="factor-node" data-factor="歩きやすさ・暮らしやすさ" style="cursor:pointer"><rect x="10" y="346.2" width="148" height="22.2" rx="6" fill="#f7d0df" stroke="#993556" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="360.5" text-anchor="middle" font-size="8.6" font-weight="600" fill="#993556">歩きやすさ・暮らしやすさ</text></g>
+<g class="factor-node" data-factor="アメニティ" style="cursor:pointer"><rect x="10" y="374.4" width="148" height="22.2" rx="6" fill="#f7d0df" stroke="#993556" stroke-width="0.9" filter="url(#sh)"/><text x="84.0" y="388.7" text-anchor="middle" font-size="8.6" font-weight="600" fill="#993556">アメニティ</text></g>
+<text x="8" y="407.8" font-size="7.3" fill="#aaa">線の太さ＝因果の強さ：</text>
+<line x1="140" y1="405.6" x2="178" y2="405.6" stroke="#888" stroke-width="1.2" opacity="0.55"/><text x="184" y="407.8" font-size="7.3" fill="#aaa">弱（1〜2本）</text>
+<line x1="295" y1="405.6" x2="333" y2="405.6" stroke="#888" stroke-width="3.2" opacity="0.55"/><text x="339" y="407.8" font-size="7.3" fill="#aaa">中（3〜4本）</text>
+<line x1="450" y1="405.6" x2="488" y2="405.6" stroke="#888" stroke-width="8.0" opacity="0.55"/><text x="494" y="407.8" font-size="7.3" fill="#aaa">強（5本以上）</text>
 </svg>
         <div class="svg-tooltip" id="svg-tooltip"></div>
-      </div>
-    </div>
-    <div class="detail-panel" id="detail-panel">
-      <div class="d-empty">因子ノードをクリックすると<br>メカニズムと<br>関連論文が表示されます</div>
-    </div>
+  </div>
+  <div class="detail-panel" id="detail-panel">
+    <div class="d-empty">因子ノードをクリックすると詳細・関連論文が表示されます</div>
   </div>
 </div>
+</div>
+
+<!-- ADMIN LOGIN MODAL -->
+<div class="modal-overlay hidden" id="admin-overlay" onclick="adminOverlayClick(event)">
+  <div class="admin-modal">
+    <div class="admin-modal-title">管理者ログイン</div>
+    <div class="admin-modal-sub">管理者パスワードを入力してください</div>
+    <div class="form-group">
+      <label>パスワード</label>
+      <div class="pw-wrap">
+        <input type="password" id="admin-pw" placeholder="パスワード" onkeydown="if(event.key==='Enter')doAdminLogin()">
+        <button class="pw-toggle" type="button" onclick="togglePwVisibility()" id="pw-toggle-btn">👁</button>
+      </div>
+      <div class="admin-error" id="admin-error"></div>
+    </div>
+    <div class="form-actions">
+      <button class="btn-cancel" onclick="closeAdminLogin()">キャンセル</button>
+      <button class="btn-save" onclick="doAdminLogin()">ログイン</button>
+    </div>
+    <div class="admin-hint">※ パスワードはHTMLファイル内の <code>ADMIN_HASH</code> 定数で管理しています。<br>変更方法はファイル冒頭のコメントを参照してください。</div>
+  </div>
 </div>
 
 <!-- MODAL -->
@@ -252,14 +265,22 @@ textarea{resize:vertical;min-height:80px;line-height:1.6}
       <div class="form-group"><label>発行年</label><input type="text" id="f-year" placeholder="例：2023"></div>
       <div class="form-group form-full"><label>掲載誌・出版社</label><input type="text" id="f-datasource" placeholder="例：American Economic Review, 86(3)"></div>
       <div class="form-group form-full"><label>URL（DOI・論文ページ）</label><input type="text" id="f-url" placeholder="例：https://doi.org/10.1257/aer.91.5.1369"></div>
-      <div class="form-group form-full"><label>政策カテゴリ</label>
-        <select id="f-policy">
-          <option value="">選択してください</option>
-          <option>人的資本</option><option>集積・雇用密度</option><option>R&amp;D・知識集約</option>
-          <option>インフラ</option><option>制度・行政能力</option><option>産業多様性</option>
-          <option>産業集積性</option><option>社会関係資本</option><option>人口活力</option>
-          <option>観光</option><option>歩きやすさ・暮らしやすさ</option><option>経済循環性</option>
-        </select>
+      <div class="form-group form-full"><label>政策カテゴリ　<span style="font-weight:400">（複数選択可）</span></label>
+        <div class="checkbox-group" id="f-policies">
+          <label><input type="checkbox" value="人口資本・人口活力"> 人口資本・人口活力</label>
+          <label><input type="checkbox" value="R&D・知識集約"> R&D・知識集約</label>
+          <label><input type="checkbox" value="インフラ"> インフラ</label>
+          <label><input type="checkbox" value="制度・行政能力"> 制度・行政能力</label>
+          <label><input type="checkbox" value="産業多様性"> 産業多様性</label>
+          <label><input type="checkbox" value="産業集積性"> 産業集積性</label>
+          <label><input type="checkbox" value="社会関係資本"> 社会関係資本</label>
+          <label><input type="checkbox" value="観光"> 観光</label>
+          <label><input type="checkbox" value="歩きやすさ・暮らしやすさ"> 歩きやすさ・暮らしやすさ</label>
+          <label><input type="checkbox" value="経済循環性"> 経済循環性</label>
+          <label><input type="checkbox" value="都市配置"> 都市配置</label>
+          <label><input type="checkbox" value="アメニティ"> アメニティ</label>
+          <label><input type="checkbox" value="中心性"> 中心性</label>
+        </div>
       </div>
       <div class="form-group form-full"><label>都市規模　<span style="font-weight:400">（複数選択可）</span></label>
         <div class="checkbox-group" id="f-sizes">
@@ -281,97 +302,128 @@ textarea{resize:vertical;min-height:80px;line-height:1.6}
 </div>
 
 <script>
-const STORAGE_KEY='urban-econ-db-v4';
-const POLICY_TAGS=['人的資本','集積・雇用密度','R&D・知識集約','インフラ','制度・行政能力','産業多様性','産業集積性','社会関係資本','人口活力','観光','歩きやすさ・暮らしやすさ','経済循環性'];
+/*
+ * ─── 管理者パスワードの変更方法 ───────────────────────────────────────
+ * ブラウザのコンソール（F12）で以下を実行してハッシュを取得し、
+ * 下の ADMIN_HASH を置き換えてください:
+ *
+ *   crypto.subtle.digest('SHA-256', new TextEncoder().encode('新しいパスワード'))
+ *     .then(b => console.log([...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')))
+ *
+ * デフォルトパスワード: admin1234
+ * ─────────────────────────────────────────────────────────────────────
+ */
+const ADMIN_HASH='ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc0596cad4c6e270';
+const STORAGE_KEY='urban-econ-db-v6';
+const POLICY_TAGS=['人口資本・人口活力','R&D・知識集約','インフラ','制度・行政能力','産業多様性','産業集積性','社会関係資本','観光','歩きやすさ・暮らしやすさ','経済循環性','都市配置','アメニティ','中心性'];
 const SIZE_TAGS=['大都市圏','中核市','小規模市','農村・町村'];
 const SIZE_DESC={'大都市圏':'100万人以上','中核市':'30〜100万人','小規模市':'10〜30万人','農村・町村':'10万人未満'};
 
 const CAUSAL_INFO={
-  '人的資本':{color:'#185FA5',mech:'生産性・技術向上',group:'知識・人材系',strength:5,mechanism:'労働生産性向上・知識スピルオーバー',desc:'教育・訓練への投資が個人・地域の生産性を高める。高スキル人材の集積は周辺労働者の賃金・生産性も押し上げる正の外部効果（人的資本スピルオーバー）を生む。大卒割合1%増→周辺賃金0.5〜0.6%上昇（Moretti, 2004）。'},
-  '集積・雇用密度':{color:'#185FA5',mech:'生産性・技術向上',group:'知識・人材系',strength:5,mechanism:'集積の外部性（労働市場プール・中間財共有）',desc:'雇用密度の上昇が労働市場プールの厚さ・中間財の多様性・対面知識交換を生み、生産性を向上させる。雇用密度2倍→生産性約6%向上（Ciccone & Hall, 1996）。日本でもサービス業で同様の効果（Morikawa, 2011）。'},
-  'R&D・知識集約':{color:'#185FA5',mech:'生産性・技術向上',group:'知識・人材系',strength:4,mechanism:'イノベーション・内生的技術進歩',desc:'R&D投資が知識を累積し技術進歩を内生化する（Romer, 1990）。知識スピルオーバーは地理的に局所化され（Jaffe et al., 1993）、大学・研究機関が集積する地域でイノベーションが加速。大企業立地で周辺企業TFPが12%上昇（Greenstone et al., 2010）。'},
-  'インフラ':{color:'#3B6D11',mech:'企業立地・産業集積',group:'産業・立地系',strength:4,mechanism:'市場アクセス改善・企業立地促進',desc:'交通・通信インフラが市場へのアクセスを改善し、企業立地を誘発する。コアインフラへの投資が民間生産性を向上（Aschauer, 1989）。鉄道整備が農業地価・地域総生産を大幅増加（Donaldson & Hornbeck, 2012）。高速道路整備が企業立地と雇用成長を促進（Holl, 2007）。'},
-  '産業多様性':{color:'#3B6D11',mech:'企業立地・産業集積',group:'産業・立地系',strength:3,mechanism:'関連多様性によるイノベーション・リスク分散',desc:'異業種間の知識交換がイノベーションを生む（ジェイコブズの外部性、Jacobs 1970）。関連多様性が高い地域では雇用成長が高く（Frenken et al., 2007）、非関連多様性は景気変動リスクを分散させる機能を持つ。'},
-  '産業集積性':{color:'#3B6D11',mech:'企業立地・産業集積',group:'産業・立地系',strength:4,mechanism:'クラスター外部経済・マーシャルの外部性',desc:'同業種の地理的集積がマーシャルの外部性（労働市場プール・中間財共有・技術スピルオーバー）を生む（Ellison et al., 2010）。大企業立地が周辺企業TFPを平均12%向上（Greenstone et al.）。日本の製造業クラスターでも同様の効果（Kondo, 2012）。'},
+  '人口資本・人口活力':{color:'#185FA5',mech:'生産性向上',group:'知識・人材系',strength:5,mechanism:'労働生産性向上・人材集積・消費需要拡大',desc:'教育・訓練への投資が個人・地域の生産性を高める。高スキル人材の集積は周辺労働者の賃金・生産性も押し上げる（人的資本スピルオーバー）。大卒割合1%増→周辺賃金0.5〜0.6%上昇（Moretti, 2004）。多様な人材の流入が労働力を供給し消費需要を拡大。クリエイティブ人材の集積が都市成長を牽引（Florida, 2002）。高スキル産業の雇用1増加→周辺で平均5の雇用を誘発（Moretti, 2010）。'},
+  'R&D・知識集約':{color:'#185FA5',mech:'生産性向上',group:'知識・人材系',strength:4,mechanism:'イノベーション・内生的技術進歩',desc:'R&D投資が知識を累積し技術進歩を内生化する（Romer, 1990）。知識スピルオーバーは地理的に局所化され（Jaffe et al., 1993）、大学・研究機関が集積する地域でイノベーションが加速。大企業立地で周辺企業TFPが12%上昇（Greenstone et al., 2010）。'},
+  'インフラ':{color:'#185FA5',mech:'生産性向上',group:'知識・人材系',strength:4,mechanism:'市場アクセス改善・民間生産性向上',desc:'交通・通信インフラが市場へのアクセスを改善し、民間部門の生産性を直接押し上げる。コアインフラへの投資が民間生産性を向上（Aschauer, 1989）。鉄道整備が農業地価・地域総生産を大幅増加（Donaldson & Hornbeck, 2012）。高速道路整備が企業立地と雇用成長を促進（Holl, 2007）。'},
+  '産業多様性':{color:'#3B6D11',mech:'産業構造',group:'産業構造系',strength:3,mechanism:'関連多様性によるイノベーション・リスク分散',desc:'異業種間の知識交換がイノベーションを生む（ジェイコブズの外部性、Jacobs 1970）。関連多様性が高い地域では雇用成長が高く（Frenken et al., 2007）、非関連多様性は景気変動リスクを分散させる機能を持つ。'},
+  '産業集積性':{color:'#3B6D11',mech:'産業構造',group:'産業構造系',strength:4,mechanism:'クラスター外部経済・マーシャルの外部性',desc:'同業種の地理的集積がマーシャルの外部性（労働市場プール・中間財共有・技術スピルオーバー）を生む（Ellison et al., 2010）。大企業立地が周辺企業TFPを平均12%向上（Greenstone et al.）。雇用密度が高いほど生産性が上昇（Ciccone & Hall, 1996; Morikawa, 2011）。'},
+  '経済循環性':{color:'#3B6D11',mech:'産業構造',group:'産業構造系',strength:3,mechanism:'域内乗数効果・産業連関の厚み',desc:'地域内での支出・雇用・投資の循環が地域乗数を高める（NEF, 2002）。地域密着型企業が多い地域ほど産業連関が厚く経済的厚生が高く（Tolbert et al., 1998）、域外資金流出（漏洩）を減らすことがGRPの底上げにつながる（枝廣ほか, 2018）。'},
+  '中心性':{color:'#0F766E',mech:'空間配置',group:'空間配置系',strength:4,mechanism:'都市システム内の優位ポジション・ハブ機能',desc:'都市システム内での中心的な位置づけが企業・人材・資本を引き付ける。大都市圏への適度な近接性がベッドタウン・サービス拠点としての成長を促す（Wolff et al., 2021）。Zipf則に基づく都市階層において上位に位置する都市ほど規模の経済を享受しやすい（Frick & Rodriguez-Pose, 2017）。'},
+  '都市配置':{color:'#0F766E',mech:'空間配置',group:'空間配置系',strength:3,mechanism:'地理的立地優位・大都市圏との連携',desc:'都市の地理的配置・大都市圏との距離が成長の質と速度を規定する。大都市に近い小都市はベッドタウン・アメニティ都市として人口流入を享受できる一方、過度な近接は独自経済の発展を阻害するリスクもある（Philadelphia Fed, 2022）。農村・町村では地方拠点都市との連携が域内経済循環を支える。'},
   '制度・行政能力':{color:'#854F0B',mech:'制度・信頼基盤',group:'社会・制度系',strength:5,mechanism:'取引コスト低下・投資環境整備',desc:'財産権保護・法の支配・行政の質が取引コストを下げ民間投資を促す。植民地制度の歴史的差異が現代の経済発展格差を説明（Acemoglu et al., 2001）。地方分権が公共財供給の効率性を高める（Tiebout 1956; Oates 2001）。'},
   '社会関係資本':{color:'#854F0B',mech:'制度・信頼基盤',group:'社会・制度系',strength:3,mechanism:'協働・情報共有・起業促進',desc:'ネットワーク・信頼・規範が情報共有コストを下げ協働を促進する。弱い紐帯が革新的情報の橋渡しをし（Granovetter, 1973）、社会関係資本が豊かな地域は起業率・雇用成長率が高い（Putnam 1993; 出口ほか 2014）。'},
-  '人口活力':{color:'#993556',mech:'需要・域内循環',group:'需要・循環系',strength:4,mechanism:'労働力供給・消費需要・人材集積',desc:'人口増加・多様な人材の流入が労働力を供給し消費需要を拡大する。クリエイティブ人材の集積が都市成長を牽引（Florida, 2002）。製造業雇用1増加が周辺で平均5の雇用を誘発（Moretti, 2010）。高学歴人材の集積がアメニティ需要とともに都市圏のGRP成長を支える（Diamond, 2016）。'},
   '観光':{color:'#993556',mech:'需要・域内循環',group:'需要・循環系',strength:3,mechanism:'域外需要取込・雇用創出',desc:'域外からの観光消費が域内所得を増やし雇用を創出する。観光は長期的な成長因子（Balaguer & Cantavella-Jordá, 2002; Brida et al., 2016）であるが、過度の観光依存はオランダ病リスクを伴う（Inchausti-Sintes, 2015）。途上国でより強い効果（Sequeira & Nunes, 2008）。'},
   '歩きやすさ・暮らしやすさ':{color:'#993556',mech:'需要・域内循環',group:'需要・循環系',strength:2,mechanism:'人材定着・不動産価値向上・医療費削減',desc:'歩きやすい環境が人材の定住意欲を高め不動産価値を向上させる（Cortright, 2009）。身体活動の促進が医療費を削減し地域の暮らしやすさを高める（Frank et al., 2006; Litman, 2012）。間接的な経済効果であり、他の成長因子との相乗効果が大きい。'},
-  '経済循環性':{color:'#993556',mech:'需要・域内循環',group:'需要・循環系',strength:3,mechanism:'域内乗数効果・資金漏洩防止',desc:'地域内での支出・雇用・投資の循環が地域乗数を高める（NEF, 2002）。地域密着型企業が多い地域ほど経済的厚生が高く（Tolbert et al., 1998）、域外資金流出（漏洩）を減らすことがGRPの底上げにつながる（枝廣ほか, 2018）。'},
+  'アメニティ':{color:'#993556',mech:'需要・域内循環',group:'需要・循環系',strength:4,mechanism:'居住選好向上・知識人材の定着',desc:'自然環境・気候・文化・飲食・学校の質などのアメニティが都市の居住選好を高め、知識・クリエイティブ労働者を惹きつける（Glaeser et al., 2001; Consumer City）。大都市の住宅費高騰が小都市アメニティの相対的価値を高め、人口流入を加速させる「プル」効果も確認されている（Philadelphia Fed, 2022）。'},
 };
 
 const MECH_INFO={
-  'm1':{label:'生産性・技術向上',desc:'人的資本・R&D・集積の三要素が生産性と技術進歩を高め、GRP成長の最大の直接要因となる。知識スピルオーバーが中心的なメカニズム。'},
-  'm2':{label:'企業立地・産業集積',desc:'インフラ・産業多様性・産業集積性がマーシャルの外部性を生み、企業立地と雇用・所得を地域に引き込む。'},
-  'm3':{label:'制度・信頼基盤',desc:'制度・行政能力・社会関係資本が取引コストを下げ、民間投資・起業・協働を促す長期的な経済成長の基盤をつくる。'},
-  'm4':{label:'需要・域内循環',desc:'人口活力・観光・歩きやすさ・経済循環性が域内外からの需要を拡大し、乗数効果を通じてGRPを押し上げる。'},
+  'm1':{label:'生産性向上',desc:'人口資本・人口活力・R&D・インフラが生産性と技術進歩を直接押し上げ、GRP成長の最大の直接要因となる。知識スピルオーバーと市場アクセス改善が中心的なメカニズム。'},
+  'm2':{label:'産業構造',desc:'産業多様性・産業集積性・経済循環性がマーシャルの外部性と域内連関を生み、雇用と付加価値を地域に定着させる。'},
+  'm3':{label:'空間配置',desc:'中心性・都市配置が都市システム内の立地優位と広域ネットワークへのアクセスを規定し、企業・人材の集積を促す。'},
+  'm4':{label:'制度・信頼基盤',desc:'制度・行政能力・社会関係資本が取引コストを下げ、民間投資・起業・協働を促す長期的な経済成長の基盤をつくる。'},
+  'm5':{label:'需要・域内循環',desc:'観光・アメニティ・歩きやすさが域内外からの需要を拡大し、乗数効果を通じてGRPを押し上げる。'},
 };
 
 const PAPERS=[
-  {id:'p01',title:'The Colonial Origins of Comparative Development',author:'Acemoglu, D., Johnson, S. & Robinson, J.A.',year:'2001',datasource:'American Economic Review, 91(5)',policy:'制度・行政能力',citySize:[],summary:'植民地制度の歴史的差異が現代の経済発展格差を説明することを実証。財産権保護や法の支配など制度の質が長期的な経済成長を規定する重要因子。',city:'',region:''},
-  {id:'p02',title:'Is Public Expenditure Productive?',author:'Aschauer D.A.',year:'1989',datasource:'Journal of Monetary Economics, 23(2)',policy:'インフラ',citySize:['大都市圏','中核市'],summary:'コアインフラへの投資が民間部門の生産性を有意に向上させることを計量的に示した先駆的研究。',city:'',region:'米国'},
-  {id:'p03',title:'R&D Spillovers and the Geography of Innovation and Production',author:'Audretsch D.B. & Feldman M.P.',year:'1996',datasource:'American Economic Review, 86(3)',policy:'R&D・知識集約',citySize:['大都市圏','中核市'],summary:'R&Dスピルオーバーが地理的に集中することを実証。知識集約産業ほどイノベーションの地理的クラスタリングが強い。',city:'',region:'米国'},
-  {id:'p04',title:'Tourism as a Long-run Economic Growth Factor: The Spanish Case',author:'Balaguer J. & Cantavella-Jordá M.',year:'2002',datasource:'Applied Economics, 34(7)',policy:'観光',citySize:['中核市','小規模市','農村・町村'],summary:'スペインを対象に観光が長期的な経済成長の牽引力であることを時系列分析で実証。',city:'',region:'スペイン'},
-  {id:'p05',title:'Human Capital: A Theoretical and Empirical Analysis',author:'Becker G.S.',year:'1964',datasource:'University of Chicago Press',policy:'人的資本',citySize:[],summary:'人的資本理論の基礎を構築。教育・訓練への投資が個人の生産性と所得を高め、経済全体の成長に寄与する。',city:'',region:''},
-  {id:'p06',title:'Revisiting the Tourism-led Growth Hypothesis: The Case of Italy',author:'Brida, J.G., Cortes-Jimenez, I. & Pulina, M.',year:'2016',datasource:'Journal of Travel Research, 55(4)',policy:'観光',citySize:['中核市','小規模市','農村・町村'],summary:'イタリアを対象に観光主導の成長仮説を再検証。観光が長期的にGDP成長と双方向の因果関係を持つことを示した。',city:'',region:'イタリア'},
-  {id:'p07',title:'Productivity and the Density of Economic Activity',author:'Ciccone A. & Hall R.E.',year:'1996',datasource:'American Economic Review, 86(1)',policy:'集積・雇用密度',citySize:['大都市圏','中核市'],summary:'雇用密度が2倍になると労働生産性が約6%上昇することを推定。集積の外部性が生産性格差を説明する重要因子。',city:'',region:'米国'},
-  {id:'p08',title:'The Empirics of Agglomeration Economies',author:'Combes P.P. & Gobillon L.',year:'2015',datasource:'Handbook of Regional and Urban Economics, Vol.5',policy:'集積・雇用密度',citySize:['大都市圏','中核市'],summary:'集積経済の実証研究を包括的にサーベイ。都市規模・密度・産業構成が生産性に与える効果を体系化。',city:'',region:''},
-  {id:'p09',title:'Walking the Walk: How Walkability Raises Home Values in U.S. Cities',author:'Cortright J.',year:'2009',datasource:'CEOs for Cities Report',policy:'歩きやすさ・暮らしやすさ',citySize:['大都市圏','中核市','小規模市'],summary:'歩きやすさが高いほど住宅価格が上昇することを実証。歩行者中心の街区設計が不動産価値と地域の経済的活力に寄与。',city:'',region:'米国'},
-  {id:'p10',title:'Thinking About a More Sustainable Agriculture',author:'Deller, S., Lamie, D. & Stickel, M.',year:'2010',datasource:'Choices, 25(1)',policy:'経済循環性',citySize:['小規模市','農村・町村'],summary:'地産地消型農業の推進が地域の乗数効果を高め、域内経済循環を強化することを示した。',city:'',region:'米国'},
-  {id:'p11',title:"The Determinants and Welfare Implications of US Workers' Diverging Location Choices",author:'Diamond R.',year:'2016',datasource:'American Economic Review, 106(3)',policy:'人口活力',citySize:['大都市圏','中核市'],summary:'高学歴労働者はアメニティ豊富な大都市に集中する一方、低学歴労働者は生活コスト上昇により排除される構造を実証。',city:'',region:'米国'},
-  {id:'p12',title:'Railroads and American Economic Growth: A Market Access Approach',author:'Donaldson D. & Hornbeck R.',year:'2012',datasource:'Quarterly Journal of Economics, 131(2)',policy:'インフラ',citySize:['中核市','小規模市','農村・町村'],summary:'鉄道網拡大が農業地価と地域経済成長に与えた効果を実証。鉄道接続による市場統合が地域総生産を大幅に増加。',city:'',region:'米国'},
-  {id:'p13',title:'What Causes Industry Agglomeration? Evidence from Coagglomeration Patterns',author:'Ellison, G., Glaeser, E.L. & Kerr, W.',year:'2010',datasource:'American Economic Review, 100(3)',policy:'産業集積性',citySize:['大都市圏','中核市'],summary:'労働市場プール・中間財共有・知識スピルオーバーの3つのマーシャル的外部性が産業集積を駆動することを実証。',city:'',region:'米国'},
-  {id:'p14',title:'The Triple Helix of University-Industry-Government Relations',author:'Etzkowitz H.',year:'2002',datasource:'Social Science Information, 42(3)',policy:'R&D・知識集約',citySize:['大都市圏','中核市'],summary:'大学・産業・政府の三者連携モデル（トリプルヘリックス）を提唱。知識集約型地域経済の発展において大学の役割が中心的。',city:'',region:''},
-  {id:'p15',title:'The Rise of the Creative Class',author:'Florida R.',year:'2002',datasource:'Basic Books',policy:'人口活力',citySize:['大都市圏','中核市'],summary:'クリエイティブ人材の集積が都市の経済成長を牽引することを提示。技術・人材・寛容性の3Tが創造的都市の形成に不可欠。',city:'',region:'米国'},
-  {id:'p16',title:'Many Pathways from Land Use to Health',author:'Frank, L.D., Sallis, J.F., Conway, T.L. et al.',year:'2006',datasource:'Journal of American Planning Association, 72(1)',policy:'歩きやすさ・暮らしやすさ',citySize:['大都市圏','中核市','小規模市'],summary:'歩きやすい都市設計が公衆衛生の改善を通じて社会コスト削減と地域の暮らしやすさを高めることを示した。',city:'',region:'米国'},
-  {id:'p17',title:'Does Trade Cause Growth?',author:'Frankel J. & Romer D.',year:'1999',datasource:'American Economic Review, 89(3)',policy:'経済循環性',citySize:[],summary:'貿易開放度が経済成長を促進するかを操作変数法で検証。貿易が一人当たり所得の増加に有意な因果効果をもつことを実証。',city:'',region:''},
-  {id:'p18',title:'Related Variety, Unrelated Variety and Regional Economic Growth',author:'Frenken, K., Van Oort, F. & Verburg, T.',year:'2007',datasource:'Regional Studies, 41(5)',policy:'産業多様性',citySize:['中核市','小規模市'],summary:'関連多様性がイノベーションを促進し、非関連多様性は景気変動のリスク分散に機能することを実証。',city:'',region:'オランダ'},
-  {id:'p19',title:'The Wealth of Cities: Agglomeration Economies and Spatial Equilibrium',author:'Glaeser E.L. & Gottlieb J.D.',year:'2009',datasource:'Journal of Economic Literature, 47(4)',policy:'人口活力',citySize:['大都市圏','中核市'],summary:'都市の生産性優位と生活費・アメニティの均衡が人口・雇用の地理的分布を決定し、人口活力の高い都市が長期的成長を遂げる構造を解明。',city:'',region:'米国'},
-  {id:'p20',title:'Cities and Skills',author:'Glaeser E.L. & Maré D.C.',year:'2001',datasource:'Journal of Labor Economics, 19(2)',policy:'人的資本',citySize:['大都市圏','中核市'],summary:'都市の規模・密度が知識・技能の習得を加速し（動学的集積効果）、高スキル人材ほど都市集積の恩恵を受けることを示した。',city:'',region:'米国'},
-  {id:'p21',title:'The Strength of Weak Ties',author:'Granovetter M.',year:'1973',datasource:'American Journal of Sociology, 78(6)',policy:'社会関係資本',citySize:[],summary:'弱い紐帯が情報拡散・就職機会・地域イノベーションにおいて強い紐帯より重要であることを示した社会関係資本研究の古典。',city:'',region:''},
-  {id:'p22',title:'Identifying Agglomeration Spillovers: Evidence from Winners and Losers of Large Plant Openings',author:'Greenstone, M., Hornbeck, R. & Moretti, E.',year:'2010',datasource:'Journal of Political Economy, 118(3)',policy:'R&D・知識集約',citySize:['中核市','小規模市'],summary:'大企業立地後に周辺既存企業の全要素生産性が約12%上昇し、知識・技術波及が地域経済を押し上げることを実証。',city:'',region:'米国'},
-  {id:'p23',title:'Twenty Years of Motorway Building in Spain',author:'Holl A.',year:'2007',datasource:'Journal of Economic Geography, 7(6)',policy:'インフラ',citySize:['中核市','小規模市','農村・町村'],summary:'高速道路へのアクセス改善が企業立地確率と雇用成長を有意に高め、地域間格差の縮小にも寄与したことを示した。',city:'',region:'スペイン'},
-  {id:'p24',title:'Tourism: Economic Growth, Employment and Dutch Disease',author:'Inchausti-Sintes F.',year:'2015',datasource:'Annals of Tourism Research, 54',policy:'観光',citySize:['小規模市','農村・町村'],summary:'観光業の拡大が経済成長・雇用に与える効果とオランダ病リスクを同時に分析。観光依存度が高い地域では産業多様化政策が必要。',city:'',region:''},
-  {id:'p25',title:'The Economy of Cities',author:'Jacobs J.',year:'1970',datasource:'Random House',policy:'産業多様性',citySize:['大都市圏','中核市'],summary:'都市の経済発展は産業の多様性と異業種間の相互作用から生まれるというジェイコブズの外部性を提唱。',city:'',region:''},
-  {id:'p26',title:'Geographic Localization of Knowledge Spillovers as Evidenced by Patent Citations',author:'Jaffe, A.B., Trajtenberg, M. & Henderson, R.',year:'1993',datasource:'Quarterly Journal of Economics, 108(3)',policy:'R&D・知識集約',citySize:['大都市圏','中核市'],summary:'特許引用データを用いて知識スピルオーバーが地理的に局所化されることを実証。',city:'',region:'米国'},
-  {id:'p27',title:'Agglomeration and Cluster Formation in Japan',author:'Kondo K.',year:'2012',datasource:'RIETI Discussion Paper 12-E-018',policy:'産業集積性',citySize:['中核市','小規模市'],summary:'日本の製造業クラスター形成を地域レベルで分析。マーシャル的外部性が産業集積の程度を決定し、クラスター政策の有効性を検証。',city:'',region:'日本'},
-  {id:'p28',title:'Economic Value of Walkability',author:'Litman T.',year:'2012',datasource:'Transportation Research Record, 1828',policy:'歩きやすさ・暮らしやすさ',citySize:['大都市圏','中核市','小規模市'],summary:'歩きやすさが生み出す経済的価値（不動産価値・医療費削減・交通コスト低減・小売売上増）を多面的に定量化した。',city:'',region:''},
-  {id:'p29',title:'On the Mechanics of Economic Development',author:'Lucas R.E. Jr.',year:'1988',datasource:'Journal of Monetary Economics, 22(1)',policy:'人的資本',citySize:[],summary:'人的資本の蓄積を内生的成長の主要エンジンと位置づけた理論モデル。都市集積が対面接触を通じた人的資本形成を加速することを示した。',city:'',region:''},
-  {id:'p30',title:'Human Capital Externalities in Cities',author:'Moretti E.',year:'2004',datasource:'Handbook of Regional and Urban Economics, Ch.51',policy:'人的資本',citySize:['大都市圏','中核市'],summary:'大卒者比率が高い都市では周辺労働者の生産性・賃金が上昇する正の外部効果が存在し、教育投資の社会的収益率が私的収益率を上回ることを示した。',city:'',region:'米国'},
-  {id:'p31',title:'Local Multipliers',author:'Moretti E.',year:'2010',datasource:'AER Papers & Proceedings, 100(2)',policy:'人口活力',citySize:['大都市圏','中核市','小規模市'],summary:'高スキル産業の雇用1増加が地域内で平均5の雇用を創出するという地域乗数効果を推定。',city:'',region:'米国'},
-  {id:'p32',title:'Economies of Density and Productivity in Service Industries',author:'Morikawa M.',year:'2011',datasource:'Review of Economics and Statistics, 93(1)',policy:'集積・雇用密度',citySize:['大都市圏','中核市'],summary:'日本のサービス業における密度の経済性を実証。雇用密度の上昇がサービス企業の生産性を有意に向上させることを示した。',city:'',region:'日本'},
-  {id:'p33',title:'The Money Trail: Measuring your impact on the local economy using LM3',author:'New Economics Foundation',year:'2002',datasource:'New Economics Foundation Report',policy:'経済循環性',citySize:['小規模市','農村・町村'],summary:'地域乗数3（LM3）手法を開発。地域内での購買・雇用・投資の連鎖を追跡し域内経済循環を測定する実践的フレームワーク。',city:'',region:'英国'},
-  {id:'p34',title:'Institutions, Institutional Change and Economic Performance',author:'North D.C.',year:'1990',datasource:'Cambridge University Press',policy:'制度・行政能力',citySize:[],summary:'制度（フォーマル・インフォーマル双方）が経済パフォーマンスを規定するという制度経済学の基礎理論を構築。',city:'',region:''},
-  {id:'p35',title:'Fiscal Federalism and Economic Growth',author:'Oates W.E.',year:'2001',datasource:'Journal of Urban Economics, 35(1)',policy:'制度・行政能力',citySize:[],summary:'地方分権的制度が地域のニーズに合った公共財を効率的に供給することで経済成長を促進することを理論・実証の両面から示した。',city:'',region:''},
-  {id:'p36',title:'Making Democracy Work: Civic Traditions in Modern Italy',author:'Putnam R.D.',year:'1993',datasource:'Princeton University Press',policy:'社会関係資本',citySize:['中核市','小規模市','農村・町村'],summary:'イタリア地域間の経済格差が社会関係資本（市民参加・信頼・ネットワーク）の差異で説明できることを実証。',city:'',region:'イタリア'},
-  {id:'p37',title:'Endogenous Technological Change',author:'Romer P.M.',year:'1990',datasource:'Journal of Political Economy, 98(5)',policy:'R&D・知識集約',citySize:[],summary:'R&D投資による知識の累積が内生的に技術進歩を生む内生的成長理論を定式化。知識集約産業への政策支援が社会全体の成長率を持続的に高める。',city:'',region:''},
-  {id:'p38',title:'Does Tourism Influence Economic Growth? A Dynamic Panel Data Approach',author:'Sequeira T.N. & Nunes P.M.',year:'2008',datasource:'Applied Economics, 40(18)',policy:'観光',citySize:['中核市','小規模市','農村・町村'],summary:'動的パネルデータを用いて観光と経済成長の関係を多国比較で実証。途上国では観光が成長の重要な牽引力となる。',city:'',region:''},
-  {id:'p39',title:'A Pure Theory of Local Expenditures',author:'Tiebout C.M.',year:'1956',datasource:'Journal of Political Economy, 64(5)',policy:'制度・行政能力',citySize:[],summary:'住民の足による投票が地方政府間競争を通じて公共財の効率的供給を生む（ティブー・モデル）ことを理論的に示した古典的論文。',city:'',region:''},
-  {id:'p40',title:'Local Capitalism, Civic Engagement, and Socioeconomic Well-Being',author:'Tolbert, C.M., Lyson, T.A. & Irwin, M.D.',year:'1998',datasource:'Social Forces, 77(2)',policy:'経済循環性',citySize:['小規模市','農村・町村'],summary:'地域密着型中小企業が多い地域ほど市民参加・雇用・所得など社会経済的厚生が高いことを実証。',city:'',region:'米国'},
-  {id:'p41',title:'地域経済と社会関係資本：市区町村レベルの分析',author:'出口弘ほか',year:'2014',datasource:'RIETI Discussion Paper 14-J-018',policy:'社会関係資本',citySize:['小規模市','農村・町村'],summary:'社会関係資本が豊かな地域は起業率・雇用成長率が高く、地域の経済的レジリエンスも強いことを示した。',city:'',region:'日本'},
-  {id:'p42',title:'地元経済を創りなおす：分析・診断・対策',author:'枝廣淳子・小井土守',year:'2018',datasource:'学芸出版社',policy:'経済循環性',citySize:['小規模市','農村・町村'],summary:'地域経済の漏れ（域外への資金流出）を可視化し、地域循環率を高める政策を体系的に提示。',city:'',region:'日本'},
-  {id:'p43',title:'人的資本と地域経済成長：都道府県データによる実証分析',author:'高橋泰城ほか',year:'2010',datasource:'日本経済研究 No.62',policy:'人的資本',citySize:['大都市圏','中核市','小規模市'],summary:'人的資本（大学進学率・高度人材比率）が地域総生産の成長に与える効果を実証。人的資本の外部性が都市部でより強く機能することを示した。',city:'',region:'日本'},
+  {id:'p01',title:'The Colonial Origins of Comparative Development',author:'Acemoglu, D., Johnson, S. & Robinson, J.A.',year:'2001',datasource:'American Economic Review, 91(5)',policy:['制度・行政能力'],citySize:[],summary:'旧植民地諸国を対象に、制度の質（財産権保護等）が現代の一人当たり所得水準を因果的に規定するかを検証した研究。入植者死亡率（マラリア・黄熱病等）という外生的な操作変数を初めて導入することで逆因果問題を克服し、制度が経済発展の根本要因であることを実証した点が革新的で、地理的条件よりも制度の質が長期的な経済格差を説明することを示した。64カ国のクロスセクションデータを用いた2段階最小二乗法（2SLS）により、財産権保護など制度の質が一人当たりGDPに強い正の因果効果を持つことが確認された。地理的条件（熱帯・緯度等）の直接効果は制度をコントロールすると消滅し、複数の操作変数・サブサンプルで頑健性が確かめられている。',city:'',region:''},
+  {id:'p02',title:'Is Public Expenditure Productive?',author:'Aschauer D.A.',year:'1989',datasource:'Journal of Monetary Economics, 23(2)',policy:['インフラ'],citySize:['大都市圏','中核市'],summary:'公共インフラ投資（道路・電力・上下水道等のコア・インフラ）が民間の全要素生産性（TFP）に与える影響を米国集計データで検証した先駆的研究。公共資本ストックを生産関数に明示的に組み込んだのは本研究が先駆けであり、公共投資が民間投資と並ぶ生産性要因であることを政策議論の俎上に載せた。米国の時系列データ（1949〜1985年）を用いたコブ＝ダグラス型生産関数の推定から、コア・インフラの生産性弾力性は約0.39と推定され民間資本（約0.31）を上回った。軍事支出等のコア以外の公共支出は有意な効果を示さず、後続研究では内生性問題の指摘もあるものの、インフラ投資の生産性効果に関する議論の起点となった研究として広く参照されている。',city:'',region:'米国'},
+  {id:'p03',title:'R&D Spillovers and the Geography of Innovation and Production',author:'Audretsch D.B. & Feldman M.P.',year:'1996',datasource:'American Economic Review, 86(3)',policy:['R&D・知識集約'],citySize:['大都市圏','中核市'],summary:'R&Dスピルオーバーが地理的に局所化しているかを実証分析した先駆的研究。先行研究が生産の地理的集積を主題としてきたのに対し、「イノベーション」の地理的集積を独立に分析し、知識スピルオーバーが行政的・物理的距離に制約されることを示した点が新しい。米国製造業の産業別・州別データを用い空間ジニ係数でイノベーション集積度を計測した結果、知識集約産業（ハイテク・製薬等）ではイノベーションの地理的集積が生産集積より顕著であり、大学研究・熟練労働の集積がイノベーションクラスター形成を促進することが確認された。産業のR&D依存度が高いほど空間集積度が高い傾向も示されている。',city:'',region:'米国'},
+  {id:'p04',title:'Tourism as a Long-run Economic Growth Factor: The Spanish Case',author:'Balaguer J. & Cantavella-Jordá M.',year:'2002',datasource:'Applied Economics, 34(7)',policy:['観光'],citySize:['中核市','小規模市','農村・町村'],summary:'観光が長期的な経済成長の要因となりうるかを検証する「観光主導成長仮説（TLGH）」をスペインのデータで初めて厳密な時系列計量手法によって実証した先駆的研究。輸出主導成長仮説のフレームワークを観光部門に応用し、共和分・グレンジャー因果性検定による標準的な方法論的基盤を提供した。スペインの四半期データ（1975〜1997年）を用いたJohansen共和分検定と誤差修正モデル（ECM）により、観光収入・実質GDP・実質実効為替レートの間に長期共和分関係が存在することが確認された。グレンジャー因果性検定では観光収入から実質GDPへの一方向の因果関係が認められ、スペインにおいてTLGHは長期的に成立すると結論付けられた。',city:'',region:'スペイン'},
+  {id:'p05',title:'Human Capital: A Theoretical and Empirical Analysis',author:'Becker G.S.',year:'1964',datasource:'University of Chicago Press',policy:['人口資本・人口活力'],citySize:[],summary:'教育・職業訓練などへの投資を「人的資本」として経済学的に定式化し、個人の教育投資決定の理論モデルを構築するとともに、教育が賃金・所得に与える効果を実証分析した理論的基礎研究。教育を消費財ではなく生産的な「資本投資」として捉える人的資本論の基礎を確立し、以後の労働経済学・成長理論の中心的パラダイムを形成した点が革新的。米国センサス・所得調査を用いて教育年数別の生涯所得を推定した結果、大学教育の内部収益率は約12〜14%（1950年代米国）と推定され、物的資本投資の収益率に匹敵することが示された。賃金の年齢プロファイルの凸型形状が人的資本の蓄積・減耗パターンで説明できることも示している。',city:'',region:''},
+  {id:'p06',title:'Revisiting the Tourism-led Growth Hypothesis: The Case of Italy',author:'Brida, J.G., Cortes-Jimenez, I. & Pulina, M.',year:'2016',datasource:'Journal of Travel Research, 55(4)',policy:['観光'],citySize:['中核市','小規模市','農村・町村'],summary:'Balaguer & Cantavella-Jordá（2002）の手法をイタリアに適用し、TLGHの再現性と地域固有性を検証した研究。観光の代理指標として到着者数と収入の双方を用い指標による結果の感応性を検証した点が貢献。イタリアの年次時系列データを用いたJohansen共和分検定・ECM・グレンジャー因果性検定により、観光収入とGDPの間に長期共和分関係と一方向の因果性が確認された。ただし到着者数では結果がやや弱く、観光の「質」（支出額）がより重要であることが示唆された。TLGHはイタリアでも概ね成立することが確認されている。',city:'',region:'イタリア'},
+  {id:'p07',title:'Productivity and the Density of Economic Activity',author:'Ciccone A. & Hall R.E.',year:'1996',datasource:'American Economic Review, 86(1)',policy:['産業集積性'],citySize:['大都市圏','中核市'],summary:'経済活動の密度（単位土地面積あたりの雇用）が労働生産性に与える影響を米国データで実証した研究。集積の外部性を「都市規模」ではなく「経済密度」で捉えることで用地面積の違いを考慮した分析を実現し、操作変数（過去の人口密度）による内生性への対処も方法論的貢献とされる。米国各州・郡レベルのデータを用いた2SLS推定から、雇用密度が2倍になると労働生産性が約5〜6%上昇することが確認された。この正の密度効果は産業・地域固有の効果をコントロールしても頑健であり、OLS推定では密度効果が過大推定されることも示されている。',city:'',region:'米国'},
+  {id:'p08',title:'The Empirics of Agglomeration Economies',author:'Combes P.P. & Gobillon L.',year:'2015',datasource:'Handbook of Regional and Urban Economics, Vol.5',policy:['産業集積性'],citySize:['大都市圏','中核市'],summary:'集積の経済に関する実証研究を体系的にサーベイし、識別戦略・推定手法の観点から知見を整理したハンドブック論文。先行研究の内生性・選択バイアスへの対処の不十分さを指摘しつつ、因果推論の観点から信頼できるエビデンスを取捨選択して整理した体系的サーベイとして位置づけられる。都市規模・密度の生産性弾力性はメタ平均で概ね0.02〜0.08と推定されており、操作変数・固定効果等の厳密な識別手法を用いると集積効果はやや小さくなる傾向がある。ハイテク・サービス産業・熟練労働者でより大きな集積効果が確認されるという知見も整理されている。',city:'',region:''},
+  {id:'p09',title:'Walking the Walk: How Walkability Raises Home Values in U.S. Cities',author:'Cortright J.',year:'2009',datasource:'CEOs for Cities Report',policy:['歩きやすさ・暮らしやすさ'],citySize:['大都市圏','中核市','小規模市'],summary:'都市の歩行可能性（Walk Score）が住宅価格に与える影響を実証分析した先駆的研究。Walk Scoreという新たな定量指標を住宅価格分析に初めて適用し、歩行環境の経済的価値を住宅市場を通じて可視化した点が政策・実務上の貢献として大きい。米国15都市の住宅売買データとWalk Scoreを結合したヘドニック価格モデルにより、Walk Scoreが1ポイント上昇すると住宅価格が500〜3,000ドル上昇することが確認された（都市によって異なる）。特に大都市圏での効果が大きく、歩行環境の価値が住宅市場で明確に資本化されていることが示されている。',city:'',region:'米国'},
+  {id:'p10',title:'Thinking About a More Sustainable Agriculture',author:'Deller, S., Lamie, D. & Stickel, M.',year:'2010',datasource:'Choices, 25(1)',policy:['経済循環性'],citySize:['小規模市','農村・町村'],summary:'現代農業システムの環境・経済・社会的持続可能性の課題を整理し、より持続可能な農業実践への移行を促すための枠組みを論じた研究。生産性向上を目的とした「緑の革命」パラダイムに対し、生態系・社会的公正・長期的持続性を同時に考慮するシステム論的アプローチを提示した点が新しい。事例研究・比較制度分析・生態系サービスの定量評価を組み合わせた分析から、有機農業・アグロエコロジー・統合的作物管理が環境負荷を低減しつつ十分な生産性を維持できる事例が蓄積されていることが示された。地域の生態・文化的条件に適合した農業システムが最も持続可能性が高く、政策・市場・制度の変革が移行の鍵であることが論じられている。',city:'',region:'米国'},
+  {id:'p11',title:"The Determinants and Welfare Implications of US Workers' Diverging Location Choices",author:'Diamond R.',year:'2016',datasource:'American Economic Review, 106(3)',policy:['人口資本・人口活力'],citySize:['大都市圏','中核市'],summary:'米国における高・低スキル労働者間の立地選択の乖離が拡大するメカニズムを、賃金・生計費・アメニティの変化を同時に考慮した構造モデルで分析した研究。賃金格差研究において立地選択を通じた空間的選別（スキル別ソーティング）と生活費・アメニティのトレードオフを同時にモデル化し、厚生分析まで行った点が独創的。米国センサス・ACSデータ（1980〜2000年）を用いた構造的一般均衡モデルの推定から、大都市への高スキル労働者集中は賃金上昇と生計費上昇の両方によって進んでおり、アメニティの改善も高スキル層には追加的な誘引となることが確認された。一方、低スキル労働者は大都市での生計費上昇により実質厚生が低下する傾向があり、技術変化・グローバル化が主要な駆動力として識別されている。',city:'',region:'米国'},
+  {id:'p12',title:'Railroads and American Economic Growth: A Market Access Approach',author:'Donaldson D. & Hornbeck R.',year:'2012',datasource:'Quarterly Journal of Economics, 131(2)',policy:['インフラ'],citySize:['中核市','小規模市','農村・町村'],summary:'19世紀米国における鉄道網の拡大が農業生産・地域経済成長に与えた因果効果を、「市場アクセス」という概念を用いて推定した研究。反実仮想的比較によるFogel（1964）の社会的節約法に対し、空間一般均衡モデルに基づく市場アクセスアプローチで経済全体への波及効果を捉えた点が方法論的貢献。米国郡レベルの農業センサスデータとGIS鉄道路線データを結合した分析から、鉄道網の撤去は農地価値を約60%低下させると推定され、市場アクセスの改善が農業特化・生産性向上・土地価値上昇をもたらすことが確認された。従来推計より大幅に大きなインフラ効果が示されており、空間経済学の枠組みを歴史研究に応用した成果として参照される。',city:'',region:'米国'},
+  {id:'p13',title:'What Causes Industry Agglomeration? Evidence from Coagglomeration Patterns',author:'Ellison, G., Glaeser, E.L. & Kerr, W.',year:'2010',datasource:'American Economic Review, 100(3)',policy:['産業集積性'],citySize:['大都市圏','中核市'],summary:'産業間の「共集積（coagglomeration）」パターンを利用してMarshallの三要因（労働プーリング・投入財連携・知識スピルオーバー）の相対的重要性を実証的に識別した研究。どの産業ペアが共に集積するかというパターンを用いて各要因の寄与を識別する新たな戦略を提案した点が方法論的貢献。米国製造業の郡レベルデータを用いた回帰分析から、Marshallの三要因すべてが共集積パターンを統計的に有意に説明することが確認された。投入財連携・労働プーリングの効果がやや大きく、知識スピルオーバーの効果は相対的に小さいが有意であり、自然資源へのアクセスも一部産業では重要な集積要因として確認されている。',city:'',region:'米国'},
+  {id:'p14',title:'The Triple Helix of University-Industry-Government Relations',author:'Etzkowitz H.',year:'2002',datasource:'Social Science Information, 42(3)',policy:['R&D・知識集約'],citySize:['大都市圏','中核市'],summary:'大学・産業界・政府の三者（Triple Helix）が相互作用するイノベーションシステムのモデルを構築した研究。国家イノベーションシステム論と「Mode 2」知識生産論を統合・発展させ、三者の境界の流動的・相互浸透的な関係を螺旋状モデルで表現した点が独創的で、大学の「起業家的役割」を中心に据えたことも新しい。MIT・シリコンバレー・欧州の事例を参照したケーススタディ・比較制度分析から、イノベーション活性地域では大学・産業・政府が機能的に重複しつつ相互に刺激し合うTriple Helix関係が確認された。大学のスピンオフ・産学連携・政府のベンチャー支援政策が三者の螺旋的相互作用を促進し、知識経済への移行がこの三者関係の重要性を高めることが論じられている。',city:'',region:''},
+  {id:'p15',title:'The Rise of the Creative Class',author:'Florida R.',year:'2002',datasource:'Basic Books',policy:['人口資本・人口活力'],citySize:['大都市圏','中核市'],summary:'「クリエイティブ・クラス」（科学者・エンジニア・芸術家等の知識労働者群）の台頭が都市・地域経済成長の新たな原動力となっているという論を展開した研究。従来の都市経済学が企業・産業を都市成長の主因と見なしてきたのに対し、「人材が先に来て企業が後を追う」という因果関係の逆転を提示し、多様性（ゲイ指数・ボヘミアン指数）を成長指標として定量化した点が新しい。米国都市圏データを用いた技術・才能・多様性指数と都市成長の回帰分析から、クリエイティブ・クラスの比率が高い都市ほどハイテク産業集積・賃金成長・人口成長が高い傾向が確認された。多様性と技術集積の間にも有意な正の相関が認められたが、相関関係にとどまるため因果推論には批判も多く、政策応用には留意が必要とされる。',city:'',region:'米国'},
+  {id:'p16',title:'Many Pathways from Land Use to Health',author:'Frank, L.D., Sallis, J.F., Conway, T.L. et al.',year:'2006',datasource:'Journal of American Planning Association, 72(1)',policy:['歩きやすさ・暮らしやすさ'],citySize:['大都市圏','中核市','小規模市'],summary:'土地利用パターン（特に都市スプロール・歩行可能な近隣環境）が身体活動・大気質・交通安全等を通じて住民の健康に影響するメカニズムを整理した学際的研究。公衆衛生と都市計画・土地利用の分野を接続するフレームワークを提示し、コンパクトシティ・歩行可能な都市設計の根拠となるエビデンスを整理した点が貢献とされる。文献レビューと疫学的研究の統合分析から、歩行可能性の高い近隣環境ほど身体活動量が高く肥満・糖尿病リスクが低い傾向が確認された。スプロール型開発は自動車依存を高め交通事故・大気汚染・社会的孤立を悪化させる一方、コンパクトな土地利用が複数の健康経路で有益な効果を持つことが示されている。',city:'',region:'米国'},
+  {id:'p17',title:'Does Trade Cause Growth?',author:'Frankel J. & Romer D.',year:'1999',datasource:'American Economic Review, 89(3)',policy:['経済循環性'],citySize:[],summary:'貿易が経済成長を引き起こすかという因果関係を操作変数法で実証した研究。地理的要因（人口・面積・距離）に基づく重力モデルから予測される二国間貿易フローを操作変数として用いることで逆因果・省略変数バイアスを除去した点が方法論的革新とされる。100カ国超のクロスセクションデータを用いた2SLS推定により、貿易シェアが一人当たりGDPに有意な正の因果効果を持つことが確認された（弾力性約0.5〜2.0）。地理的要因が成長に与える直接効果は間接的（貿易経由）であることも示唆されており、OLS推定より若干大きな効果が得られているが定性的な結論は変わらない。',city:'',region:''},
+  {id:'p18',title:'Related Variety, Unrelated Variety and Regional Economic Growth',author:'Frenken, K., Van Oort, F. & Verburg, T.',year:'2007',datasource:'Regional Studies, 41(5)',policy:['産業多様性'],citySize:['中核市','小規模市'],summary:'地域の産業的多様性を「関連多様性（related variety）」と「非関連多様性（unrelated variety）」に区分し、それぞれが地域の雇用・生産性成長に与える異なる効果をオランダのデータで実証した研究。Jacobs外部性とPorter外部性の論争に「関連性」の次元を加え、「関連多様性」が知識スピルオーバーの有効な経路となるという新たな命題を提示した点が革新的。オランダの郡レベルデータ（1996〜2002年）をエントロピー指数で計測した固定効果回帰から、関連多様性は雇用成長に有意な正の効果を持つ一方、非関連多様性は景気変動リスクを分散させるポートフォリオ的な効果に留まる傾向があることが示された。生産性成長には関連多様性よりも産業特化の効果が大きいという知見もあわせて確認されている。',city:'',region:'オランダ'},
+  {id:'p19',title:'The Wealth of Cities: Agglomeration Economies and Spatial Equilibrium',author:'Glaeser E.L. & Gottlieb J.D.',year:'2009',datasource:'Journal of Economic Literature, 47(4)',policy:['人口資本・人口活力'],citySize:['大都市圏','中核市'],summary:'集積の経済と空間均衡理論を統合したフレームワークで、米国都市の賃金・地価・人口の決定要因を体系的に論じたサーベイ研究。Roback（1982）の空間均衡モデルを拡張して集積の経済を内包した都市間の同時決定メカニズムを整理し、住宅規制・産業政策への空間均衡論の応用を体系化した点が貢献。米国都市圏データを用いた実証分析から、人的資本（大卒者比率）が都市の賃金・人口成長に最も安定した正の効果を持つことが確認された。都市アメニティは地価を通じて資本化されており、住宅供給規制が人口流入を制約して厚生損失をもたらす可能性も示されている。',city:'',region:'米国'},
+  {id:'p20',title:'Cities and Skills',author:'Glaeser E.L. & Maré D.C.',year:'2001',datasource:'Journal of Labor Economics, 19(2)',policy:['人口資本・人口活力'],citySize:['大都市圏','中核市'],summary:'大都市に居住・就労する労働者が高い賃金を得る「都市賃金プレミアム」のメカニズムを解明した研究。個票の固定効果パネル推定と移住前後の賃金変化追跡により、集積効果そのものを選択効果と識別した点が方法論的貢献で、都市での就労年数が累積的にスキルを高める「学習効果」の証拠を提示した。NLSなどの個人パネルデータを用いた個人固定効果モデルの推定から、固定効果をコントロールしても都市賃金プレミアムの約半分が残存し集積効果の存在が確認された。さらに都市退出後も賃金プレミアムが持続することから「都市での学習・スキル蓄積」効果が示されており、大都市ほど効果が大きいことも確認されている。',city:'',region:'米国'},
+  {id:'p21',title:'The Strength of Weak Ties',author:'Granovetter M.',year:'1973',datasource:'American Journal of Sociology, 78(6)',policy:['社会関係資本'],citySize:[],summary:'知人程度の「弱い紐帯（weak ties）」が就職機会・情報伝達・社会統合において強い友人関係よりも重要な役割を果たすという命題を提示した古典的研究。社会ネットワーク研究が強い紐帯を重視してきたのに対し、弱い紐帯が異なる社会集団間の「橋渡し」として情報・機会の流通を促すという反直観的命題を提示した点が革新的で、以後の社会関係資本論の基盤となった。ボストン近郊の転職者へのインタビュー調査とネットワーク理論の分析から、転職に際して有益な情報は強い紐帯よりも弱い紐帯を通じて入手されることが多いことが確認された。弱い紐帯は異なる集団間の「橋渡し」として新しい情報・機会へのアクセスを提供する一方、強い紐帯は情報の冗長性が高く新規情報の伝達に不向きであることが示されている。',city:'',region:''},
+  {id:'p22',title:'Identifying Agglomeration Spillovers: Evidence from Winners and Losers of Large Plant Openings',author:'Greenstone, M., Hornbeck, R. & Moretti, E.',year:'2010',datasource:'Journal of Political Economy, 118(3)',policy:['R&D・知識集約'],citySize:['中核市','小規模市'],summary:'大規模工場の誘致競争の「勝者」と「敗者」の比較を自然実験として利用し、集積の外部性（スピルオーバー）を既存企業のTFPで計量した研究。選択バイアスが問題となりやすい集積の外部性の実証において、誘致競争の「準ランダムな」勝敗を利用して外部性を識別した点が方法論上の大きな貢献。Million Dollar Plantデータと製造業センサスを結合したDiD（差の差分）推定から、大規模工場立地後に「勝者」郡の既存製造業のTFPが「敗者」郡より約12%上昇することが確認された。集積のスピルオーバーは関連産業・同一産業の企業に対してより大きく、空間的範囲は郡内〜近隣郡レベルに限定されることも示されている。',city:'',region:'米国'},
+  {id:'p23',title:'Twenty Years of Motorway Building in Spain',author:'Holl A.',year:'2007',datasource:'Journal of Economic Geography, 7(6)',policy:['インフラ'],citySize:['中核市','小規模市','農村・町村'],summary:'スペインの高速道路整備（1980〜2000年代）が企業参入・立地選択に与えた影響を実証分析した研究。EU加盟後の大規模なインフラ投資という自然実験的状況を活用してインフラ→企業参入の因果的効果を識別し、空間計量手法を組み合わせた点が貢献。スペイン製造業企業データと高速道路GISデータを用いた負の二項回帰モデルから、高速道路インターチェンジへの近接性が企業参入率を有意に高めることが確認された。効果は製造業でより大きく、規模の小さな企業ほどインフラ整備の恩恵を受けやすい傾向がある。一部地域では隣接地域からの企業誘引（ゼロサム効果）も確認されている。',city:'',region:'スペイン'},
+  {id:'p24',title:'Tourism: Economic Growth, Employment and Dutch Disease',author:'Inchausti-Sintes F.',year:'2015',datasource:'Annals of Tourism Research, 54',policy:['観光'],citySize:['小規模市','農村・町村'],summary:'観光業への高い依存が「オランダ病」と類似した資源配分の歪みをもたらすか、すなわち観光収入が製造業の競争力を損なうかを実証分析した研究。TLGHの多くが観光→成長の正の関係を示してきたのに対し、観光依存が製造業の衰退を引き起こす可能性を体系的に実証した点が新規性とされる。複数国のパネルデータを用いた固定効果モデルおよびGMM推定から、観光特化度が高い国ほど製造業の競争力（輸出シェア）が低下する傾向が確認された。実質為替レートの増価が媒介変数として機能しており、オランダ病と類似のメカニズムが観光でも作動することが示唆されている。',city:'',region:''},
+  {id:'p25',title:'The Economy of Cities',author:'Jacobs J.',year:'1970',datasource:'Random House',policy:['産業多様性'],citySize:['大都市圏','中核市'],summary:'都市経済の起源と発展メカニズムを論じ、多様な産業・活動が混在する都市がイノベーション・経済成長の主要エンジンとなるという命題を提示した古典的著作。「農村が都市を養う」という通説に対し、都市の多様性・イノベーション・輸入代替プロセスを成長の中心に置いた点が独創的で、後の「Jacobs外部性」研究の理論的基盤となった。都市の歴史・発展の事例研究と概念的論証により、活発な都市では多様な産業・職人技術が共存し、既存製品の輸入代替→新製品の輸出という「発展の連鎖」が作動することが示された。農村の専業化は都市の多様性なしには成立せず、都市が農業の生産性向上にも寄与するという論理が展開されている。',city:'',region:''},
+  {id:'p26',title:'Geographic Localization of Knowledge Spillovers as Evidenced by Patent Citations',author:'Jaffe, A.B., Trajtenberg, M. & Henderson, R.',year:'1993',datasource:'Quarterly Journal of Economics, 108(3)',policy:['R&D・知識集約'],citySize:['大都市圏','中核市'],summary:'知識スピルオーバーが地理的に局所化しているかを、特許引用データを用いて初めて定量的に示した研究。知識スピルオーバーは「invisible（不可視）」とされ実証困難とされてきたが、特許引用を知識フローの「足跡」として活用し空間的範囲を計測した方法論が革新的。米国特許庁の引用データベースを用い、各特許の引用先の地理的分布をランダム引用の地理的分布と比較した尤度比検定から、特許引用は同一国・同一州に統計的に有意に偏在し、知識スピルオーバーが地理的に局所化していることが確認された。局所化の程度は特許の引用年齢とともに低下し（時間とともに知識が地理的に拡散する）、産業によって差があることも示されている。',city:'',region:'米国'},
+  {id:'p27',title:'Agglomeration and Cluster Formation in Japan',author:'Kondo K.',year:'2012',datasource:'RIETI Discussion Paper 12-E-018',policy:['産業集積性'],citySize:['中核市','小規模市'],summary:'日本における産業集積・クラスターの形成要因と経済的効果を分析した研究。日本固有の産業組織（系列・下請け構造・産地）を持つ東アジア文脈でMarshallの集積論とクラスター政策の普遍的適用可能性を検証し、産業政策と集積の相互作用を明示的に分析した点が貢献。工業統計・事業所統計を用いた固定効果モデルにより、日本の主要産業（自動車・電機）では高度な地理的集積が生産性向上・技術革新と正に相関することが確認された。下請け・系列ネットワークが集積の外部性の重要な媒介経路となっており、政策的クラスター（知識クラスター特区）は形成初期の効果は限定的だが長期的には技術スピルオーバーを促進する可能性が示されている。',city:'',region:'日本'},
+  {id:'p28',title:'Economic Value of Walkability',author:'Litman T.',year:'2012',datasource:'Transportation Research Record, 1828',policy:['歩きやすさ・暮らしやすさ'],citySize:['大都市圏','中核市','小規模市'],summary:'歩行可能な環境が個人・企業・地域社会に対してどのような経済的価値を生み出すかを体系的に整理・定量化した研究。歩行の価値をもっぱら健康・環境の文脈で論じてきた先行研究に対し、土地価格・小売売上・医療費削減等の経済的価値として定量化し、交通政策・土地利用計画の費用便益分析に統合した点が貢献。文献レビューとヘドニック価格法・旅行費用法・医療費削減の便益計算を組み合わせた多面的評価から、歩行可能な地域の住宅・商業用地は非歩行可能地域より5〜30%のプレミアムを示す傾向があることが示された。歩行者が多い商業地では小売売上が高く、歩行促進による健康増進は医療費節約・生産性向上を通じて大きな社会的経済価値を生むことが整理されている。',city:'',region:''},
+  {id:'p29',title:'On the Mechanics of Economic Development',author:'Lucas R.E. Jr.',year:'1988',datasource:'Journal of Monetary Economics, 22(1)',policy:['人口資本・人口活力'],citySize:[],summary:'人的資本の蓄積と外部効果を内生的成長の主エンジンとする理論モデルを構築した研究。Solow成長モデルへの批判として、人的資本の外部効果（他者の人的資本が自身の生産性を高める）を内生的成長の源泉として定式化した点が革新的で、Romer（1986）と並ぶ内生的成長理論の基盤論文として都市・地域研究にも多大な影響を与えた。代表的家計の効用最大化モデルに人的資本蓄積方程式を組み込んだ理論分析から、人的資本の外部効果を考慮すると長期的に収穫逓増の下で持続的成長が理論的に達成できることが示された。インドと米国の所得格差のシミュレーションでも人的資本の違いが格差の大部分を説明できることが確認されており、教育・人的資本投資の社会的収益率が高いことが理論的に導出されている。',city:'',region:''},
+  {id:'p30',title:'Human Capital Externalities in Cities',author:'Moretti E.',year:'2004',datasource:'Handbook of Regional and Urban Economics, Ch.51',policy:['人口資本・人口活力'],citySize:['大都市圏','中核市'],summary:'都市における人的資本の外部効果（他者の教育水準が自身の賃金・生産性に正の影響を与える社会的収益）の存在と大きさを実証したハンドブック論文。Lucas（1988）の人的資本外部効果論を実証的に検証した先駆的研究として、個人の教育水準をコントロールしたうえで地域の平均的教育水準の賃金効果を識別した点が貢献。米国センサスの個票データを用いた操作変数（都市の歴史的人口構成・大学の地理的分布等）を組み込んだパネル回帰から、都市の大卒者比率が1%上昇すると低学歴労働者の賃金が0.5〜0.7%上昇することが確認された。この効果は選択バイアス・産業構成の変化をコントロールしても頑健であり、人的資本外部効果の規模の大きさが政策的含意を持つことが示されている。',city:'',region:'米国'},
+  {id:'p31',title:'Local Multipliers',author:'Moretti E.',year:'2010',datasource:'AER Papers & Proceedings, 100(2)',policy:['人口資本・人口活力'],citySize:['大都市圏','中核市','小規模市'],summary:'製造業・ハイテク産業の雇用増加が地域の非貿易財サービス業の雇用にもたらす乗数効果（ローカル乗数）を推定した研究。産業連関分析で扱われてきた地域乗数を計量経済学的な識別戦略（Bartik手法）で推定し、ハイテク雇用の乗数が一般製造業より大幅に高いことを示した点が政策的に重要な知見とされる。米国都市圏レベルのデータを用いた2SLS推定から、製造業の雇用が1単位増加すると地元サービス業が約1.6単位増加し（ローカル乗数≈2.6）、ハイテク産業では乗数が5.0前後に達することが推定された。熟練度の高い産業ほど高賃金→地域消費→サービス業雇用という波及効果が大きく、産業誘致政策の地域経済効果を評価する際の重要な知見を提供している。',city:'',region:'米国'},
+  {id:'p32',title:'Economies of Density and Productivity in Service Industries',author:'Morikawa M.',year:'2011',datasource:'Review of Economics and Statistics, 93(1)',policy:['産業集積性'],citySize:['大都市圏','中核市'],summary:'製造業を中心に研究されてきた集積・密度の経済をサービス産業に適用し、密度がサービス業の生産性に与える効果を実証分析した研究。集積の経済研究が製造業に偏在してきた中でサービス業での密度効果を体系的に計測し、サービス業の多様性（知識集約度）によって密度効果が異なることを示した点が貢献。都市圏・地域レベルのサービス業生産データを用いた操作変数付き生産関数推定から、サービス業でも密度が生産性に正の効果を持つことが確認された。知識集約型ビジネスサービス（金融・法律・コンサルティング等）では密度弾力性が製造業に匹敵するほど大きい一方、対面性の低いサービス（配送・倉庫等）では効果が小さい傾向があることも示されている。',city:'',region:'日本'},
+  {id:'p33',title:'The Money Trail: Measuring your impact on the local economy using LM3',author:'New Economics Foundation',year:'2002',datasource:'New Economics Foundation Report',policy:['経済循環性'],citySize:['小規模市','農村・町村'],summary:'地域経済への支出が地域内でどれだけ循環するかを測定するLM3（Local Multiplier 3）という実践的指標を開発・提示した研究。ケインズの経済乗数概念を地域・コミュニティスケールに応用し、非専門家でも使える簡易な3段階乗数計算法として実装した点が新しく、地域内外への支出の「漏れ」を可視化する実践ツールとして広く参照されている。英国の公共機関（NHS病院・学校等）の調達データを用いたケーススタディにより、地元企業・農家から調達した場合のLM3は大手チェーンや遠隔地企業からの調達に比べて2〜3倍高い値を示すことが確認された。地域内調達・ローカルフードシステムへの切り替えが地域経済循環を大幅に改善し、公共調達の地域化が大きなインパクトをもつことが示されている。',city:'',region:'英国'},
+  {id:'p34',title:'Institutions, Institutional Change and Economic Performance',author:'North D.C.',year:'1990',datasource:'Cambridge University Press',policy:['制度・行政能力'],citySize:[],summary:'制度（フォーマルなルール・インフォーマルな規範・実施メカニズム）が経済パフォーマンスを規定するという包括的な理論を構築した研究。新古典派経済学が制度を「与件」として捨象してきたのに対し、制度そのものの変化・持続性を経済分析の中心に置く「新制度主義経済学」の基盤を確立し、経路依存性・Lock-inの概念で非効率な制度が長期持続する理由を説明した点が革新的。取引費用経済学を基盤とし中世欧州の商業制度・植民地制度・近代企業発展の事例で理論を例証した分析から、フォーマル制度とインフォーマル制度の相互作用が経済パフォーマンスの長期的差異を生むことが論じられた。制度は経路依存的で一時的に非効率な制度が「ロックイン」される一方、意図的な制度改革もインフォーマル制度の変化が伴わなければ効果が限定的であることが示されている。',city:'',region:''},
+  {id:'p35',title:'Fiscal Federalism and Economic Growth',author:'Oates W.E.',year:'2001',datasource:'Journal of Urban Economics, 35(1)',policy:['制度・行政能力'],citySize:[],summary:'財政連邦制（中央と地方政府間の権限・財源配分の仕組み）が経済成長に与える影響を実証分析した研究。Tiebout（1956）の「足による投票」論を発展させ、財政連邦制が市場競争に類似した効率化圧力を政府間にもたらすという命題を実証面から支持した先駆的研究。OECD諸国のクロスセクション・パネルデータを用いた回帰分析から、地方政府の財政自律性が高い国ほど経済成長率が高い傾向が確認された。ただし財政分権の効果は行政能力・中央政府の調整機能の水準に条件付けられており、能力が低い場合は分権化が非効率をもたらすリスクもあることが指摘されている。',city:'',region:''},
+  {id:'p36',title:'Making Democracy Work: Civic Traditions in Modern Italy',author:'Putnam R.D.',year:'1993',datasource:'Princeton University Press',policy:['社会関係資本'],citySize:['中核市','小規模市','農村・町村'],summary:'イタリアの州制度改革（1970年）を準自然実験として活用し、地方政府のパフォーマンスの差異をもたらす要因を分析した研究。政治制度・経済水準だけで行政パフォーマンスを説明してきた先行研究に対し、数百年にわたる「市民的伝統」の蓄積が現代の政府効率性を規定するという長期的・文化的説明を提示し、「社会関係資本」概念の普及に貢献した点が革新的。1970年以降のイタリア20州の縦断的データを用いた行政パフォーマンス指数と市民的伝統指標（投票率・新聞購読率・合唱団数等）の回帰分析から、市民的伝統・社会関係資本が豊かな北部州は南部州に比べて行政パフォーマンスが著しく高いことが確認された。この差は地方制度開始以降に拡大する傾向があり、社会関係資本が経済発展水準より地方政府効率性を強く規定することが示されている。',city:'',region:'イタリア'},
+  {id:'p37',title:'Endogenous Technological Change',author:'Romer P.M.',year:'1990',datasource:'Journal of Political Economy, 98(5)',policy:['R&D・知識集約'],citySize:[],summary:'技術進歩を外生的に与えるのではなく、意図的なR&D投資の結果として内生的に決定されるモデルを構築した研究。Solow成長モデルでの外生的技術進歩に対し、R&D投資・人的資本・独占利潤からの研究誘因を組み込んだ内生的成長モデルによって「なぜ技術進歩が起きるか」を経済理論の内部で説明した点が革新的で、Lucas（1988）と並ぶ内生的成長理論の基盤論文。最終財・中間財・研究部門の3部門モデルによる均衡成長経路の分析から、人的資本・R&D投資・市場規模が大きいほど技術進歩・経済成長率が高くなることが理論的に示された。研究部門に参入するに足る人的資本が存在しない場合には内生的成長が起動しないことも示されており、特許制度・教育投資・研究補助金の重要性が政策含意として導出されている。',city:'',region:''},
+  {id:'p38',title:'Does Tourism Influence Economic Growth? A Dynamic Panel Data Approach',author:'Sequeira T.N. & Nunes P.M.',year:'2008',datasource:'Applied Economics, 40(18)',policy:['観光'],citySize:['中核市','小規模市','農村・町村'],summary:'複数国のパネルデータと動的推定手法（差分GMM・システムGMM）を用いてTLGH（観光主導成長仮説）を検証した研究。単一国の時系列分析に依存してきた先行研究に対し、パネルデータで国の異質性をコントロールし観光変数の内生性にも対処した点が方法論的貢献。複数国の年次パネルデータを用いたGMM推定においても、観光変数が経済成長に有意な正の効果を持つことが確認された。効果の大きさは国の所得水準・観光特化度・制度の質によって異なり、観光の成長効果は短期より長期に安定的・大きい傾向があることが示されている。',city:'',region:''},
+  {id:'p39',title:'A Pure Theory of Local Expenditures',author:'Tiebout C.M.',year:'1956',datasource:'Journal of Political Economy, 64(5)',policy:['制度・行政能力'],citySize:[],summary:'地方政府の公共財・サービスの最適供給と住民の立地選択の関係を理論化した古典的研究。Samuelson（1954）が公共財の市場供給の失敗を示したのに対し、住民が自らの公共サービス選好に合った自治体に移住する「足による投票」によって、分権化された供給の効率性が達成できることを論じた点が革新的で、財政連邦制・地方分権理論の出発点となった。完全移動・完全情報等の仮定の下での純粋理論モデルの構築により、「足による投票」メカニズムがPareto効率的な公共財供給を実現できることが理論的に示された。自治体規模の最適化（最適ポピュレーション）の概念も導出されており、地方分権・自治体間競争をめぐる政策議論の理論的基盤として参照され続けている。',city:'',region:''},
+  {id:'p40',title:'Local Capitalism, Civic Engagement, and Socioeconomic Well-Being',author:'Tolbert, C.M., Lyson, T.A. & Irwin, M.D.',year:'1998',datasource:'Social Forces, 77(2)',policy:['経済循環性'],citySize:['小規模市','農村・町村'],summary:'地元に根差した中小企業・ローカル資本の集積が地域の社会経済的厚生（所得・雇用・健康・市民参加等）に与える影響を分析した研究。企業規模・本社立地と地域経済の関係（Absentee Corporation効果）を社会関係資本・市民参加のフレームと統合し、地元資本家・起業家の存在が地域のソーシャルキャピタルを強化するという仮説を実証した点が貢献。米国の郡・都市レベルの横断面データを用いた回帰分析から、地元所有企業比率が高い地域では所得水準・雇用安定性・市民参加率が高く、貧困率が低い傾向が確認された。本社機能を持つ企業が集積する地域では経営者・専門職の地域コミュニティへの参加を通じた社会関係資本の蓄積が促進されることも示されている。',city:'',region:'米国'},
+  {id:'p41',title:'地域経済と社会関係資本：市区町村レベルの分析',author:'出口弘ほか',year:'2014',datasource:'RIETI Discussion Paper 14-J-018',policy:['社会関係資本'],citySize:['小規模市','農村・町村'],summary:'日本の市区町村データを用いて社会関係資本と地域経済パフォーマンスの関係を実証分析した研究。社会関係資本と経済成長の実証研究が欧米中心である中で、日本独自の社会的紐帯（氏子組織・消防団・町内会等）を代理指標として活用し、市区町村という細かい地理的単位で分析した点が独自性とされる。市区町村レベルの統計データを用いた固定効果パネル回帰から、社会関係資本の水準が高い市区町村では一人当たり所得・雇用率が高い傾向が確認された。市民参加・NPO活動が活発な地域では地域産業の多様性・新規開業率も高い傾向があることも示されており、ただし因果的効果の識別には課題があり相関関係にとどまる可能性も指摘されている。',city:'',region:'日本'},
+  {id:'p42',title:'地元経済を創りなおす：分析・診断・対策',author:'枝廣淳子・小井土守',year:'2018',datasource:'学芸出版社',policy:['経済循環性'],citySize:['小規模市','農村・町村'],summary:'地域経済の内発的発展と再生のための分析・診断・対策を論じた実践的・政策的著作。高度成長期以来の「誘致型・外来型」地域開発への批判的視座から、地域固有の資源を活用した「内発的発展論」を体系化し、地域内経済循環分析（LM3類似手法）・雇用乗数分析等の診断ツールを日本の地域政策論に導入した点が貢献。農山村・中山間地域・地方中核都市等の複数事例研究から、外来型開発地域では地域内経済循環率が低く雇用・所得の地域外漏出が大きいことが確認された。内発的・地元資本型の地域では経済の自律性・安定性が高く、人口減少局面でも生活の質を維持しやすいことが示されており、地産地消・コミュニティ経済の実践的な枠組みを提供している。',city:'',region:'日本'},
+  {id:'p43',title:'人的資本と地域経済成長：都道府県データによる実証分析',author:'高橋泰城ほか',year:'2010',datasource:'日本経済研究 No.62',policy:['人口資本・人口活力'],citySize:['大都市圏','中核市','小規模市'],summary:'日本の都道府県データを用いて人的資本が地域経済成長に与える影響を計量経済学的に検証した研究。人的資本と経済成長の実証研究が国際比較中心である中で、都道府県間の人的資本格差と収入格差・成長格差の関係を直接分析し、大学集積・研究機関分布を考慮した点が新しい。都道府県別の国勢調査・学校基本調査等のパネルデータを用いた固定効果推定から、都道府県の大卒者比率・大学院進学率が一人当たり県民所得の成長に有意な正の効果を持つことが確認された。東京・愛知等の人的資本集積地域と地方圏の格差が拡大傾向にあり、大学・研究機関の集積が地域内の人的資本外部効果を高めることも示唆されている。',city:'',region:'日本'},
+  {id:'p44',title:'Big or Small Cities? On City Size and Economic Growth',author:'Frick, S. & Rodriguez-Pose, A.',year:'2017',datasource:'Growth and Change',policy:['中心性'],citySize:['中核市','小規模市'],url:'https://eprints.lse.ac.uk/84296/1/Growth%20and%20Change%20_Final_2017%20.pdf',summary:'都市規模と国家レベルの経済成長の関係を実証分析した研究。先行研究が都市集中度（プライマシー）のみを指標とし単一閾値を用いてきたのに対し、50万人未満〜1,000万人超の6段階カテゴリーで細分化し、都市規模固有の効果を産業構成・インフラ・ガバナンスといった文脈要因とあわせて分析した点が新しい。Hausman-Taylor推定量と固定効果モデルを用いて1980〜2010年・113カ国パネルデータを分析した結果、50万人未満の小都市が都市人口1,230万人以下の国（サンプルの約7割）で成長を促進することが確認された。メガシティ（1,000万人超）は人口2,850万人以上の大国のみで有効であり、国の規模と都市規模の適合関係が成長効果を規定することが示されている。',city:'',region:''},
+  {id:'p45',title:'Driving Factors of Urban Growth: A Systematic Review',author:'Etemadi et al.',year:'2025',datasource:'Growth and Change',policy:['人口資本・人口活力'],citySize:['大都市圏','中核市','小規模市','農村・町村'],url:'https://onlinelibrary.wiley.com/doi/10.1111/grow.70090',summary:'都市成長の駆動要因に関する既存研究をPRISMA準拠のシステマティックレビュー手法で体系的に整理・分類した研究。個別の要因を扱った研究は多数存在するが、Web of Science・Scopus等からのスクリーニングを通じて要因間の関係性や研究ギャップを明示化し、2020年代の文献を含む最新知見を統合した点が新しい。統合分析から、経済機会（雇用・産業集積）・インフラ整備・人的資本・制度的能力・ガバナンス・農村から都市への人口移動・土地利用政策が主要な駆動要因として繰り返し確認された。地域・発展段階によって要因の重みが異なることも整理されており、途上国・小都市に関する研究の不足が今後の課題として指摘されている。',city:'',region:''},
+  {id:'p46',title:'Small City Economic Growth Typologies',author:'Erickcek, G. & McKinney, H.',year:'2006',datasource:'Taylor & Francis Online',policy:['産業多様性'],citySize:['小規模市'],url:'',summary:'米国の小・中規模都市（人口概ね25万人未満）を対象に、経済成長の決定要因を探った研究。先行研究の大半が大都市圏を対象としており小都市の成長メカニズムが軽視されてきた中で、大都市とは異なる成長要因が働いていることを実証した点が新しい。米国センサスおよびBLSデータを用いた回帰分析とクラスター分析により、人的資本（大卒者比率）と産業構成（製造業依存度の低さ・知識産業の存在）が小・中規模都市の成長に最も重要な要因として確認された。大都市で有効な集積の経済効果は小都市では限定的であり、大都市圏との近接性（地理的立地）も成長に寄与することが示されている。',city:'',region:'米国'},
+  {id:'p47',title:'The Small City in the Urban System: Complex Pathways of Growth and Decline',author:'Wolff, M. et al.',year:'2021',datasource:'Geografiska Annaler: Series B, Urban Geography',policy:['歩きやすさ・暮らしやすさ'],citySize:['小規模市'],url:'https://www.tandfonline.com/doi/full/10.1080/04353684.2021.1953280',summary:'欧州（主にドイツ）の小都市を対象に、都市システム全体における位置づけと成長・衰退の複雑な経路を分析した研究。収縮都市研究が一方向的な変化を想定することが多い中で、成長と衰退が交互に現れる「複雑な経路」を重視し、都市システム論のアプローチを小都市分析に本格適用した点が独自性とされる。ドイツの長期パネルデータを用いたクラスター分析・シーケンス分析から、小都市の成長・衰退経路は一様ではなく成長継続型・衰退継続型・回復型・変動型など複数のパターンが確認された。大都市圏との機能的連携の度合いや地方経済の多様性が経路を規定する主要因であることも示されている。',city:'',region:''},
+  {id:'p48',title:'Consumer City',author:'Glaeser, E. et al.',year:'2001',datasource:'Journal of Economic Geography',policy:['歩きやすさ・暮らしやすさ'],citySize:['大都市圏','中核市'],url:'https://scholar.harvard.edu/files/glaeser/files/consumer_city.pdf',summary:'都市の魅力を生産面だけでなく消費面（アメニティ：飲食・文化・娯楽・多様性）から説明するフレームワークを提示した研究。都市経済学・NEG理論が都市を生産・労働市場の集積地として捉えてきたのに対し、都市を「消費の場」として再定義し、アメニティが賃金プレミアムを超える居住選好をもたらすことを示した点が革新的とされる。米国大都市圏データを用いたヘドニック分析・パネル回帰から、消費アメニティの豊かな都市は高地価・高賃金にもかかわらず人口が増加する傾向が確認された。知識・クリエイティブ労働者ほどアメニティへの支払い意思額が高く、結果は複数の都市規模・アメニティ指標で頑健性が確認されている。',city:'',region:'米国'},
+  {id:'p49',title:'The Growth of Cities',author:'Duranton, G. & Puga, D.',year:'2014',datasource:'Handbook of Regional and Urban Economics',policy:['人口資本・人口活力'],citySize:['大都市圏','中核市','小規模市'],url:'https://faculty.wharton.upenn.edu/wp-content/uploads/2017/05/Growth-pf-cities-book-chapter.pdf',summary:'都市成長メカニズムに関する理論・実証研究を包括的にレビューし、集積の経済・人材集積・選択効果・都市間相互作用が都市成長に与える影響を整理したハンドブック論文。集積の経済の「ミクロ基盤」（共有・マッチング・学習）とマクロ的成長効果を一貫したフレームワークで整理し、技術変化・グローバル化が都市成長に与える影響の最新知見を体系化した点が重要な貢献。自然実験・操作変数法を用いた因果推論研究を重点的に評価した結果、集積の経済（知識スピルオーバー・労働市場プーリング・投入財共有）・人的資本の外部性・産業多様性（Jacobs外部性）が都市成長の主要エンジンとして確認された。都市規模と生産性の間には正の相関があるが、過度な集積は混雑コストをもたらし非線形的な関係をなすことも整理されている。',city:'',region:''},
+  {id:'p50',title:'The Push of Big City Prices and the Pull of Small Town Amenities',author:'Federal Reserve Bank of Philadelphia',year:'2022',datasource:'Philadelphia Fed Working Paper, WP22-41',policy:['歩きやすさ・暮らしやすさ'],citySize:['大都市圏','中核市','小規模市'],url:'https://www.philadelphiafed.org/-/media/frbp/assets/working-papers/2022/wp22-41.pdf',summary:'大都市の高コスト（主に住宅価格）が人々を押し出す「プッシュ」効果と、小都市・地方のアメニティが人々を引き寄せる「プル」効果の両面から都市間人口移動のメカニズムを解明した研究。Consumer City理論がアメニティの「プル」効果のみを強調するのに対し、住宅費のプッシュ効果と小都市アメニティのプル効果を同時に分析するデュアルフレームワークを採用し、コロナ後の移動行動データを活用した点が新しい。IRS移動データ・ACS・Zillow住宅価格データを組み合わせたDiD等の実証分析から、大都市の住宅価格上昇が人口流出を統計的に有意に説明することが確認され、自然アメニティ・生活の質が豊かな小都市への流入増加もあわせて検証された。リモートワーク普及がこのプッシュ・プル効果を増幅させていることも示されている。',city:'',region:'米国'},
+  {id:'p51',title:'Urban Growth Rates, Trajectories, and Multi-Dimensional Disparities in China',author:'Sun et al.',year:'2022',datasource:'Cities (ScienceDirect)',policy:['人口資本・人口活力'],citySize:['中核市','小規模市'],url:'https://www.sciencedirect.com/science/article/abs/pii/S0264275122001561',summary:'中国の都市を対象に、人口・経済・土地利用等の多次元的指標を用いて都市成長率・成長軌跡・地域間格差を分析した研究。総量的な成長に着目する先行研究に対し、「多次元的格差」（人口・経済・土地の多面的乖離）を同時に捉え成長軌跡の類型化を行った点が新しく、市場化・行政介入・地理的要因の交錯する中国固有の文脈を組み込んだ分析も独自性とされる。中国統計年鑑等の長期パネルデータを用いた主成分分析・クラスター分析と空間計量経済学的手法により、東部沿海と内陸都市の成長格差が依然大きく成長の恩恵は一部大都市圏に集中していることが確認された。土地拡大が人口・経済成長を超えて進行するミスマッチが多くの都市で確認されており、国家重点都市指定・交通インフラ整備が成長軌跡を左右する重要要因として特定されている。',city:'',region:'中国'},
+  {id:'p52',title:'Urban Growth Divides: The Inevitable Structure of Shrinking Cities in Urbanization Evolution',author:'（都市成長格差の研究）',year:'2024',datasource:'Cities (ScienceDirect)',policy:['人口資本・人口活力'],citySize:['大都市圏','小規模市','農村・町村'],url:'https://www.sciencedirect.com/article/pii/S0264275124008527',summary:'都市化の進化過程において一部の都市が必然的に縮小するという「都市成長格差の構造的不可避性」を分析した研究。収縮都市研究の多くが衰退を政策失敗や産業衰退の結果として捉えるのに対し、都市システム全体の進化プロセスから「収縮の必然性」を論じる構造的視点を提供し、成長と収縮が同一システム内で共存・相互規定されることを明示化した点が独自性。複数国・複数時点の都市人口・経済データを用いたZipf則・ガルトン回帰の応用とシミュレーションモデルの比較検証から、都市化の進展に伴い一定割合の都市が系統的に収縮することが確認された。収縮は経済危機・政策失敗だけでなく都市システム内の競争・階層再編を反映した構造的現象であることが示されている。',city:'',region:'日本'},
+  {id:'p53',title:'Determinants of Economic City Size',author:'Tabassum, U. & Nazeer, M.',year:'2021',datasource:'ResearchGate',policy:['歩きやすさ・暮らしやすさ'],citySize:['大都市圏','中核市','小規模市'],url:'https://www.researchgate.net/publication/363173856_DETERMINANTS_OF_ECONOMIC_CITY_SIZE',summary:'都市の経済的規模（人口・GDP等）を規定する要因をパキスタン等の都市データで実証分析した研究。都市規模の決定要因研究が欧米先進国を対象とするものが多い中で南アジア途上国を明示的に分析し、経済的都市規模の複合的決定要因を一つの計量フレームワークで統合した点が新しい。パキスタンの都市レベルパネルデータを用いたOLS・固定効果・GMM等の複数手法による推定から、貿易開放度・交通インフラ・人的資本（教育水準）が都市規模に有意な正の影響を与えることが確認された。制度的質（ガバナンス・汚職水準）も重要な要因として特定されており、内生性に対処したGMM推定でも主要結果は頑健であることが確認されている。途上国都市では集積の経済よりも基礎インフラの整備が先決条件であることが示唆されている。',city:'',region:''},
 ];
 
-let db=[],editId=null,searchQ='',filterPolicy='',filterSizes=new Set();
+let db=[],editId=null,searchQ='',filterPolicies=new Set(),filterSizes=new Set(),adminMode=false;
 
 function loadDB(){
   try{
     const saved=localStorage.getItem(STORAGE_KEY);
-    if(saved){const p=JSON.parse(saved);const ids=new Set(p.map(e=>e.id));db=[...p,...PAPERS.filter(x=>!ids.has(x.id))];}
-    else db=[...PAPERS];
+    if(saved){
+      let p=JSON.parse(saved);
+      // migration: policy が文字列の場合は配列に変換
+      p=p.map(e=>({...e,policy:Array.isArray(e.policy)?e.policy:(e.policy?[e.policy]:[])}));
+      const ids=new Set(p.map(e=>e.id));
+      db=[...p,...PAPERS.filter(x=>!ids.has(x.id))];
+    }else db=[...PAPERS];
   }catch{db=[...PAPERS];}
+  try{if(sessionStorage.getItem('admin-session')==='1')adminMode=true;}catch{}
+  updateAdminUI();
   renderAll();
 }
 function saveDB(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(db));}catch{}}
 function uid(){return 'u'+Date.now()+Math.random().toString(36).slice(2,6);}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function getFiltered(){return db.filter(e=>{const q=searchQ.toLowerCase();const mQ=!q||(e.title+e.author+e.summary+e.datasource+e.policy).toLowerCase().includes(q);const mP=!filterPolicy||e.policy===filterPolicy;const mS=filterSizes.size===0||(e.citySize||[]).some(s=>filterSizes.has(s));return mQ&&mP&&mS;});}
+function getFiltered(){return db.filter(e=>{const q=searchQ.toLowerCase();const mQ=!q||(e.title+e.author+e.summary+e.datasource+(e.policy||[]).join(' ')).toLowerCase().includes(q);const mP=filterPolicies.size===0||(e.policy||[]).some(p=>filterPolicies.has(p));const mS=filterSizes.size===0||(e.citySize||[]).some(s=>filterSizes.has(s));return mQ&&mP&&mS;});}
 function renderStats(){const items=getFiltered();document.getElementById('stat-total').textContent=db.length;document.getElementById('stat-shown').textContent=items.length;document.getElementById('stat-policies').textContent=POLICY_TAGS.length;document.getElementById('stat-sized').textContent=db.filter(e=>(e.citySize||[]).length>0).length;}
 function renderFilters(){
   const pf=document.getElementById('policy-filters');
-  pf.innerHTML=`<button class="tag-btn${!filterPolicy?' ap':''}" onclick="setPolicy('')">すべて<span class="tag-cnt">${db.length}</span></button> `+POLICY_TAGS.map(p=>{const c=db.filter(e=>e.policy===p).length;return `<button class="tag-btn${filterPolicy===p?' ap':''}" onclick="setPolicy('${esc(p)}')">${esc(p)}<span class="tag-cnt">${c}</span></button>`;}).join(' ');
+  pf.innerHTML=`<button class="tag-btn${filterPolicies.size===0?' ap':''}" onclick="clearPolicies()">すべて<span class="tag-cnt">${db.length}</span></button> `+POLICY_TAGS.map(p=>{const c=db.filter(e=>(e.policy||[]).includes(p)).length;return `<button class="tag-btn${filterPolicies.has(p)?' ap':''}" onclick="togglePolicy('${esc(p)}')">${esc(p)}<span class="tag-cnt">${c}</span></button>`;}).join(' ');
   const sf=document.getElementById('size-filters');
   sf.innerHTML=`<button class="tag-btn${filterSizes.size===0?' as':''}" onclick="clearSizes()">すべて</button> `+SIZE_TAGS.map(s=>{const c=db.filter(e=>(e.citySize||[]).includes(s)).length;return `<button class="tag-btn${filterSizes.has(s)?' as':''}" onclick="toggleSize('${s}')" title="${SIZE_DESC[s]}">${esc(s)}<span class="tag-cnt">${c}</span></button>`;}).join(' ');
 }
@@ -382,20 +434,22 @@ function renderList(){
   if(!items.length){el.innerHTML='<div class="empty-state">該当するエビデンスが見つかりません。<br>検索条件を変えてみてください。</div>';return;}
   el.innerHTML=items.map(e=>{
     const sizes=(e.citySize||[]).map(s=>`<span class="bs">${esc(s)}</span>`).join('');
-    const titleEl=e.url?`<a href="${esc(e.url)}" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px">${esc(e.title)}</a>`:esc(e.title);return `<div class="entry-card"><div class="ec-top"><div class="ec-title">${titleEl}</div><div class="ec-badges">${e.year?`<span class="by">${esc(e.year)}</span>`:''}${e.policy?`<span class="bp">${esc(e.policy)}</span>`:''}</div></div><div class="ec-author">${esc(e.author)}${e.region?' · '+esc(e.region):''}</div>${e.datasource?`<div class="bj">${esc(e.datasource)}</div>`:''}${sizes?`<div class="ec-sizes">${sizes}</div>`:''}${e.summary?`<div class="ec-summary" style="margin-top:7px">${esc(e.summary)}</div>`:''}<div class="ec-actions"><button class="btn-sm" onclick="startEdit('${e.id}')">編集</button><button class="btn-sm btn-del" onclick="delEntry('${e.id}')">削除</button></div></div>`;
+    const policies=(e.policy||[]).map(p=>`<span class="bp">${esc(p)}</span>`).join('');
+    const titleEl=e.url?`<a href="${esc(e.url)}" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px">${esc(e.title)}</a>`:esc(e.title);return `<div class="entry-card"><div class="ec-top"><div class="ec-title">${titleEl}</div><div class="ec-badges">${e.year?`<span class="by">${esc(e.year)}</span>`:''}${policies}</div></div><div class="ec-author">${esc(e.author)}${e.region?' · '+esc(e.region):''}</div>${e.datasource?`<div class="bj">${esc(e.datasource)}</div>`:''}${sizes?`<div class="ec-sizes">${sizes}</div>`:''}${e.summary?`<div class="ec-summary" style="margin-top:7px">${esc(e.summary)}</div>`:''}${adminMode?`<div class="ec-actions"><button class="btn-sm" onclick="startEdit('${e.id}')">編集</button><button class="btn-sm btn-del" onclick="delEntry('${e.id}')">削除</button></div>`:''}</div>`;
   }).join('');
 }
 function renderAll(){renderStats();renderFilters();renderList();}
 function onSearch(){searchQ=document.getElementById('search-input').value;renderAll();}
-function setPolicy(v){filterPolicy=v;renderAll();}
+function togglePolicy(p){if(filterPolicies.has(p))filterPolicies.delete(p);else filterPolicies.add(p);renderAll();}
+function clearPolicies(){filterPolicies.clear();renderAll();}
 function toggleSize(s){if(filterSizes.has(s))filterSizes.delete(s);else filterSizes.add(s);renderAll();}
 function clearSizes(){filterSizes.clear();renderAll();}
 function startAdd(){editId=null;document.getElementById('modal-title').textContent='新しいエビデンスを登録';clearForm();document.getElementById('modal-overlay').classList.remove('hidden');}
-function startEdit(id){const e=db.find(x=>x.id===id);if(!e)return;editId=id;document.getElementById('modal-title').textContent='エビデンスを編集';document.getElementById('f-title').value=e.title||'';document.getElementById('f-author').value=e.author||'';document.getElementById('f-year').value=e.year||'';document.getElementById('f-datasource').value=e.datasource||'';document.getElementById('f-url').value=e.url||'';document.getElementById('f-policy').value=e.policy||'';document.getElementById('f-summary').value=e.summary||'';document.getElementById('f-city').value=e.city||'';document.getElementById('f-region').value=e.region||'';const sizes=e.citySize||[];document.querySelectorAll('#f-sizes input[type=checkbox]').forEach(cb=>{cb.checked=sizes.includes(cb.value);});document.getElementById('modal-overlay').classList.remove('hidden');}
-function clearForm(){['f-title','f-author','f-year','f-datasource','f-url','f-summary','f-city','f-region'].forEach(id=>document.getElementById(id).value='');document.getElementById('f-policy').value='';document.querySelectorAll('#f-sizes input[type=checkbox]').forEach(cb=>cb.checked=false);}
+function startEdit(id){const e=db.find(x=>x.id===id);if(!e)return;editId=id;document.getElementById('modal-title').textContent='エビデンスを編集';document.getElementById('f-title').value=e.title||'';document.getElementById('f-author').value=e.author||'';document.getElementById('f-year').value=e.year||'';document.getElementById('f-datasource').value=e.datasource||'';document.getElementById('f-url').value=e.url||'';document.getElementById('f-summary').value=e.summary||'';document.getElementById('f-city').value=e.city||'';document.getElementById('f-region').value=e.region||'';const policies=e.policy||[];document.querySelectorAll('#f-policies input[type=checkbox]').forEach(cb=>{cb.checked=policies.includes(cb.value);});const sizes=e.citySize||[];document.querySelectorAll('#f-sizes input[type=checkbox]').forEach(cb=>{cb.checked=sizes.includes(cb.value);});document.getElementById('modal-overlay').classList.remove('hidden');}
+function clearForm(){['f-title','f-author','f-year','f-datasource','f-url','f-summary','f-city','f-region'].forEach(id=>document.getElementById(id).value='');document.querySelectorAll('#f-policies input[type=checkbox]').forEach(cb=>cb.checked=false);document.querySelectorAll('#f-sizes input[type=checkbox]').forEach(cb=>cb.checked=false);}
 function closeModal(){document.getElementById('modal-overlay').classList.add('hidden');editId=null;}
 function overlayClick(e){if(e.target===document.getElementById('modal-overlay'))closeModal();}
-function saveForm(){const title=document.getElementById('f-title').value.trim();if(!title){alert('タイトルは必須です');return;}const citySize=[...document.querySelectorAll('#f-sizes input[type=checkbox]:checked')].map(cb=>cb.value);const entry={id:editId||uid(),title,author:document.getElementById('f-author').value.trim(),year:document.getElementById('f-year').value.trim(),datasource:document.getElementById('f-datasource').value.trim(),url:document.getElementById('f-url').value.trim(),policy:document.getElementById('f-policy').value,citySize,summary:document.getElementById('f-summary').value.trim(),city:document.getElementById('f-city').value.trim(),region:document.getElementById('f-region').value.trim()};if(editId){db=db.map(e=>e.id===editId?entry:e);}else{db=[entry,...db];}saveDB();closeModal();renderAll();}
+function saveForm(){const title=document.getElementById('f-title').value.trim();if(!title){alert('タイトルは必須です');return;}const policy=[...document.querySelectorAll('#f-policies input[type=checkbox]:checked')].map(cb=>cb.value);const citySize=[...document.querySelectorAll('#f-sizes input[type=checkbox]:checked')].map(cb=>cb.value);const entry={id:editId||uid(),title,author:document.getElementById('f-author').value.trim(),year:document.getElementById('f-year').value.trim(),datasource:document.getElementById('f-datasource').value.trim(),url:document.getElementById('f-url').value.trim(),policy,citySize,summary:document.getElementById('f-summary').value.trim(),city:document.getElementById('f-city').value.trim(),region:document.getElementById('f-region').value.trim()};if(editId){db=db.map(e=>e.id===editId?entry:e);}else{db=[entry,...db];}saveDB();closeModal();renderAll();}
 function delEntry(id){if(!confirm('このエビデンスを削除しますか？'))return;db=db.filter(e=>e.id!==id);saveDB();renderAll();}
 
 /* CAUSAL DIAGRAM */
@@ -410,6 +464,7 @@ function showPage(id){
 let causalReady=false;
 function initCausalEvents(){
   if(causalReady)return; causalReady=true;
+  document.getElementById('detail-panel').style.display='none';
   const svg=document.getElementById('causal-svg');
   const tooltip=document.getElementById('svg-tooltip');
   const wrap=document.querySelector('.causal-canvas');
@@ -427,7 +482,7 @@ function initCausalEvents(){
     g.addEventListener('click',()=>{
       svg.querySelectorAll('.factor-node rect').forEach(r=>r.style.strokeWidth='0.9');
       const m=MECH_INFO[g.dataset.id];if(!m)return;
-      document.getElementById('detail-panel').innerHTML=`<div class="d-factor">${m.label}</div><div class="d-mech" style="background:#eeeffe;color:#3547c8">中間メカニズム</div><div class="d-desc" style="margin-top:8px">${m.desc}</div>`;
+      const p2=document.getElementById('detail-panel');p2.style.display='block';p2.innerHTML=`<div class="d-factor">${m.label}</div><div class="d-mech" style="background:#eeeffe;color:#3547c8">中間メカニズム</div><div class="d-desc" style="margin-top:8px">${m.desc}</div>`;
     });
     g.addEventListener('mouseenter',()=>{const m=MECH_INFO[g.dataset.id];if(m){tooltip.textContent='クリックで詳細表示';tooltip.style.opacity='1';}});
     g.addEventListener('mouseleave',()=>{tooltip.style.opacity='0';});
@@ -437,7 +492,9 @@ function initCausalEvents(){
 
 function showFactorDetail(factor){
   const info=CAUSAL_INFO[factor];if(!info)return;
-  const papers=db.filter(e=>e.policy===factor);
+  const panel=document.getElementById('detail-panel');
+  panel.style.display='block';
+  const papers=db.filter(e=>(e.policy||[]).includes(factor));
   const s=info.strength;
   const barW=Math.round(s/5*100);
   const barCol={'#185FA5':'#378ADD','#3B6D11':'#3B6D11','#854F0B':'#854F0B','#993556':'#993556'}[info.color]||info.color;
@@ -455,232 +512,43 @@ function showFactorDetail(factor){
 <div class="d-desc">${info.desc}</div>
 ${uniqueSizes.length?`<div class="d-sizes">${uniqueSizes.map(s=>`<span class="bs">${esc(s)}</span>`).join('')}</div>`:''}
 <div class="d-papers-label">関連論文（${papers.length}件）</div>
-${papers.map(p=>{const pt=p.url?`<a href="${esc(p.url)}" target="_blank" rel="noopener" style="color:#185FA5;text-decoration:underline;text-underline-offset:2px">${esc(p.title)}</a>`:esc(p.title);return `<div class="d-paper"><div class="d-paper-title">${pt}</div><div class="d-paper-meta">${esc(p.author)}${p.year?' ('+p.year+')':''}</div>${p.datasource?`<div class="d-paper-journal">${esc(p.datasource)}</div>`:''}</div>`;}).join('')}`;
+<div class="d-paper-grid">${papers.map(p=>{const pt=p.url?`<a href="${esc(p.url)}" target="_blank" rel="noopener" style="color:#185FA5;text-decoration:underline;text-underline-offset:2px">${esc(p.title)}</a>`:esc(p.title);return `<div class="d-paper"><div class="d-paper-title">${pt}</div><div class="d-paper-meta">${esc(p.author)}${p.year?' ('+p.year+')':''}</div>${p.datasource?`<div class="d-paper-journal">${esc(p.datasource)}</div>`:''}</div>`;}).join('')}`;
 }
 
 
-function showCity(id){
-  document.querySelectorAll('#page-strategy .st-panel').forEach(p=>{
-    p.style.display = p.id === 'st-'+id ? 'block' : 'none';
-  });
-  document.querySelectorAll('#page-strategy .st-tag-btn').forEach(t=>{
-    const active = t.dataset.city === id;
-    t.className = 'st-tag-btn' + (active ? ' ac-'+id : '');
-  });
+
+/* ADMIN AUTH */
+async function hashPw(pw){const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(pw));return [...new Uint8Array(buf)].map(x=>x.toString(16).padStart(2,'0')).join('');}
+function showAdminLogin(){document.getElementById('admin-pw').value='';document.getElementById('admin-error').textContent='';document.getElementById('admin-overlay').classList.remove('hidden');setTimeout(()=>document.getElementById('admin-pw').focus(),80);}
+function closeAdminLogin(){document.getElementById('admin-overlay').classList.add('hidden');}
+function adminOverlayClick(e){if(e.target===document.getElementById('admin-overlay'))closeAdminLogin();}
+function togglePwVisibility(){const inp=document.getElementById('admin-pw');const btn=document.getElementById('pw-toggle-btn');if(inp.type==='password'){inp.type='text';btn.textContent='🙈';}else{inp.type='password';btn.textContent='👁';}}
+async function doAdminLogin(){
+  const pw=document.getElementById('admin-pw').value;
+  if(!pw){document.getElementById('admin-error').textContent='パスワードを入力してください';return;}
+  const h=await hashPw(pw);
+  if(h===ADMIN_HASH){
+    adminMode=true;
+    try{sessionStorage.setItem('admin-session','1');}catch{}
+    closeAdminLogin();
+    updateAdminUI();
+    renderList();
+  }else{
+    document.getElementById('admin-error').textContent='パスワードが正しくありません';
+    document.getElementById('admin-pw').value='';
+    document.getElementById('admin-pw').focus();
+  }
+}
+function adminLogout(){adminMode=false;try{sessionStorage.removeItem('admin-session');}catch{}updateAdminUI();renderList();}
+function updateAdminUI(){
+  document.getElementById('admin-badge').classList.toggle('hidden',!adminMode);
+  document.getElementById('btn-admin-logout').classList.toggle('hidden',!adminMode);
+  document.getElementById('btn-admin-login').classList.toggle('hidden',adminMode);
+  document.getElementById('btn-add').classList.toggle('hidden',!adminMode);
 }
 
 loadDB();
 </script>
-
-<!-- STRATEGY PAGE -->
-<div class="page" id="page-strategy">
-<div class="st-wrap">
-  <div class="st-header">
-    <div class="st-title">都市規模別 成長戦略</div>
-    <div class="st-sub">論文エビデンスに基づき、都市規模ごとに現実的な成長戦略案を整理しています。</div>
-  </div>
-
-  <div class="st-filter-section">
-    <div class="filter-label">都市規模</div>
-    <div class="st-tag-row"><button class="st-tag-btn ac-metro" data-city="metro" onclick="showCity('metro')">大都市圏</button><button class="st-tag-btn" data-city="core" onclick="showCity('core')">中核市</button><button class="st-tag-btn" data-city="small" onclick="showCity('small')">小規模市</button><button class="st-tag-btn" data-city="rural" onclick="showCity('rural')">農村・町村</button></div>
-  </div>
-  <hr class="st-filter-divider">
-
-  
-<div class="st-panel active" id="st-metro" style="display:block">
-  <div class="st-city-desc"><strong>大都市圏</strong>　<span style="color:#888780;font-size:11px">人口100万人以上 ／ 政令指定都市・三大都市圏</span><br>集積・知識・人材が最も豊富な層。生産性フロンティアの更新と国際競争力の維持が主課題。規模の利益を活かしながら、混雑・住宅コスト上昇という集積の負の外部性をいかに制御するかが鍵。</div>
-
-  <div class="st-section-label">① 設定すべきゴール</div>
-  <div class="st-card">
-    <div class="st-body"><p><strong>「知識集約型クラスターの深化と、生産性成長の国内外への波及拠点となること」</strong><br><br>単なるGRP成長ではなく、国際水準の生産性・賃金・イノベーション創出を達成し、地方中核市への知識・人材・企業の移転拠点として機能すること。10〜15年スパンで域内の高付加価値雇用比率と一人あたりGRPを先進国主要都市水準へ引き上げる。</p>
-    <div class="st-chips"><span class="st-chip">Romer (1990) 内生的成長</span><span class="st-chip">Glaeser & Gottlieb (2009)</span><span class="st-chip">Moretti (2010) 地域乗数</span></div></div>
-  </div>
-
-  <div class="st-section-label">② 基本方針</div>
-  <div class="st-two">
-    <div class="st-card">
-      <div class="st-card-title">長期（10年以上）</div>
-      <div class="st-body"><ul><li>大学・研究機関・スタートアップの<strong>知識エコシステム</strong>を制度的に育成。産学官（トリプルヘリックス）連携を常設化し、特許・スピンオフを地域内に留める仕組みを構築</li><li>高スキル人材を惹きつける<strong>国際水準のアメニティ</strong>（多言語行政・国際学校・医療）を整備し、外国人高度人材の定着を促進</li><li>住宅供給規制の合理化により生活コスト上昇を抑制し、集積の<strong>負の外部性をコントロール</strong></li></ul></div>
-    </div>
-    <div class="st-card">
-      <div class="st-card-title">短期（3〜5年）</div>
-      <div class="st-body"><ul><li>既存産業クラスターの<strong>デジタル・グリーン転換支援</strong>に集中投資し、TFP（全要素生産性）の即効的引き上げを図る</li><li>スタートアップ誘致（補助・規制サンドボックス）と<strong>大企業のオープンイノベーション</strong>拠点の誘致を並行推進</li><li>交通・デジタルインフラの混雑解消に投資し、<strong>集積コストを引き下げる</strong></li></ul></div>
-    </div>
-  </div>
-
-  <div class="st-section-label">③ 重点化すべき政策とその理由</div>
-  <div class="st-card"><div class="st-body"><div class="st-policy" style="border-left-color:#378ADD">
-<div class="st-policy-name">R&D・知識集約への集中投資</div>
-<div class="st-policy-reason">Jaffe et al.（1993）が示すように知識スピルオーバーは地理的に局所化される。大都市は既に人材・大学・資本が揃っており、R&D投資の限界収益が最も高い。Greenstone et al.（2010）の通り大企業立地が周辺企業TFPを12%押し上げる効果も大都市ほど強く出る。</div>
-</div><div class="st-policy" style="border-left-color:#378ADD">
-<div class="st-policy-name">産業多様性の維持（関連多様性の促進）</div>
-<div class="st-policy-reason">Frenken et al.（2007）の知見より、単一産業への過度な依存は景気変動リスクを高める。大都市では関連する産業群をクロスファーティライズする政策（産業横断的なコワーキング・人材交流）が雇用成長に最も効く。</div>
-</div><div class="st-policy" style="border-left-color:#378ADD">
-<div class="st-policy-name">住宅供給の規制緩和・高密度開発</div>
-<div class="st-policy-reason">Diamond（2016）が示した通り、住宅コスト上昇は低・中スキル人材の排除につながり、都市の多様性を損なう。集積の便益を守るためには密度規制の見直しが不可欠。</div>
-</div></div></div>
-
-  <div class="st-section-label">④ 実現に必要なリソース</div>
-  <div class="st-card"><div class="st-body"><div class="st-resource">
-<span class="st-rtag" style="background:#E6F1FB;color:#0C447C">人材</span>
-<span class="st-rtext">国際的な研究者・エンジニア・起業家を誘致するためのビザ・住環境・報酬水準の整備。大学との共同採用プログラム</span>
-</div><div class="st-resource">
-<span class="st-rtag" style="background:#E6F1FB;color:#0C447C">資金</span>
-<span class="st-rtext">国・県・民間VC連携によるスタートアップ投資エコシステム。産学連携R&Dへの公的マッチングファンド</span>
-</div><div class="st-resource">
-<span class="st-rtag" style="background:#E6F1FB;color:#0C447C">制度</span>
-<span class="st-rtext">規制サンドボックス・国家戦略特区の活用。大学知財の商業化を促す技術移転機関（TLO）の強化</span>
-</div><div class="st-resource">
-<span class="st-rtag" style="background:#E6F1FB;color:#0C447C">インフラ</span>
-<span class="st-rtext">高速交通・光ファイバー・研究施設の更新投資。国際空港・港湾との連結強化</span>
-</div></div></div>
-</div>
-<div class="st-panel" id="st-core" style="display:none">
-  <div class="st-city-desc"><strong>中核市</strong>　<span style="color:#888780;font-size:11px">人口30〜100万人 ／ 地方県庁所在地・政令市に次ぐ中規模都市</span><br>大都市ほどの集積密度はないが、地域の行政・経済・医療・教育の中枢を担う。大都市との差別化が鍵で、「適度な暮らしやすさ」と「行政能力の高さ」を武器に域内の経済循環を強化することが現実的な成長経路。</div>
-
-  <div class="st-section-label">① 設定すべきゴール</div>
-  <div class="st-card">
-    <div class="st-body"><p><strong>「域内経済循環率の向上と、地域特化型産業クラスターの確立」</strong><br><br>域外への資金漏洩を抑制しながら、地域の強みある産業（農食・医療・伝統産業等）のクラスターを確立。Moretti（2010）の地域乗数効果を活用し、製造・医療・大学の雇用を核に裾野産業の雇用創出を連鎖させる。15年スパンで社会人口の転入超過と地域GRP成長率を全国平均超えに。</p>
-    <div class="st-chips"><span class="st-chip">Moretti (2010) 地域乗数</span><span class="st-chip">Frenken et al. (2007)</span><span class="st-chip">Oates (2001) 財政連邦主義</span></div></div>
-  </div>
-
-  <div class="st-section-label">② 基本方針</div>
-  <div class="st-two">
-    <div class="st-card">
-      <div class="st-card-title">長期（10年以上）</div>
-      <div class="st-body"><ul><li>地域大学を核とした<strong>産学連携クラスター</strong>の育成。地域固有の産業（農業・製造・観光）にデジタル・研究開発を接合し、域内イノベーション回路を構築</li><li>コンパクトシティ政策と<strong>歩きやすい中心市街地</strong>の再生により、人材定着と不動産価値向上を同時に実現（Cortright 2009）</li><li>近隣の中核市・農村との<strong>広域連携</strong>による機能分担型集積の形成</li></ul></div>
-    </div>
-    <div class="st-card">
-      <div class="st-card-title">短期（3〜5年）</div>
-      <div class="st-body"><ul><li>地元中小企業の<strong>デジタル化・生産性向上支援</strong>に集中（補助・伴走型支援）</li><li>子育て・医療・住宅の「<strong>暮らしやすさ</strong>」を可視化・ブランド化し、移住促進に直結させる</li><li>地域エネルギー・食の<strong>地産地消</strong>モデルを推進し、域内乗数の即効的向上を図る</li></ul></div>
-    </div>
-  </div>
-
-  <div class="st-section-label">③ 重点化すべき政策とその理由</div>
-  <div class="st-card"><div class="st-body"><div class="st-policy" style="border-left-color:#3B6D11">
-<div class="st-policy-name">経済循環性の強化（LM3アプローチ）</div>
-<div class="st-policy-reason">NEF（2002）のLM3手法が示すように、域内での購買・雇用・投資の連鎖を高めることがGRP底上げの最短経路。中核市は行政調達・公共サービスの規模があり、地元調達率の引き上げだけで乗数効果が即座に生まれる。大都市より取り組みやすく、効果が出やすい。</div>
-</div><div class="st-policy" style="border-left-color:#3B6D11">
-<div class="st-policy-name">制度・行政能力の向上（規制改革・創業支援）</div>
-<div class="st-policy-reason">Tiebout（1956）・Oates（2001）が示す通り、行政サービスの質が企業・居住者の立地選択を左右する。中核市は政策自由度があり、迅速な許認可・ワンストップ創業支援・デジタル行政化は大都市との差別化が可能な領域。</div>
-</div><div class="st-policy" style="border-left-color:#3B6D11">
-<div class="st-policy-name">歩きやすさ・暮らしやすさによる人材定着</div>
-<div class="st-policy-reason">Diamond（2016）の知見通り、大都市の住宅コスト上昇が続く中、中核市は「手頃で質の高い居住環境」という比較優位を持ちうる。Litman（2012）が示す歩きやすさの経済価値（不動産・医療・商業）を都市設計に反映させることで人材転入を促進する。</div>
-</div></div></div>
-
-  <div class="st-section-label">④ 実現に必要なリソース</div>
-  <div class="st-card"><div class="st-body"><div class="st-resource">
-<span class="st-rtag" style="background:#EAF3DE;color:#3B6D11">人材</span>
-<span class="st-rtext">地域大学との連携による人材育成プログラム。UIJターン人材のマッチング・定住支援体制の整備</span>
-</div><div class="st-resource">
-<span class="st-rtag" style="background:#EAF3DE;color:#3B6D11">資金</span>
-<span class="st-rtext">地域金融機関（地銀・信金）との協調融資スキーム。地方創生交付金・国補助の戦略的活用</span>
-</div><div class="st-resource">
-<span class="st-rtag" style="background:#EAF3DE;color:#3B6D11">制度</span>
-<span class="st-rtext">コンパクトシティ計画の法的裏付け。産学官連携協定の締結と継続的なガバナンス体制</span>
-</div><div class="st-resource">
-<span class="st-rtag" style="background:#EAF3DE;color:#3B6D11">インフラ</span>
-<span class="st-rtext">中心市街地の公共交通・歩行者空間整備。地域エネルギー網（地産地消型再エネ）の構築</span>
-</div></div></div>
-</div>
-<div class="st-panel" id="st-small" style="display:none">
-  <div class="st-city-desc"><strong>小規模市</strong>　<span style="color:#888780;font-size:11px">人口10〜30万人 ／ 地方の一般市・旧市町村合併後の市など</span><br>人口減少圧力が最も強く、集積の外部性は限定的。「成長」よりも「縮小への対応と機能維持」が現実的な優先課題。地域資源（農業・観光・地場産業）を活かした特化戦略と経済循環の深化で、持続可能な経済基盤を構築できる。</div>
-
-  <div class="st-section-label">① 設定すべきゴール</div>
-  <div class="st-card">
-    <div class="st-body"><p><strong>「人口減少下でも一人あたり所得と生活サービスを維持できる持続可能な経済構造の確立」</strong><br><br>絶対的なGRP成長よりも、人口減少に見合った産業の生産性向上と域内経済循環率の向上を優先。Tolbert et al.（1998）が示す「地域密着型中小企業の集積が厚生を高める」知見に基づき、地元企業の稼ぐ力と定着率を高める。10年スパンで域外資金漏洩率を20〜30%削減し、一人あたりGRPの相対的維持を目指す。</p>
-    <div class="st-chips"><span class="st-chip">Tolbert et al. (1998)</span><span class="st-chip">NEF LM3 (2002)</span><span class="st-chip">Balaguer & Cantavella (2002) 観光</span></div></div>
-  </div>
-
-  <div class="st-section-label">② 基本方針</div>
-  <div class="st-two">
-    <div class="st-card">
-      <div class="st-card-title">長期（10年以上）</div>
-      <div class="st-body"><ul><li>地域の一次産業・観光・地場産業の<strong>高付加価値化</strong>（6次産業化・ブランド化・輸出）により、少ない人口でも高い付加価値を生む構造へ転換</li><li>近隣市町村との<strong>広域連携による行政効率化</strong>と機能の集約。中核市へのアクセス改善で「機能的な通勤圏」として位置づけ</li><li>地域エネルギー・食料の域内自給率向上による<strong>資金漏洩の構造的削減</strong></li></ul></div>
-    </div>
-    <div class="st-card">
-      <div class="st-card-title">短期（3〜5年）</div>
-      <div class="st-body"><ul><li>移住・二地域居住の促進と<strong>リモートワーク環境整備</strong>による人口の一時的補完</li><li>地元農産物・特産品の<strong>販路開拓・ECチャネル強化</strong>で域外収入を増やす</li><li>空き家・廃校等の遊休資産を活用した<strong>サテライトオフィス・起業拠点</strong>の整備</li></ul></div>
-    </div>
-  </div>
-
-  <div class="st-section-label">③ 重点化すべき政策とその理由</div>
-  <div class="st-card"><div class="st-body"><div class="st-policy" style="border-left-color:#854F0B">
-<div class="st-policy-name">観光・交流人口による域外収入の確保</div>
-<div class="st-policy-reason">Sequeira & Nunes（2008）・Balaguer & Cantavella（2002）の知見では、観光は特に資源制約のある地域で有効な成長因子。域内産業が脆弱でも域外からの消費を取り込むことで地域乗数が機能する。ただしInchausti-Sintes（2015）が警告するオランダ病リスクを避けるため、産業多様性との組み合わせが必要。</div>
-</div><div class="st-policy" style="border-left-color:#854F0B">
-<div class="st-policy-name">経済循環性の強化（地産地消・地元調達）</div>
-<div class="st-policy-reason">枝廣ほか（2018）が実証するように、食・エネルギー・サービスの地産地消は域外資金流出を直接削減する。小規模市は大型企業誘致より地元の資金が地元で回る仕組みの方が即効性が高く、外部依存リスクも低い。</div>
-</div><div class="st-policy" style="border-left-color:#854F0B">
-<div class="st-policy-name">社会関係資本の活用（コミュニティ経済）</div>
-<div class="st-policy-reason">Putnam（1993）・出口ほか（2014）が示す通り、社会関係資本が厚い地域は起業率・経済レジリエンスが高い。小規模市では住民間の信頼・ネットワークが実質的な「インフラ」として機能し、行政コスト削減と地域課題解決を同時に実現できる。</div>
-</div></div></div>
-
-  <div class="st-section-label">④ 実現に必要なリソース</div>
-  <div class="st-card"><div class="st-body"><div class="st-resource">
-<span class="st-rtag" style="background:#FAEEDA;color:#854F0B">人材</span>
-<span class="st-rtext">地域おこし協力隊・UIJターン人材の戦略的活用。農業・観光の担い手育成と後継者支援制度</span>
-</div><div class="st-resource">
-<span class="st-rtag" style="background:#FAEEDA;color:#854F0B">資金</span>
-<span class="st-rtext">ふるさと納税・クラウドファンディング等の地域資金調達手段の多様化。6次産業化・観光への補助</span>
-</div><div class="st-resource">
-<span class="st-rtag" style="background:#FAEEDA;color:#854F0B">制度</span>
-<span class="st-rtext">近隣市町村との広域連合・事務委託による行政効率化。空き家・遊休地の活用を促す条例整備</span>
-</div><div class="st-resource">
-<span class="st-rtag" style="background:#FAEEDA;color:#854F0B">インフラ</span>
-<span class="st-rtext">高速ブロードバンドの全域整備（リモートワーク基盤）。移動手段の確保（デマンド交通・MaaS）</span>
-</div></div></div>
-</div>
-<div class="st-panel" id="st-rural" style="display:none">
-  <div class="st-city-desc"><strong>農村・町村</strong>　<span style="color:#888780;font-size:11px">人口10万人未満 ／ 山間・中山間・離島・農業地帯など</span><br>人口・財政ともに制約が最も厳しく、単独での「経済成長」は現実的でない場合も多い。住民の生活水準を守ることを第一義に置き、自然資本・食・コミュニティという固有の強みを最大限に活用する。広域連携と中核市との機能補完が生存戦略の軸。</div>
-
-  <div class="st-section-label">① 設定すべきゴール</div>
-  <div class="st-card">
-    <div class="st-body"><p><strong>「自然資本と社会関係資本を基盤に、外部収入を確保しながら域内で富が循環する持続可能なコミュニティ経済の実現」</strong><br><br>GRP成長より「集落の存続」「一人あたり所得の維持」「生活サービスへのアクセス確保」を優先目標に設定。20年スパンで人口流出に歯止めをかけ、「関係人口」を含む実質的な地域経済圏を維持する。</p>
-    <div class="st-chips"><span class="st-chip">Deller et al. (2010)</span><span class="st-chip">Putnam (1993) 社会関係資本</span><span class="st-chip">枝廣ほか (2018)</span></div></div>
-  </div>
-
-  <div class="st-section-label">② 基本方針</div>
-  <div class="st-two">
-    <div class="st-card">
-      <div class="st-card-title">長期（10年以上）</div>
-      <div class="st-body"><ul><li><strong>中核市・小規模市との機能分担型連携</strong>を制度化。農村は食料・エネルギー・自然資本を供給し、都市から医療・教育・行政サービスを受ける相互補完の経済圏を形成</li><li>農地・森林・水系という<strong>自然資本の経済化</strong>（環境サービス対価・カーボンクレジット・グリーンツーリズム）で域外収入を多様化</li><li>コミュニティが主体となった<strong>「小さな経済圏」</strong>の自治運営（協同組合・農事組合・地域商社）を法的・財政的に支援</li></ul></div>
-    </div>
-    <div class="st-card">
-      <div class="st-card-title">短期（3〜5年）</div>
-      <div class="st-body"><ul><li><strong>関係人口・二地域居住</strong>の積極誘致。農業体験・ワーケーション・サテライトオフィスで季節的な交流人口を取り込む</li><li>農産品のブランド化・<strong>直販・EC拡大</strong>で中間マージンを削減し、農家所得を向上</li><li>再生可能エネルギー（太陽光・小水力・バイオマス）の域内導入で<strong>エネルギー費の域外流出を削減</strong></li></ul></div>
-    </div>
-  </div>
-
-  <div class="st-section-label">③ 重点化すべき政策とその理由</div>
-  <div class="st-card"><div class="st-body"><div class="st-policy" style="border-left-color:#993556">
-<div class="st-policy-name">社会関係資本の維持・強化</div>
-<div class="st-policy-reason">Putnam（1993）・出口ほか（2014）・Granovetter（1973）が示す通り、農村では社会関係資本こそが最大の経済インフラ。住民間の信頼・協力ネットワークが行政コストを代替し、共助による農業・介護・子育てを支える。集落機能の維持自体が「経済」であり、政策として意識的に投資する必要がある。</div>
-</div><div class="st-policy" style="border-left-color:#993556">
-<div class="st-policy-name">域内経済循環の最大化（エネルギー・食・ケア）</div>
-<div class="st-policy-reason">枝廣ほか（2018）・NEF（2002）が示すように、農村では域外へのお金の「漏れ」が特に大きい。地産地消・小水力・農産直販は外部依存なく実行でき、乗数効果が最も高い政策。Deller et al.（2010）の持続可能農業モデルも同方向を支持する。</div>
-</div><div class="st-policy" style="border-left-color:#993556">
-<div class="st-policy-name">観光・関係人口による域外収入の確保</div>
-<div class="st-policy-reason">農村固有の景観・食文化・体験は都市にない希少財であり、グリーンツーリズム・農家民泊・ワーケーションは資本投資を最小化しながら域外収入を得られる。Brida et al.（2016）が示すように観光が経済成長と双方向の因果をもつ点は農村でも有効で、観光過剰リスクも規模的に低い。</div>
-</div></div></div>
-
-  <div class="st-section-label">④ 実現に必要なリソース</div>
-  <div class="st-card"><div class="st-body"><div class="st-resource">
-<span class="st-rtag" style="background:#f7d0df;color:#993556">人材</span>
-<span class="st-rtext">地域おこし協力隊・農業研修生の受け入れ体制。集落支援員・コミュニティナース等の専門職配置</span>
-</div><div class="st-resource">
-<span class="st-rtag" style="background:#f7d0df;color:#993556">資金</span>
-<span class="st-rtext">ふるさと納税・農水省補助・カーボンクレジット収入。小規模分散型投資（協同組合・クラファン）</span>
-</div><div class="st-resource">
-<span class="st-rtag" style="background:#f7d0df;color:#993556">制度</span>
-<span class="st-rtext">広域連合・定住自立圏の枠組みを活用した行政サービスの共同提供。農地・空き家の活用規制の緩和</span>
-</div><div class="st-resource">
-<span class="st-rtag" style="background:#f7d0df;color:#993556">インフラ</span>
-<span class="st-rtext">デジタル基盤（光回線・スマート農業）の整備。MaaS・ドローン物流等の次世代移動・物流手段の導入</span>
-</div></div></div>
-</div>
-</div>
-</div>
 
 </body>
 </html>
